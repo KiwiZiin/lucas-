@@ -1,79 +1,129 @@
 <!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>FIBRA — Posters</title>
 <link rel="stylesheet" href="base.css"><script src="letras.js"></script><script src="fotos.js"></script><script src="fibra.js"></script>
 <style>
-/* GRADE DO POSTER — 1200 × 1600 · margem 72 · 12 colunas de 66 · calha 24 · módulo de estampa 100
-   linhas: topo 72 · cabeçalho 72→132 · linha das letras 192 · barrado 1500→1600 · rodapé 1428 */
+/* GRADE DO POSTER — 1200 × 1600 · margem 72 · 12 colunas de 66 · calha 24
+   linhas: topo 72 · cabeçalho 72→168 · linha das letras 240 · linha de base das letras 1456 · rodapé 1528
+   letras-janela: uma única letra por poster, inteira e centralizada; as padronagens vivem nas peças de colcha */
 .poster { width: 1200px; height: 1600px; }
 .poster > * { position: absolute; }
-.legenda { left: 72px; top: 72px; font-size: 34.7px; line-height: 36.5px; z-index: 3; }
+.legenda { left: 72px; top: 72px; font-size: 50px; line-height: 61px; z-index: 3; }      /* topo da caixa-alta → base da 2ª linha = 96 */
 .rot { left: 72px; top: 72px; font-size: 16px; z-index: 3; }
-.assina { right: 72px; top: 72px; width: 336px; z-index: 3; }               /* 4 colunas · altura 60 = bloco da legenda */
-.poster fibra-janela { top: 192px; }
-.barrado { left: 0; bottom: 0; width: 1200px; height: 100px; z-index: 5; }    /* 12 módulos de 100 */
-.pe { left: 72px; right: 72px; bottom: 172px; display: flex; justify-content: space-between; align-items: flex-end; z-index: 3; }
+.rot-d { right: 72px; top: 72px; font-size: 16px; z-index: 3; }
+.assina { right: 72px; top: 72px; width: 224.3px; z-index: 3; }                           /* altura 96 = bloco da legenda */
+.letra { left: 50%; transform: translateX(-50%); top: 240px; height: 1216px; }   /* uma letra por poster, centralizada */
+.letra svg { width: auto !important; height: 100% !important; }
+.pe { left: 72px; right: 72px; bottom: 72px; display: flex; justify-content: space-between; align-items: flex-end; z-index: 3; }
 .pe .t-rotulo { font-size: 16px; line-height: 24px; } .pe .t-rotulo:last-child { text-align: right; }
 .grande { left: 72px; }
-.coluna { left: 72px; right: 72px; top: 192px; display: flex; flex-direction: column; align-items: flex-start; }
 </style></head><body>
 
-<div class="prancha poster bg-fuba" data-nome="fibra-poster-01-F-feijao" data-grade="72,12,24" data-linhas="72,132,192,1500">
+<!-- 01 · F · fubá · o grão -->
+<div class="prancha poster bg-fuba" data-nome="fibra-poster-01-F-feijao" data-grade="72,12,24" data-linhas="72,168,240,1456,1528">
   <div class="legenda t-chamada tb">Feijão no fogo,<br>todo dia.</div><fibra-logo class="assina"></fibra-logo>
-  <fibra-janela alta letra="F" foto="tex-feijao-preto" style="width:1218px;left:-90px"></fibra-janela>
-  <fibra-padrao class="barrado" tipo="ladrilho" cores="fuba,couve,mata" cols="12" rows="1"></fibra-padrao>
+  <fibra-janela class="letra" letra="F" foto="tex-feijao-preto"></fibra-janela>
+  <div class="pe"><div class="t-rotulo tb">Cestas de comida de verdade</div><div class="t-rotulo tb">fibra.com.br</div></div>
 </div>
 
-<div class="prancha poster bg-urucum" data-nome="fibra-poster-02-I-verdura" data-grade="72,12,24" data-linhas="72,132,192,1500">
+<!-- 02 · I · urucum · a verdura -->
+<div class="prancha poster bg-urucum" data-nome="fibra-poster-02-I-verdura" data-grade="72,12,24" data-linhas="72,168,240,1456,1528">
   <div class="legenda t-chamada tb">Verdura fresca,<br>direto de quem planta.</div><fibra-logo class="assina" cor="arroz"></fibra-logo>
-  <fibra-janela alta letra="I" foto="feira-couve" fx=".42" style="width:516px;left:342px"></fibra-janela>
-  <fibra-padrao class="barrado" tipo="bandeirinha" cores="urucum,fuba,arroz,dende" cols="12" rows="1"></fibra-padrao>
+  <fibra-janela class="letra" letra="I" foto="feira-couve" fx=".42"></fibra-janela>
+  <div class="pe"><div class="t-rotulo tb">Cestas de comida de verdade</div><div class="t-rotulo tb">fibra.com.br</div></div>
 </div>
 
-<div class="prancha poster bg-anil" data-nome="fibra-poster-03-B-cozinha" data-grade="72,12,24" data-linhas="72,132,192,1500">
+<!-- 03 · B · anil · a cozinha -->
+<div class="prancha poster bg-anil" data-nome="fibra-poster-03-B-cozinha" data-grade="72,12,24" data-linhas="72,168,240,1456,1528">
   <div class="legenda t-chamada tb">Quem cozinha sabe<br>o valor do básico.</div><fibra-logo class="assina" cor="fuba"></fibra-logo>
-  <fibra-janela alta letra="B" foto="cozinha-fogao" fx=".27" style="width:1398px;left:-270px"></fibra-janela>
-  <fibra-padrao class="barrado" tipo="prato" cores="anil,arroz,fuba,urucum" cols="12" rows="1"></fibra-padrao>
+  <fibra-janela class="letra" letra="B" foto="cozinha-sorriso" fx=".2" fy=".4"></fibra-janela>
+  <div class="pe"><div class="t-rotulo tb">Cestas de comida de verdade</div><div class="t-rotulo tb">fibra.com.br</div></div>
 </div>
 
-<div class="prancha poster bg-dende" data-nome="fibra-poster-04-R-roca" data-grade="72,12,24" data-linhas="72,132,192,1500">
+<!-- 04 · R · dendê · a roça -->
+<div class="prancha poster bg-dende" data-nome="fibra-poster-04-R-roca" data-grade="72,12,24" data-linhas="72,168,240,1456,1528">
   <div class="legenda t-chamada tb">Da roça pra panela,<br>sem atravessador.</div><fibra-logo class="assina"></fibra-logo>
-  <fibra-janela alta letra="R" foto="agro-lavoura" fx=".72" style="width:1398px;left:-270px"></fibra-janela>
-  <fibra-padrao class="barrado" tipo="trancado" cores="feijao,fuba,arroz" cols="12" rows="1"></fibra-padrao>
+  <fibra-janela class="letra" letra="R" foto="agro-lavoura" fx=".71" fy=".3"></fibra-janela>
+  <div class="pe"><div class="t-rotulo tb">Cestas de comida de verdade</div><div class="t-rotulo tb">fibra.com.br</div></div>
 </div>
 
-<div class="prancha poster bg-couve" data-nome="fibra-poster-05-A-mesa" data-grade="72,12,24" data-linhas="72,132,192,1500">
+<!-- 05 · A · couve · a mesa -->
+<div class="prancha poster bg-couve" data-nome="fibra-poster-05-A-mesa" data-grade="72,12,24" data-linhas="72,168,240,1456,1528">
   <div class="legenda t-chamada tb">Mesa cheia é direito,<br>não é sorte.</div><fibra-logo class="assina" cor="fuba"></fibra-logo>
-  <fibra-janela alta letra="A" foto="comida-panelas" style="width:1560px;left:-180px"></fibra-janela>
-  <fibra-padrao class="barrado" tipo="folha" cores="couve,mata,fuba,arroz" cols="12" rows="1" seed="5"></fibra-padrao>
+  <fibra-janela class="letra" letra="A" foto="comida-pf" fx=".36" fy=".5"></fibra-janela>
+  <div class="pe"><div class="t-rotulo tb">Cestas de comida de verdade</div><div class="t-rotulo tb">fibra.com.br</div></div>
 </div>
 
-<div class="prancha poster bg-mata" data-nome="fibra-poster-06-manifesto" data-grade="72,12,24" data-linhas="72,132,192,1200">
+<!-- 06 · manifesto -->
+<div class="prancha poster bg-mata" data-nome="fibra-poster-06-manifesto" data-grade="72,12,24" data-linhas="72,168,240,1456,1528">
   <div class="rot t-rotulo tb">Como a Fibra funciona</div><fibra-logo class="assina" cor="fuba"></fibra-logo>
-  <div class="grande t-titulo tb" data-ajusta="1056" style="top:192px;font-size:100px">
+  <div class="grande t-titulo tb" data-ajusta="1056" style="top:240px;font-size:170px">
     <span class="ln">Quem pode,</span><span class="ln">assina.</span>
-    <span class="ln" style="margin-top:.42em">Quem precisa,</span><span class="ln">paga menos.</span>
-    <span class="ln c-fuba" style="margin-top:.42em">Todo mundo</span><span class="ln c-fuba">come bem.</span>
+    <span class="ln" style="margin-top:.2em">Quem precisa,</span><span class="ln">paga menos.</span>
+    <span class="ln c-fuba" style="margin-top:.2em">Todo mundo</span><span class="ln c-fuba">come bem.</span>
   </div>
-  <div class="pe" style="bottom:472px"><div class="t-rotulo tb">Cestas de comida de verdade<br>direto de produtores brasileiros</div><div class="t-rotulo tb">fibra.com.br<br>@fibra.cestas</div></div>
-  <fibra-padrao tipo="ladrilho" cores="fuba,couve,mata" cols="6" rows="2" style="left:0;bottom:0;width:1200px;height:400px"></fibra-padrao>
+  <div class="pe"><div class="t-rotulo tb">Cestas de comida de verdade<br>direto de produtores brasileiros</div><div class="t-rotulo tb">fibra.com.br<br>@fibra.cestas</div></div>
 </div>
 
-<div class="prancha poster bg-arroz" data-nome="fibra-poster-07-dado" data-grade="72,12,24" data-linhas="72,132,192,1500">
+<!-- 07 · dado -->
+<div class="prancha poster bg-arroz" data-nome="fibra-poster-07-dado" data-grade="72,12,24" data-linhas="72,168,240,1456,1528">
   <div class="rot t-rotulo tb">Brasil · 2024</div><fibra-logo class="assina"></fibra-logo>
-  <div class="coluna" style="gap:72px">
-    <div class="t-titulo tb c-urucum" data-ajusta="1056" style="font-size:340px;letter-spacing:-.03em"><span class="ln">24,2%</span></div>
-    <div style="width:100%;display:grid;grid-template-columns:repeat(4,1fr);column-gap:24px"><fibra-grao cor="urucum"></fibra-grao><fibra-grao></fibra-grao><fibra-grao></fibra-grao><fibra-grao></fibra-grao></div>
-    <div class="t-chamada tb" style="width:966px;font-size:60px;line-height:62px;font-weight:700;letter-spacing:-.025em">Quase 1 em cada 4 lares brasileiros conviveu com algum grau de insegurança alimentar.</div>
-    <div class="t-texto tb" style="width:696px;font-size:32px;line-height:42px">A Fibra existe pra esse número cair: comida de verdade, de quem planta, por um preço que cabe no mês.</div>
+  <div class="grande t-titulo tb c-urucum" data-ajusta="1056" style="top:240px;font-size:400px;letter-spacing:0"><span class="ln">24,2%</span></div>
+  <div class="t-chamada tb" id="frase" style="left:72px;width:966px;top:700px;font-size:58px;line-height:64px;font-weight:700;letter-spacing:-.03em">Quase 1 em cada 4 lares brasileiros conviveu com algum grau de insegurança alimentar.</div>
+  <div class="t-texto tb" style="left:72px;width:696px;top:948px;font-size:30px;line-height:44px">A Fibra existe pra esse número cair: comida de verdade, de quem planta, por um preço que cabe no mês.</div>
+  <div style="left:72px;top:1192px;width:1056px;height:264px;display:grid;grid-template-columns:repeat(4,264px)">
+    <fibra-trama tipo="graos" cores="urucum,arroz,fuba" cols="2" rows="2"></fibra-trama><fibra-prato foto="tex-feijao-preto" fundo="fuba" raios="dende" aro="arroz"></fibra-prato>
+    <fibra-foto foto="mesa-geracoes" w="264" h="264" fx=".3" fy=".4" zoom="1.2" duo="feijao,arroz"></fibra-foto><fibra-trama tipo="sarja" cores="feijao,urucum,arroz" cols="2" rows="2"></fibra-trama>
   </div>
   <div class="pe"><div class="t-rotulo tb">Fonte: IBGE, PNAD Contínua<br>Segurança Alimentar 2024</div><div class="t-rotulo tb">fibra.com.br<br>@fibra.cestas</div></div>
-  <fibra-padrao class="barrado" tipo="trancado" cores="arroz,urucum,feijao" cols="12" rows="1"></fibra-padrao>
 </div>
 
-<div class="prancha poster bg-arroz" data-nome="fibra-poster-08-lancamento" data-grade="72,12,24" data-linhas="72,132,192,1500">
-  <div class="rot t-rotulo tb">Cestas de comida de verdade</div><div class="t-rotulo tb" style="right:72px;top:72px;font-size:16px">Brasil</div>
-  <fibra-janela letra="empilhado" fotos="tex-feijao-preto,feira-couve,cozinha-sorriso,agro-chapeu,mesa-jovem" fx=".5,.42,.2,.5,.1" fy=".5,.5,.38,.3,.45" zoom="1,1,1.05,1.25,1.12" style="width:1056px;left:72px;top:192px"></fibra-janela>
-  <div class="grande t-titulo tb" data-ajusta="1056" style="top:835px;font-size:100px"><span class="ln">Comida de verdade</span><span class="ln">é direito de</span><span class="ln c-couve">todo mundo.</span></div>
+<!-- 08 · lançamento -->
+<div class="prancha poster bg-arroz" data-nome="fibra-poster-08-lancamento" data-grade="72,12,24" data-linhas="72,168,240,1456,1528">
+  <div class="legenda t-chamada tb">Comida de verdade é<br>direito de todo mundo.</div><div class="rot-d t-rotulo tb">Brasil</div>
+  <fibra-janela class="letra" letra="empilhado" fotos="tex-feijao-preto,feira-couve,cozinha-sorriso,agro-lavoura,comida-pf" fx=".5,.42,.2,.71,.36" fy=".5,.5,.4,.3,.5"></fibra-janela>
   <div class="pe"><div class="t-rotulo tb">Arroz, feijão, legumes e verduras<br>de produtores brasileiros, a preço justo</div><div class="t-rotulo tb">fibra.com.br<br>@fibra.cestas</div></div>
-  <fibra-padrao class="barrado" tipo="bandeirinha" cores="arroz,couve,fuba,anil,urucum" cols="12" rows="1"></fibra-padrao>
+</div>
+
+<!-- 09 · colcha -->
+<div class="prancha poster bg-feijao" data-nome="fibra-poster-09-colcha">
+  <div style="left:0;top:0;width:1200px;height:1600px;display:grid;grid-template-columns:repeat(6,200px);grid-template-rows:repeat(8,200px)" class="cg">
+    <fibra-prato foto="tex-feijao-preto" fundo="fuba" raios="dende" aro="arroz"></fibra-prato>
+    <fibra-trama tipo="zigue" cores="arroz,urucum,feijao" cols="4" rows="2" style="grid-column:span 2"></fibra-trama>
+    <fibra-foto foto="agro-senhora" w="200" h="200" fx=".42" fy=".35" zoom="1.05" duo="mata,fuba"></fibra-foto>
+    <fibra-trama tipo="olho" cores="feijao,dende,fuba" cols="2" rows="2"></fibra-trama>
+    <fibra-prato foto="tex-arroz" fundo="anil" raios="mata" aro="fuba"></fibra-prato>
+
+    <fibra-trama tipo="espinha" cores="mata,couve,fuba" cols="2" rows="2"></fibra-trama>
+    <fibra-trama tipo="graos" cores="couve,fuba,arroz" cols="2" rows="2"></fibra-trama>
+    <fibra-foto foto="feira-banana" w="400" h="200" fx=".5" fy=".45" duo="anil,arroz" style="grid-column:span 2"></fibra-foto>
+    <fibra-trama tipo="dente" cores="urucum,fuba,arroz" cols="2" rows="2"></fibra-trama>
+    <fibra-trama tipo="sarja" cores="feijao,fuba,arroz" cols="2" rows="2"></fibra-trama>
+
+    <fibra-foto foto="cozinha-vovo" w="200" h="200" fx=".55" fy=".35" zoom="1.1" duo="feijao,dende"></fibra-foto>
+    <div class="bg-mata" style="grid-column:2 / span 4;grid-row:3 / span 3;position:relative" id="miolo">
+      <div class="t-rotulo tb" style="position:absolute;left:56px;top:56px;font-size:15px">Cestas de comida de verdade</div><div class="t-rotulo tb" style="position:absolute;right:56px;top:56px;font-size:15px">Brasil</div>
+      <fibra-logo cor="fuba" style="position:absolute;left:56px;top:110px;width:688px"></fibra-logo>
+      <div class="t-chamada tb" style="position:absolute;left:56px;bottom:56px;font-size:38px;line-height:46px;width:640px">Comida de verdade é direito de todo mundo.</div>
+    </div>
+    <fibra-trama tipo="losango" cores="anil,fuba,anil,arroz,urucum" cols="2" rows="2"></fibra-trama>
+
+    <fibra-trama tipo="escama" cores="feijao,urucum,dende,fuba" cols="2" rows="2"></fibra-trama>
+    <fibra-prato foto="tex-feijao-carioca" fundo="couve" raios="mata" aro="arroz"></fibra-prato>
+
+    <fibra-trama tipo="sarja" cores="mata,arroz,couve" cols="2" rows="2"></fibra-trama>
+    <fibra-foto foto="agro-enxada" w="200" h="200" fx=".5" fy=".25" zoom="1.15" duo="urucum,arroz"></fibra-foto>
+
+    <fibra-prato foto="feira-couve" fundo="arroz" raios="fuba" aro="couve" fx=".4"></fibra-prato>
+    <fibra-foto foto="mesa-geracoes" w="400" h="200" fx=".3" fy=".35" duo="feijao,fuba" style="grid-column:span 2"></fibra-foto>
+    <fibra-trama tipo="esteira" cores="feijao,dende,arroz" cols="2" rows="2"></fibra-trama>
+    <fibra-trama tipo="raios" cores="fuba,dende" cols="1" rows="1" n="24"></fibra-trama>
+    <fibra-trama tipo="zigue" cores="couve,fuba,mata" cols="2" rows="2"></fibra-trama>
+
+    <fibra-prato foto="comida-pf" fundo="urucum" raios="feijao" aro="fuba" fx=".2" zoom="1.55" style="grid-column:span 2;grid-row:span 2"></fibra-prato>
+    <fibra-trama tipo="degrau" cores="mata,fuba,arroz" cols="2" rows="2"></fibra-trama>
+    <fibra-foto foto="agro-cafe" w="200" h="200" fx=".28" fy=".25" zoom="1.2" duo="mata,arroz"></fibra-foto>
+    <fibra-foto foto="agro-lavoura" w="400" h="400" fx=".72" fy=".2" zoom="1.15" duo="feijao,fuba" style="grid-column:span 2;grid-row:span 2"></fibra-foto>
+    <fibra-trama tipo="losango" cores="fuba,feijao,fuba,couve,arroz" cols="2" rows="2"></fibra-trama>
+    <fibra-trama tipo="tela" cores="feijao,anil,arroz" cols="2" rows="2"></fibra-trama>
+  </div>
 </div>
 </body></html>

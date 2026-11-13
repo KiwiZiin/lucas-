@@ -1,0 +1,126 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>FIBRA — Motion</title>
+<link rel="stylesheet" href="base.css"><script src="letras.js"></script><script src="fotos.js"></script>
+<script>window.FIBRA_FOTOS_URL = '../fotos/motion/';</script><script src="fibra.js"></script>
+<style>
+html, body { margin: 0; padding: 0; background: #000; display: block; }
+#palco { position: relative; overflow: hidden; }
+.cena { position: absolute; inset: 0; overflow: hidden; display: none; }
+.cena > * { position: absolute; }
+.l { display: block; overflow: hidden; height: 1.34em; line-height: 1.34em; margin-bottom: -.3em; white-space: nowrap; }
+.l > span { display: block; will-change: transform; }
+.manchete { font-size: 100px; }
+.faixa { left: 0; width: 100%; }
+</style></head><body><div id="palco"></div>
+<script>
+/* Motion da FIBRA — linha do tempo determinística: window.quadro(f) desenha o quadro f (30 qps).
+   ?v na URL gera o formato vertical (1080 × 1920); sem parâmetro, 1920 × 1080. */
+const V = /[?&]v\b/.test(location.search), W = V ? 1080 : 1920, H = V ? 1920 : 1080, FPS = 30, TOTAL = 600;
+const D = FIBRA.dados, C = D.cores, FOT = window.FIBRA_FOTOS, palco = document.getElementById('palco');
+palco.style.width = W + 'px'; palco.style.height = H + 'px';
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x)), p = (f, a, b) => clamp((f - a) / (b - a));
+const eo = t => 1 - Math.pow(1 - t, 4), eio = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2, ei = t => t * t * t;
+const M = 96, MV = 72, m = V ? MV : M;
+
+// imagem que cobre a caixa
+function cobre(n, bx, by, bw, bh, fx = .5, fy = .5, z = 1, cls = '') {
+  const [iw, ih] = FOT[n], a = iw / ih, h = Math.max(bh, bw / a) * z, w = h * a;
+  return `<image class="${cls}" href="${FIBRA.fotoUrl(n)}" x="${(bx + (bw - w) * fx).toFixed(1)}" y="${(by + (bh - h) * fy).toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" preserveAspectRatio="none"/>`;
+}
+const disp = V ? FIBRA.disposicao('empilhado') : FIBRA.disposicao('horizontal');
+const LH = V ? 1040 : 560, LW = LH * disp.w / disp.h, LX = (W - LW) / 2, LY = (H - LH) / 2 - (V ? 40 : 0);
+const letraPath = (l, graos) => FIBRA.letraD(l, graos);
+
+// ciclos de fotos por letra (cotidiano brasileiro): [foto, fx, fy, zoom]
+const CICLO = {
+  F: [['tex-feijao-preto'], ['tex-feijao-carioca'], ['comida-tropeiro'], ['tex-arroz'], ['feira-banana'], ['comida-feijoada']],
+  I: [['feira-couve', .42], ['tex-couve'], ['feira-vagem'], ['feira-pupunha'], ['agro-estrada'], ['lugar-obrigado']],
+  B: [['cozinha-sorriso', .2, .38, 1.05], ['cozinha-fogao', .3, .4], ['cozinha-vovo', .6, .4, 1.1], ['mesa-geracoes', .3, .4], ['cozinha-avental', .55, .3], ['mesa-casal', .3, .35]],
+  R: [['agro-lavoura', .72, .2, 1.1], ['agro-enxada', .55, .3], ['agro-senhora', .45, .4], ['agro-cafe', .3, .3], ['agro-chapeu', .5, .32, 1.25], ['agro-bone', .7, .3]],
+  A: [['mesa-jovem', .1, .45, 1.12], ['comida-pf', .2, .5], ['mesa-menina', .3, .45, 1.1], ['comida-prato', .3, .5], ['mesa-maos', .5, .5], ['comida-panelas', .5, .5]],
+};
+const FUNDOS = ['fuba', 'dende', 'anil', 'urucum', 'couve'];
+
+const el = (h) => { const d = document.createElement('div'); d.innerHTML = h; return d.firstElementChild; };
+const logoSVG = (cor, id) => `<svg id="${id}" viewBox="0 0 ${disp.w} ${disp.h}" style="left:${LX}px;top:${LY}px;width:${LW}px;height:${LH}px;overflow:visible">` +
+  disp.itens.map((i, n) => `<g class="lt" data-n="${n}" data-y="${i.y}"><path transform="translate(${i.x} ${i.y})" fill="${C[cor]}" fill-rule="evenodd" d="${letraPath(i.l, true)}"/></g>`).join('') + '</svg>';
+const linhas = t => t.map(x => `<span class="l"><span>${x}</span></span>`).join('');
+
+// ── cena 1: logotipo sobe letra a letra ──
+const c1 = el(`<div class="cena bg-couve" id="c1">${logoSVG('fuba', 'logo1')}</div>`);
+// ── cena 2: letras viram janelas; fotos passam em ritmo rápido ──
+let j = `<svg viewBox="0 0 ${disp.w} ${disp.h}" id="jan" style="left:${LX}px;top:${LY}px;width:${LW}px;height:${LH}px;overflow:visible"><defs>`;
+disp.itens.forEach((i, n) => j += `<clipPath id="cj${n}"><path transform="translate(${i.x} ${i.y})" d="${D.letras[i.l].d}"/></clipPath>`); j += '</defs>';
+disp.itens.forEach((i, n) => { j += `<g clip-path="url(#cj${n})"><rect x="${i.x}" y="${i.y}" width="${D.letras[i.l].w}" height="1000" fill="${C.mata}"/>` + CICLO[i.l].map((q, k) => cobre(q[0], i.x, i.y, D.letras[i.l].w, 1000, q[1], q[2], q[3], `fj fj${n} k${k}`)).join('') + '</g>'; });
+const c2 = el(`<div class="cena" id="c2">${j}</svg><div class="t-rotulo" id="c2r" style="left:${m}px;top:${V ? 250 : m}px;font-size:${V ? 18 : 20}px">Cestas de comida de verdade</div><div class="t-rotulo" id="c2d" style="right:${m}px;top:${V ? 250 : m}px;font-size:${V ? 18 : 20}px">Brasil</div></div>`);
+// ── cenas 3a–c: uma letra inteira, uma história ──
+const HEROI = [
+  { l: 'B', bg: 'anil', logo: 'fuba', foto: ['cozinha-sorriso', .2, .4, 1.06], t: ['Quem cozinha', 'sabe o valor', 'do básico.'] },
+  { l: 'R', bg: 'dende', logo: 'feijao', foto: ['agro-lavoura', .71, .3, 1.06], t: ['Da roça', 'pra panela, sem', 'atravessador.'] },
+  { l: 'A', bg: 'couve', logo: 'fuba', foto: ['comida-pf', .36, .5, 1.06], t: ['Mesa cheia', 'é direito,', 'não é sorte.'] },
+];
+const c3 = HEROI.map((h, n) => {
+  const L = D.letras[h.l], hh = V ? 740 : 888, ww = hh * L.w / 1000, lx = V ? (W - ww) / 2 : M, ly = V ? 840 : M;
+  const tx = V ? m : M + 640, tw = V ? W - 2 * m : W - tx - M;
+  return el(`<div class="cena bg-${h.bg}" id="c3${n}">
+    <svg class="letra" viewBox="0 0 ${L.w} 1000" style="left:${lx}px;top:${ly}px;width:${ww}px;height:${hh}px;overflow:visible"><defs><clipPath id="ch${n}"><path d="${L.d}"/></clipPath></defs><g clip-path="url(#ch${n})"><g class="pan">${cobre(h.foto[0], -40, 0, L.w + 80, 1000, h.foto[1], h.foto[2], h.foto[3])}</g></g></svg>
+    <fibra-logo cor="${h.logo}" style="${V ? `left:${m}px` : `right:${M}px`};top:${V ? 250 : M}px;width:${V ? 196 : 224}px"></fibra-logo>
+    <div class="manchete t-titulo" data-w="${V ? 640 : 960}" style="left:${tx}px;top:${V ? 400 : 330}px">${linhas(h.t)}</div></div>`);
+});
+// ── cena 4: as cinco padronagens atravessam a tela ──
+const PADS = [['sarja', 'feijao,fuba,dende'], ['zigue', 'arroz,urucum,feijao'], ['olho', 'mata,fuba,arroz'], ['escama', 'anil,arroz,fuba'], ['espinha', 'mata,couve,fuba']];
+const bh = H / 5;
+const c4 = el(`<div class="cena" id="c4" style="display:none;z-index:9;background:transparent">` + PADS.map((q, n) => `<fibra-trama class="faixa bd" tipo="${q[0]}" cores="${q[1]}" cols="${(W / (bh / 2)).toFixed(3)}" rows="2" style="top:${n * bh}px;height:${bh + 1}px"></fibra-trama>`).join('') + '</div>');
+// ── cena 5: assinatura ──
+const T5 = V ? 234 : 216, N5 = V ? 4 : 8;
+const RET = [`<fibra-trama tipo="sarja" cores="feijao,fuba,dende" cols="2" rows="2"></fibra-trama>`, `<fibra-prato foto="tex-feijao-preto" fundo="fuba" raios="dende" aro="arroz"></fibra-prato>`, `<fibra-foto foto="agro-senhora" w="100" h="100" fx=".42" fy=".35" duo="mata,fuba"></fibra-foto>`, `<fibra-trama tipo="zigue" cores="arroz,urucum,feijao" cols="2" rows="2"></fibra-trama>`,
+  `<fibra-prato foto="tex-arroz" fundo="anil" raios="mata" aro="fuba"></fibra-prato>`, `<fibra-trama tipo="olho" cores="feijao,dende,fuba" cols="2" rows="2"></fibra-trama>`, `<fibra-foto foto="cozinha-vovo" w="100" h="100" fx=".55" fy=".35" zoom="1.1" duo="feijao,dende"></fibra-foto>`, `<fibra-trama tipo="escama" cores="mata,couve,fuba" cols="2" rows="2"></fibra-trama>`];
+const c5 = el(`<div class="cena bg-mata" id="c5">
+  <div class="manchete t-titulo" data-w="${V ? W - 2 * m : 1180}" style="left:${m}px;top:${V ? 400 : M}px">${linhas(['Comida de verdade', 'é direito de', '<i class="c-fuba" style="font-style:normal">todo mundo.</i>'])}</div>
+  <fibra-logo id="lf" cor="fuba" style="${V ? `left:${m}px;top:1010px` : `right:${M}px;top:${M}px`};width:${V ? 380 : 420}px"></fibra-logo>
+  <div class="t-rotulo" id="url" style="${V ? `left:${m}px;top:1220px` : `right:${M}px;top:${M + 210}px;text-align:right`};font-size:${V ? 20 : 22}px;line-height:1.5">Cestas de comida de verdade<br>fibra.com.br</div>
+  <div id="f5" style="left:${V ? m : M}px;bottom:${V ? 340 : M}px;width:${T5 * N5}px;height:${T5}px;display:grid;grid-template-columns:repeat(${N5},${T5}px)">${RET.slice(0, N5).map(x => `<div class="ret" style="overflow:hidden;position:relative">${x.replace('>', ' style="width:100%;height:100%">')}</div>`).join('')}</div></div>`);
+[c1, c2, ...c3, c5, c4].forEach(c => palco.appendChild(c));
+
+window.prepara = async () => {
+  await FIBRA.pronto();
+  document.querySelectorAll('.manchete').forEach(mm => {   // ajusta o corpo para a linha mais larga ocupar data-w; alinhamento óptico à esquerda
+    const sp = [...mm.querySelectorAll('.l > span')]; const pai = mm.closest('.cena'), era = pai.style.display; pai.style.display = 'block';
+    for (let k = 0; k < 3; k++) { const larg = Math.max(...sp.map(s => { const t = FIBRA.tinta(s); return t.dir - t.esq; })); mm.style.fontSize = (parseFloat(getComputedStyle(mm).fontSize) * parseFloat(mm.dataset.w) / larg) + 'px'; }
+    sp.forEach(s => { s.dataset.ox = (-FIBRA.tinta(s).esq).toFixed(2); }); pai.style.display = era;
+  });
+  await Promise.all([...document.querySelectorAll('image')].map(i => { const im = new Image(); im.src = i.getAttribute('href'); return im.decode().catch(() => 0); }));
+  return TOTAL;
+};
+const mostra = (c, on) => { c.style.display = on ? 'block' : 'none'; };
+const sobe = (mm, f, f0, passo = 5, dur = 18) => mm.querySelectorAll('.l > span').forEach((s, n) => { const t = eo(p(f, f0 + n * passo, f0 + n * passo + dur)); s.style.transform = `translate(${s.dataset.ox || 0}px, ${(1 - t) * 105}%)`; });
+
+window.quadro = f => {
+  // cena 1 · 0–60
+  mostra(c1, f < 60);
+  if (f < 60) c1.querySelectorAll('.lt').forEach(g => { const n = +g.dataset.n, t = eo(p(f, 4 + n * 4, 30 + n * 4)); g.style.transform = `translateY(${(1 - t) * 1250}px)`; g.style.opacity = t > 0 ? 1 : 0; });
+  // cena 2 · 60–210
+  mostra(c2, f >= 60 && f < 210);
+  if (f >= 60 && f < 210) {
+    const g = f - 60, bg = FUNDOS[Math.floor(g / 30) % FUNDOS.length]; c2.style.background = C[bg]; const claro = ['fuba', 'dende'].includes(bg);
+    c2.querySelector('#c2r').style.color = c2.querySelector('#c2d').style.color = claro ? C.feijao : C.arroz;
+    disp.itens.forEach((i, n) => { const k = Math.floor((g + n * 3) / 7) % CICLO[i.l].length; c2.querySelectorAll('.fj' + n).forEach((im, q) => im.style.display = q === k ? 'block' : 'none'); });
+    const z = 1 + .05 * (g / 150); c2.querySelector('#jan').style.transform = `scale(${z})`;
+  }
+  // cenas 3 · 210–390 (60 quadros cada)
+  c3.forEach((c, n) => {
+    const a = 210 + n * 60, on = f >= a && f < a + (n === 2 ? 210 : 60) && f < 420; mostra(c, on); if (!on) return; const g = f - a, t = eo(p(g, 0, 22));   // a última cena fica por baixo das faixas
+    c.querySelector('.letra').style.transform = `translateY(${(1 - t) * 70}px) scale(${1.04 - .04 * t})`; c.querySelector('.letra').style.transformOrigin = '50% 60%';
+    c.querySelector('.pan').style.transform = `translateX(${-g * .55}px)`;
+    sobe(c.querySelector('.manchete'), g, 6);
+    c.querySelector('fibra-logo').style.opacity = p(g, 4, 12);
+  });
+  // cena 5 · 420–600 (por baixo da cena 4)
+  const on5 = f >= 420; mostra(c5, on5);
+  if (on5) { const g = f - 438; sobe(c5.querySelector('.manchete'), g, 0, 6, 20); const t = eo(p(g, 26, 46));
+    c5.querySelector('#lf').style.opacity = c5.querySelector('#url').style.opacity = t; c5.querySelector('#lf').style.transform = c5.querySelector('#url').style.transform = `translateY(${(1 - t) * 30}px)`;
+    c5.querySelectorAll('.ret').forEach((r, q) => { const u = eo(p(g, 30 + q * 3, 48 + q * 3)); r.firstElementChild.style.transform = `translateY(${(1 - u) * 101}%)`; }); }
+  // cena 4 · 390–450: faixas de padronagem entram e saem em sentidos alternados
+  const on4 = f >= 390 && f < 452; mostra(c4, on4);
+  if (on4) c4.querySelectorAll('.bd').forEach((b, n) => { const g = f - 390, s = n % 2 ? 1 : -1, ent = eo(p(g, n * 3, 18 + n * 3)), sai = ei(p(g, 36 + n * 3, 56 + n * 3)); b.style.transform = `translateX(${s * (1 - ent) * 100 + (-s) * sai * 100}%)`; });
+};
+</script></body></html>

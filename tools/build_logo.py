@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Constrói o logotipo FIBRA a partir da Archivo Expanded Black (OFL):
+"""Constrói o logotipo FIBRA a partir da Anton (OFL):
 - silhuetas sólidas das letras (janelas de fotografia)
 - contra-formas substituídas pelo "grão" (elipse inclinada)
 Gera marca/letras.json, src/letras.js e os SVGs em marca/logo/."""
@@ -13,11 +13,11 @@ from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.pens.transformPen import TransformPen
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FONT = f'{ROOT}/marca/fontes/Archivo-Expanded-Black.ttf'
+FONT = f'{ROOT}/marca/fontes/Anton-Regular.ttf'
 CAP = 1000.0                       # altura de caixa-alta normalizada
-GRAO = {'rx': 112, 'ry': 46, 'ang': -24}
-TRACK = -30                        # entreletra global (unid. normalizadas)
-KERN = {'FI': 0, 'IB': 0, 'BR': -6, 'RA': -58}
+GRAO = {'rx': 82, 'ry': 35, 'ang': -42}
+TRACK = 6                        # entreletra global (unid. normalizadas)
+KERN = {'FI': 0, 'IB': 0, 'BR': 0, 'RA': -30}
 CORES = {'feijao': '#2A1611', 'arroz': '#F4ECD8', 'couve': '#0B7A3B', 'mata': '#073D26', 'fuba': '#FFC72C', 'anil': '#2152C8', 'dende': '#F28A1C', 'urucum': '#C8402A'}
 
 def contours(rec):
@@ -30,8 +30,8 @@ def contours(rec):
 def replay(c, pen):
     for op, a in c: getattr(pen, op)(*a)
 
-FONT_ALTA = f'{ROOT}/marca/fontes/Archivo-Black.ttf'
-KERN_ALTA = {'BR': -4, 'RA': -52}
+FONT_ALTA = FONT   # a Anton já é condensada: um único conjunto de letras serve ao logotipo e às janelas
+KERN_ALTA = KERN
 
 def letter(font, ch):
     gs = font.getGlyphSet(); name = font.getBestCmap()[ord(ch)]; cap = font['OS/2'].sCapHeight; s = CAP / cap
@@ -49,7 +49,7 @@ def letter(font, ch):
     return {'d': ' '.join(path(i[0]) for i in outs), 'w': round((outer[2][2] - xmin) * s, 1),
             'top': round((cap - outer[2][3]) * s, 1), 'bot': round((cap - outer[2][1]) * s, 1),
             'miolo': ' '.join(path(i[0]) for i in holes),
-            'graos': [center(i[2]) for i in sorted(holes, key=lambda i: -i[2][3])],
+            'graos': [([center(i[2])[0], 590.0] if ch == 'A' else center(i[2])) for i in sorted(holes, key=lambda i: -i[2][3])],
             'lsb': round(xmin * s, 1), 'adv': round(gs[name].width * s, 1)}
 
 def grao_path(cx, cy, rx=None, ry=None, ang=None):
@@ -80,13 +80,13 @@ def svg(vb, body, fill, bg=None):
 def main():
     font = TTFont(FONT); L = {c: letter(font, c) for c in 'FIBRA'}
     itens, W = layout(L, 'FIBRA'); top, w_top = layout(L, 'FI'); bot, w_bot = layout(L, 'BRA')
-    GAP = 96                                          # entrelinha da versão empilhada
+    GAP = 70                                          # entrelinha da versão empilhada
     data = {'cap': CAP, 'grao': GRAO, 'letras': L, 'logo': {'w': W, 'h': CAP, 'itens': itens},
             'pilha': {'w': max(w_top, w_bot), 'h': CAP * 2 + GAP, 'linhas': [{'y': 0, 'itens': top, 'w': w_top}, {'y': CAP + GAP, 'itens': bot, 'w': w_bot}]},
             'cores': CORES}
     # conjunto alto (largura normal)
     fa = TTFont(FONT_ALTA); LA = {c: letter(fa, c) for c in 'FIBRA'}
-    ia, wa = layout(LA, 'FIBRA', -22, KERN_ALTA); ta, wta = layout(LA, 'FI', -22, KERN_ALTA); ba, wba = layout(LA, 'BRA', -22, KERN_ALTA)
+    ia, wa = layout(LA, 'FIBRA', TRACK, KERN_ALTA); ta, wta = layout(LA, 'FI', TRACK, KERN_ALTA); ba, wba = layout(LA, 'BRA', TRACK, KERN_ALTA)
     data['alta'] = {'letras': LA, 'logo': {'w': wa, 'h': CAP, 'itens': ia}, 'pilha': {'w': max(wta, wba), 'h': CAP * 2 + GAP, 'linhas': [{'y': 0, 'itens': ta, 'w': wta}, {'y': CAP + GAP, 'itens': ba, 'w': wba}]}}
     json.dump(data, open(f'{ROOT}/marca/letras.json', 'w'))
     os.makedirs(f'{ROOT}/src', exist_ok=True)
@@ -96,9 +96,9 @@ def main():
     solido = ''.join(shape(L, i['l'], i['x'], graos=False) for i in itens)
     pilha = ''.join(shape(L, i['l'], i['x'], ln['y']) for ln in data['pilha']['linhas'] for i in ln['itens'])
     # símbolo: F + grão
-    F = L['F']; sim_w = F['w']; gx, gy = F['w'] * 0.735, 815.0
-    simbolo = shape(L, 'F') + f'<path d="{grao_path(gx, gy, 190, 78)}"/>'
-    data['simbolo'] = {'w': sim_w, 'grao': [gx, gy, 190, 78]}
+    F = L['F']; sim_w = F['w']; gx, gy = F['w'] * 0.80, 800.0
+    simbolo = shape(L, 'F') + f'<path d="{grao_path(gx, gy, 118, 50)}"/>'
+    data['simbolo'] = {'w': sim_w, 'grao': [gx, gy, 118, 50]}
     json.dump(data, open(f'{ROOT}/marca/letras.json', 'w'))
     open(f'{ROOT}/src/letras.js', 'w').write('window.FIBRA_DADOS = ' + json.dumps(data) + ';\n')
     for nome, cor in CORES.items():

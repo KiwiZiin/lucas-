@@ -136,53 +136,95 @@
   }
 
 
-  // ── padronagens ──────────────────────────────────────────────────
-  // Cinco estampas modulares, de raiz brasileira, desenhadas num módulo de 100 × 100:
-  //   ladrilho (cozinha) · trancado (cesta) · bandeirinha (festa) · folha (roça) · prato (mesa)
-  const rng = seed => { let s = (seed * 2654435761) >>> 0 || 1; return () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296; };
-  const PAD = {   // cada função desenha só as formas do módulo; o fundo é um retângulo único (sem emendas)
-    ladrilho: { fundo: 1, f(c) {   // estrela côncava entre quatro círculos — ladrilho hidráulico
-      return `<path d="M50 0L100 50L50 100L0 50Z" fill="${c[2] || c[0]}"/><path d="M-.5 -.5H50A50 50 0 0 1 0 50H-.5ZM100.5 -.5V50H100A50 50 0 0 1 50 0V-.5ZM100.5 100.5H50V100A50 50 0 0 1 100 50H100.5ZM-.5 100.5V50H0A50 50 0 0 1 50 100V100.5Z" fill="${c[1]}"/>` +
-        `<circle cx="50" cy="50" r="11" fill="${c[0]}"/><path d="M0 0H20A20 20 0 0 1 0 20ZM100 0V20A20 20 0 0 1 80 0ZM100 100H80A20 20 0 0 1 100 80ZM0 100V80A20 20 0 0 1 20 100Z" fill="${c[0]}"/>`; } },
-    trancado: { fundo: 0, f(c, i, j) {   // tiras que passam por cima e por baixo — cestaria
-      return (i + j) % 2 === 0 ? `<path d="M-.5 5H100.5V47H-.5ZM-.5 53H100.5V95H-.5Z" fill="${c[1]}"/>` : `<path d="M5 -.5H47V100.5H5ZM53 -.5H95V100.5H53Z" fill="${c[2] || c[1]}"/>`; } },
-    bandeirinha: { fundo: 0, f(c, i, j) {   // bandeirinhas de festa junina
-      return `<path d="M16 -.5H84V92L50 62L16 92Z" fill="${c[1 + ((i + j * 2) % (c.length - 1))]}"/>`; } },
-    prato: { fundo: 0, f(c, i, j) {   // pratos e panelas vistos de cima
-      const k = c.length - 1, q = n => c[1 + ((i + j + n) % k)];
-      return `<circle cx="50" cy="50" r="44" fill="${q(0)}"/><circle cx="50" cy="50" r="29" fill="${q(1)}"/><circle cx="50" cy="50" r="12" fill="${k > 2 ? q(2) : c[0]}"/>`; } },
-    folha: { fundo: 0, f(c, i, j, r) {   // quartos de círculo e folhas — a roça vista de cima
-      const cor1 = c[1 + Math.floor(r() * (c.length - 1))], t = r(), rot = Math.floor(r() * 4) * 90;
-      const f = t < .12 ? `<rect x="-.5" y="-.5" width="101" height="101" fill="${cor1}"/>` : t < .2 ? '' : t < .66 ? `<path d="M-.5 -.5H100A100 100 0 0 1 0 100H-.5Z" fill="${cor1}"/>` : `<path d="M0 0A100 100 0 0 1 100 100A100 100 0 0 1 0 0Z" fill="${cor1}"/>`;
-      return `<g transform="rotate(${rot} 50 50)">${f}</g>`; } },
+  // ── colcha de cestaria ───────────────────────────────────────────
+  // Tramas desenhadas fio a fio, como na cestaria: tiras horizontais (trama) e verticais (urdidura) que passam
+  // por cima e por baixo. Cada desenho nasce da regra de cruzamento, não de um ornamento aplicado.
+  //   sarja (diagonal) · espinha (zigue-zague) · olho (losangos concêntricos) · esteira (2×2) · tela (1×1) · degrau (escada)
+  // Grafismos de apoio: raios · zigue · losango · escama · graos · dente
+  const POR_CIMA = {
+    tela: (i, j) => (i + j) % 2 === 0,
+    esteira: (i, j) => ((i >> 1) + (j >> 1)) % 2 === 0,
+    sarja: (i, j) => (((i + j) % 4) + 4) % 4 < 2,
+    espinha: (i, j, P) => { const k = ((j % (2 * P)) + 2 * P) % (2 * P), jj = k < P ? k : 2 * P - 1 - k; return ((i + jj) % 4) < 2; },
+    olho: (i, j, P) => { const u = Math.abs((((i % P) + P) % P) - (P - 1) / 2), v = Math.abs((((j % P) + P) % P) - (P - 1) / 2); return Math.floor(u + v) % 4 < 2; },
+    degrau: (i, j) => ((i + 2 * Math.floor(j / 2)) % 6 + 6) % 6 < 3,
   };
-  function padrao(tipo, cores, cols, rows, seed = 1) {
-    const c = cores.map(cor), r = rng(seed), P = PAD[tipo]; let h = '';
-    for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) h += `<g transform="translate(${i * 100} ${j * 100})">${P.f(c, i, j, r)}</g>`;
-    return `<svg viewBox="0 0 ${cols * 100} ${rows * 100}" preserveAspectRatio="none"><rect width="${cols * 100}" height="${rows * 100}" fill="${c[P.fundo]}"/><g clip-path="inset(0)">${h}</g></svg>`;
+  function tecido(tipo, c, cols, rows, n = 8) {   // n fios por módulo
+    const s = 100 / n, g = s * .14, W = cols * 100, H = rows * 100, NX = cols * n, NY = rows * n, f = POR_CIMA[tipo], P = n; let h = `<rect width="${W}" height="${H}" fill="${c[0]}"/>`, d = '';
+    for (let j = 0; j < NY; j++) d += `M0 ${(j * s + g / 2).toFixed(2)}H${W}v${(s - g).toFixed(2)}H0Z`;
+    h += `<path d="${d}" fill="${c[1]}"/>`; d = '';
+    for (let i = 0; i < NX; i++) { let j = 0; while (j < NY) { if (!f(i, j, P)) { j++; continue; } let k = j; while (k + 1 < NY && f(i, k + 1, P)) k++;
+      d += `M${(i * s + g / 2).toFixed(2)} ${(j === 0 ? 0 : j * s + g / 2).toFixed(2)}h${(s - g).toFixed(2)}V${(k === NY - 1 ? H : (k + 1) * s - g / 2).toFixed(2)}h${(-(s - g)).toFixed(2)}Z`; j = k + 1; } }
+    return h + `<path d="${d}" fill="${c[2] || c[1]}"/>`;
   }
-  /* <fibra-padrao tipo="ladrilho" cores="arroz,couve,fuba" cols="4" rows="2" seed="3"> — a primeira cor é o fundo */
-  class Padrao extends HTMLElement {
-    connectedCallback() {
-      const g = (a, d) => this.getAttribute(a) || d;
-      this.innerHTML = padrao(g('tipo', 'ladrilho'), g('cores', 'arroz,couve,fuba').split(',').map(s => s.trim()), parseInt(g('cols', 4)), parseInt(g('rows', 1)), parseInt(g('seed', 1)));
-    }
+  const GRAF = {
+    raios(c, W, H, o) {   // sol de tiras: raios alternados a partir do centro
+      const n = o.n || 24, cx = W / 2, cy = H / 2, R = Math.hypot(W, H); let d = '';
+      for (let k = 0; k < n; k += 2) { const a = k / n * 2 * Math.PI - Math.PI / 2 - Math.PI / n, b2 = a + 2 * Math.PI / n; d += `M${cx} ${cy}L${(cx + R * Math.cos(a)).toFixed(1)} ${(cy + R * Math.sin(a)).toFixed(1)}L${(cx + R * Math.cos(b2)).toFixed(1)} ${(cy + R * Math.sin(b2)).toFixed(1)}Z`; }
+      return `<rect width="${W}" height="${H}" fill="${c[0]}"/><path d="${d}" fill="${c[1]}"/>`;
+    },
+    zigue(c, W, H, o) {   // faixas em zigue-zague
+      const p = o.p || 50, e = o.e || 12.5, k = c.length - 1; let h = `<rect width="${W}" height="${H}" fill="${c[0]}"/>`;
+      for (let y = -p, q = 0; y < H + p; y += e * 2, q++) { let d = `M${-p} ${y + p / 2}`; for (let x = -p, up = true; x <= W + p; x += p / 2, up = !up) d += `L${x} ${y + (up ? p / 2 : 0)}`; h += `<path d="${d}" fill="none" stroke="${c[1 + (q % k)]}" stroke-width="${e}" stroke-linejoin="miter" stroke-miterlimit="8"/>`; }
+      return h;
+    },
+    losango(c, W, H) {   // losangos concêntricos por módulo
+      let h = `<rect width="${W}" height="${H}" fill="${c[0]}"/>`; const k = c.length - 1;
+      for (let y = 0; y < H; y += 100) for (let x = 0; x < W; x += 100) [50, 36, 22, 9].forEach((r, q) => h += `<path d="M${x + 50} ${y + 50 - r}L${x + 50 + r} ${y + 50}L${x + 50} ${y + 50 + r}L${x + 50 - r} ${y + 50}Z" fill="${c[1 + (q % k)]}"/>`);
+      return h;
+    },
+    escama(c, W, H) {   // escamas / telhas em fiadas desencontradas
+      let h = `<rect width="${W}" height="${H}" fill="${c[0]}"/>`; const k = c.length - 1, r = 25;
+      for (let j = Math.ceil(H / r) + 1; j >= -1; j--) for (let x = (j % 2 ? -r : 0) - r; x < W + r; x += 2 * r) { const y = j * r; h += `<circle cx="${x + r}" cy="${y}" r="${r}" fill="${c[1 + ((j % k) + k) % k]}"/><circle cx="${x + r}" cy="${y}" r="${r * .56}" fill="${c[1 + (((j + 1) % k) + k) % k]}"/><circle cx="${x + r}" cy="${y}" r="${r * .2}" fill="${c[0]}"/>`; }
+      return h;
+    },
+    graos(c, W, H) {   // grãos em fiadas, com a inclinação alternada: ponto de arroz
+      let h = `<rect width="${W}" height="${H}" fill="${c[0]}"/>`, d = [``, ``]; const p = 25;
+      for (let j = 0, y = p / 2; y < H; y += p, j++) for (let x = (j % 2 ? p : p / 2); x < W; x += p) d[j % 2] += graoPath(x, y, 9.5, 4, j % 2 ? 42 : -42);
+      return h + `<path d="${d[0]}" fill="${c[1]}"/><path d="${d[1]}" fill="${c[2] || c[1]}"/>`;
+    },
+    dente(c, W, H) {   // dente de serra: fiadas de triângulos
+      let h = `<rect width="${W}" height="${H}" fill="${c[0]}"/>`; const k = c.length - 1, p = 25;
+      for (let j = 0, y = 0; y < H; y += p, j++) { let d = ''; for (let x = 0; x < W; x += p) d += `M${x} ${y + p}L${x + p / 2} ${y}L${x + p} ${y + p}Z`; h += `<path d="${d}" fill="${c[1 + (j % k)]}"/>`; }
+      return h;
+    },
+  };
+  function trama(tipo, cores, cols, rows, o = {}) {
+    const c = cores.map(cor), W = cols * 100, H = rows * 100, corpo = POR_CIMA[tipo] ? tecido(tipo, c, cols, rows, o.n || 8) : GRAF[tipo](c, W, H, o);
+    return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><g clip-path="inset(0)">${corpo}</g></svg>`;
   }
-
-
-  /* <fibra-foto foto="mesa-jovem" w="1080" h="630" fx=".5" fy=".3" zoom="1"> — fotografia retangular que cobre a caixa w × h */
+  /* <fibra-trama tipo="sarja" cores="feijao,fuba,dende" cols="2" rows="2" n="8"> — a primeira cor é o fundo (o vão entre as tiras) */
+  class Trama extends HTMLElement {
+    connectedCallback() { const g = (a, d) => this.getAttribute(a) || d;
+      this.innerHTML = trama(g('tipo', 'sarja'), g('cores', 'feijao,fuba,dende').split(',').map(x => x.trim()), parseFloat(g('cols', 1)), parseFloat(g('rows', 1)), { n: parseInt(g('n', 8)), p: parseFloat(g('p', 50)), e: parseFloat(g('e', 12.5)) }); }
+  }
+  /* <fibra-prato foto="tex-feijao-preto" fundo="couve" raios="mata" aro="arroz" n="24"> — prato visto de cima sobre um sol de tiras */
+  class Prato extends HTMLElement {
+    connectedCallback() { const g = (a, d) => this.getAttribute(a) || d, id = 'p' + (++uid), f = this.getAttribute('foto'), fx = parseFloat(g('fx', .5)), fy = parseFloat(g('fy', .5)), z = parseFloat(g('zoom', 1));
+      const r = parseFloat(g('r', 34)), aro = cor(g('aro', 'arroz'));
+      this.innerHTML = `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">${GRAF.raios([cor(g('fundo', 'couve')), cor(g('raios', 'mata'))], 100, 100, { n: parseInt(g('n', 24)) })}` +
+        `<circle cx="50" cy="50" r="${r + 5.5}" fill="${aro}"/><circle cx="50" cy="50" r="${r + 1.6}" fill="none" stroke="${cor(g('fio', 'feijao'))}" stroke-opacity=".28" stroke-width=".7"/>` +
+        `<clipPath id="${id}"><circle cx="50" cy="50" r="${r}"/></clipPath><g clip-path="url(#${id})"><rect width="100" height="100" fill="${cor('feijao')}"/>${f ? cobre(f, 50 - r, 50 - r, 2 * r, 2 * r, fx, fy, z) : ''}</g></svg>`; }
+  }
+  customElements.define('fibra-prato', Prato);
+  /* <fibra-foto foto="mesa-jovem" w="1080" h="630" fx=".5" fy=".3" zoom="1" duo="mata,fuba"> — fotografia retangular que cobre a caixa w × h.
+     duo: duotom (sombras na primeira cor, luzes na segunda). */
   class Foto extends HTMLElement {
     connectedCallback() {
-      const g = (a, d) => parseFloat(this.getAttribute(a) ?? d), w = g('w', 100), h = g('h', 100);
+      const g = (a, d) => parseFloat(this.getAttribute(a) ?? d), w = g('w', 100), h = g('h', 100), duo = this.getAttribute('duo'), id = ++uid; let filtro = '';
       this.style.display = 'block'; this.style.lineHeight = 0;
-      this.innerHTML = `<svg viewBox="0 0 ${w} ${h}" style="display:block;width:100%;height:100%" preserveAspectRatio="none"><clipPath id="f${++uid}"><rect width="${w}" height="${h}"/></clipPath><g clip-path="url(#f${uid})">${cobre(this.getAttribute('foto'), 0, 0, w, h, g('fx', .5), g('fy', .5), g('zoom', 1))}</g></svg>`;
+      if (duo) {
+        const hex = v => { const x = cor(v).replace('#', ''); return [0, 2, 4].map(k => parseInt(x.substr(k, 2), 16) / 255); }, [a, b] = duo.split(',').map(x => hex(x.trim()));
+        filtro = `<filter id="d${id}" color-interpolation-filters="sRGB" x="0" y="0" width="100%" height="100%"><feColorMatrix type="matrix" values=".2126 .7152 .0722 0 0 .2126 .7152 .0722 0 0 .2126 .7152 .0722 0 0 0 0 0 1 0"/><feComponentTransfer><feFuncR type="linear" slope="1.25" intercept="-.1"/><feFuncG type="linear" slope="1.25" intercept="-.1"/><feFuncB type="linear" slope="1.25" intercept="-.1"/></feComponentTransfer><feComponentTransfer><feFuncR type="table" tableValues="${a[0]} ${b[0]}"/><feFuncG type="table" tableValues="${a[1]} ${b[1]}"/><feFuncB type="table" tableValues="${a[2]} ${b[2]}"/></feComponentTransfer></filter>`;
+      }
+      this.innerHTML = `<svg viewBox="0 0 ${w} ${h}" style="display:block;width:100%;height:100%" preserveAspectRatio="none"><defs>${filtro}<clipPath id="f${id}"><rect width="${w}" height="${h}"/></clipPath></defs><g clip-path="url(#f${id})"><g ${duo ? `filter="url(#d${id})"` : ''}>${cobre(this.getAttribute('foto'), 0, 0, w, h, g('fx', .5), g('fy', .5), g('zoom', 1))}</g></g></svg>`;
     }
   }
   customElements.define('fibra-foto', Foto);
-  customElements.define('fibra-padrao', Padrao);
+  customElements.define('fibra-trama', Trama);
   customElements.define('fibra-logo', Logo); customElements.define('fibra-janela', Janela); customElements.define('fibra-grao', Grao);
-  window.FIBRA = { dados: D, cor, padrao, graoPath, letraD, disposicao, plantio, fotoUrl,
-    tinta, pronto: async () => { aplicaPlantio(); await document.fonts.ready; await Promise.all(['900 semi-expanded 40px Archivo', '900 expanded 40px Archivo', '800 40px Archivo', '600 20px Archivo', '400 20px Archivo', '500 20px "DM Mono"'].map(f => document.fonts.load(f))); ajustaTipos(); grade(); await Promise.all(espera);
+  window.FIBRA = { dados: D, cor, trama, graoPath, letraD, disposicao, plantio, fotoUrl,
+    tinta, pronto: async () => { aplicaPlantio(); await document.fonts.ready; await Promise.all(['400 40px Anton', '400 20px Sora', '600 20px Sora', '700 20px Sora'].map(f => document.fonts.load(f))); ajustaTipos(); grade(); await Promise.all(espera);
       await Promise.all([...document.images].map(i => i.complete ? (i.decode ? i.decode().catch(() => 0) : 0) : new Promise(r => { i.onload = i.onerror = r; }))); return true; } };
   document.addEventListener('DOMContentLoaded', aplicaPlantio);
 })();

@@ -1,220 +1,204 @@
 <!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>FIBRA — Instagram</title>
 <link rel="stylesheet" href="base.css"><script src="letras.js"></script><script src="fotos.js"></script><script src="fibra.js"></script>
 <style>
-/* GRADE DO FEED — 1080 × 1350 · margem 72 · 12 colunas de 56 · calha 24 · módulo de estampa 90
-   linhas: topo 72 · cabeçalho 72→140 · linha das letras 208 · barrado 1260→1350 · rodapé 1188 */
+/* GRADE DO FEED — 1080 × 1350 · margem 72 · 12 colunas de 56 · calha 24
+   linhas: topo 72 · cabeçalho 72→156 · linha das letras 214 · linha de base 1278
+   colcha: coluna de 4 retalhos de 266 (= altura das letras ÷ 4) ou fiada de 4 retalhos de 234 (= largura útil ÷ 4) */
 .ig { width: 1080px; height: 1350px; } .st { width: 1080px; height: 1920px; } .qd { width: 1080px; height: 1080px; }
 .ig > *, .st > *, .qd > * { position: absolute; }
-.legenda { left: 72px; top: 72px; font-size: 38.9px; line-height: 40.8px; z-index: 3; }
-.rot { left: 72px; top: 72px; font-size: 16px; z-index: 3; }
-.rot-d { right: 72px; top: 72px; font-size: 16px; z-index: 3; }
-.assina { right: 72px; top: 72px; width: 376px; z-index: 3; }   /* 5 colunas · altura 67,5 = bloco da legenda */
-.ig fibra-janela { top: 208px; }
-.barrado { left: 0; bottom: 0; width: 1080px; height: 90px; z-index: 5; }
-.pe { left: 72px; right: 72px; bottom: 162px; display: flex; justify-content: space-between; align-items: flex-end; z-index: 3; }
-.pe .t-rotulo { font-size: 16px; line-height: 24px; } .pe .t-rotulo:last-child { text-align: right; }
-.grande { left: 72px; }
+.legenda { left: 72px; top: 72px; font-size: 43px; line-height: 52.6px; z-index: 3; }
+.rot { left: 72px; top: 72px; font-size: 16px; z-index: 3; } .rot-d { right: 72px; top: 72px; font-size: 16px; z-index: 3; }
+.assina { right: 72px; top: 72px; width: 196.3px; z-index: 3; }
+.letra { left: 50%; transform: translateX(-50%); top: 214px; height: 1064px; } .letra svg { width: auto !important; height: 100% !important; }
+.fiada { left: 72px; bottom: 72px; width: 936px; height: 234px; display: grid; grid-template-columns: repeat(4, 234px); }
+.fiada > *, .mosaico > * { width: 100%; height: 100%; }
+.grande { left: 72px; top: 214px; }
 .coluna { left: 72px; right: 72px; display: flex; flex-direction: column; align-items: flex-start; }
-.corpo { font-size: 31px; line-height: 40px; }
-.tabela { width: 100%; font-size: 21px; line-height: 1; }
-.tabela > div { display: flex; justify-content: space-between; padding: 15.5px 0; border-top: 2px solid var(--linha); }
-.tabela > div:last-child { border-bottom: 2px solid var(--linha); }
-.tabela b { font-weight: 500; opacity: .6; }
-/* carrossel: foto (7 módulos) · barrado (1) · texto (7) */
-.car .foto { left: 0; top: 0; width: 1080px; height: 630px; }
-.car .faixa { left: 0; top: 630px; width: 1080px; height: 90px; }
-.car .rot, .car .assina { top: 792px; }
-.car .coluna { top: 928px; gap: 40px; }
+.corpo { font-size: 29px; line-height: 42px; }
+.tabela { width: 100%; font-size: 23px; line-height: 1; } .tabela > div { display: flex; justify-content: space-between; padding: 17px 0 16px; border-top: 2px solid var(--linha); }
+.tabela > div:last-child { border-bottom: 2px solid var(--linha); } .tabela b { font-weight: 600; }
+.mosaico { left: 0; top: 0; width: 1080px; display: grid; grid-template-columns: repeat(4, 270px); grid-auto-rows: 270px; }
+/* carrossel: foto 480 · fiada de retalhos 270 · texto 600 */
+.car .foto { left: 0; top: 0; width: 1080px; height: 480px; } .car .mosaico { top: 480px; }
+.car .rot, .car .assina { top: 822px; } .car .coluna { top: 962px; gap: 44px; }
 /* stories: área segura 250 → 1580 */
-.st .rot, .st .rot-d, .st .legenda, .st .assina { top: 250px; } .st .pe { bottom: 340px; }
+.st .rot, .st .rot-d, .st .legenda, .st .assina { top: 250px; }
+.st .pe { left: 72px; right: 72px; bottom: 340px; display: flex; justify-content: space-between; } .st .pe .t-rotulo { font-size: 16px; line-height: 24px; }
 </style></head><body>
 
 <!-- ═════ FEED: grade de lançamento (3 × 3) ═════ -->
-<div class="prancha ig bg-couve" data-nome="feed-01-logo" data-grade="72,12,24" data-linhas="72,140,208,1260">
-  <fibra-padrao tipo="ladrilho" cores="fuba,couve,mata" cols="12" rows="1" style="left:0;top:0;width:1080px;height:90px"></fibra-padrao>
-  <div class="rot t-rotulo tb" style="top:162px">Chegou</div><div class="rot-d t-rotulo tb" style="top:162px">Brasil</div>
-  <fibra-logo cor="fuba" style="left:72px;width:936px;top:591px"></fibra-logo>
-  <div class="pe"><div class="t-rotulo tb">Cestas de comida de verdade</div><div class="t-rotulo tb">@fibra.cestas</div></div>
-  <fibra-padrao class="barrado" tipo="ladrilho" cores="fuba,couve,mata" cols="12" rows="1"></fibra-padrao>
+<div class="prancha ig bg-feijao" data-nome="feed-01-logo">
+  <div class="mosaico" style="height:1350px">
+    <fibra-prato foto="tex-feijao-preto" fundo="fuba" raios="dende" aro="arroz"></fibra-prato><fibra-trama tipo="zigue" cores="arroz,urucum,feijao" cols="2" rows="2"></fibra-trama><fibra-foto foto="agro-senhora" w="270" h="270" fx=".42" fy=".35" zoom="1.05" duo="mata,fuba"></fibra-foto><fibra-trama tipo="olho" cores="feijao,dende,fuba" cols="2" rows="2"></fibra-trama>
+    <fibra-trama tipo="espinha" cores="mata,couve,fuba" cols="2" rows="2"></fibra-trama>
+    <div class="bg-couve" style="grid-column:2 / span 2;grid-row:2 / span 3;position:relative"><fibra-logo cor="fuba" style="position:absolute;left:54px;top:320px;width:432px"></fibra-logo><div class="t-rotulo tb" style="position:absolute;left:54px;top:54px;font-size:15px">Chegou</div><div class="t-rotulo tb" style="position:absolute;right:54px;top:54px;font-size:15px">Brasil</div><div class="t-rotulo tb" style="position:absolute;left:54px;bottom:54px;font-size:15px;line-height:23px">Cestas de comida<br>de verdade</div></div>
+    <fibra-trama tipo="losango" cores="anil,fuba,anil,arroz,urucum" cols="2" rows="2"></fibra-trama>
+    <fibra-foto foto="cozinha-vovo" w="270" h="270" fx=".55" fy=".35" zoom="1.1" duo="feijao,dende"></fibra-foto><fibra-prato foto="tex-arroz" fundo="anil" raios="mata" aro="fuba"></fibra-prato>
+    <fibra-trama tipo="escama" cores="feijao,urucum,dende,fuba" cols="2" rows="2"></fibra-trama><fibra-trama tipo="sarja" cores="feijao,fuba,arroz" cols="2" rows="2"></fibra-trama>
+    <fibra-prato foto="feira-couve" fundo="arroz" raios="fuba" aro="couve" fx=".4"></fibra-prato><fibra-trama tipo="graos" cores="urucum,arroz,fuba" cols="2" rows="2"></fibra-trama><fibra-foto foto="agro-enxada" w="270" h="270" fx=".5" fy=".25" zoom="1.15" duo="anil,arroz"></fibra-foto><fibra-trama tipo="dente" cores="arroz,couve,anil,urucum" cols="2" rows="2"></fibra-trama>
+  </div>
 </div>
 
-<div class="prancha ig bg-arroz" data-nome="feed-02-direito" data-grade="72,12,24" data-linhas="72,140,208,1260">
+<div class="prancha ig bg-arroz" data-nome="feed-02-direito" data-grade="72,12,24" data-linhas="72,156,214,1278">
   <div class="rot t-rotulo tb">Manifesto</div><fibra-logo class="assina"></fibra-logo>
-  <div class="grande t-titulo tb" data-ajusta="936" style="top:208px;font-size:120px"><span class="ln">Comida</span><span class="ln">de verdade</span><span class="ln">é direito</span><span class="ln">de todo</span><span class="ln c-couve">mundo.</span></div>
-  <div class="pe"><div class="t-rotulo tb">Arroz, feijão, legumes e verduras<br>de produtores brasileiros</div><div class="t-rotulo tb">fibra.com.br</div></div>
-  <fibra-padrao class="barrado" tipo="bandeirinha" cores="arroz,couve,fuba,anil,urucum" cols="12" rows="1"></fibra-padrao>
+  <div class="grande t-titulo tb" data-ajusta="936" style="font-size:150px"><span class="ln">Comida de verdade</span><span class="ln">é direito de</span><span class="ln c-couve">todo mundo.</span></div>
+  <div class="t-chamada tb" style="left:72px;top:720px;width:820px;font-size:36px;line-height:48px">Arroz, feijão, legumes e verduras de produtores brasileiros, por um preço que cabe no mês.</div>
+  <div class="fiada"><fibra-trama tipo="sarja" cores="feijao,fuba,dende" cols="2" rows="2"></fibra-trama><fibra-prato foto="tex-feijao-carioca" fundo="couve" raios="mata" aro="arroz"></fibra-prato><fibra-foto foto="mesa-geracoes" w="234" h="234" fx=".3" fy=".4" zoom="1.2" duo="mata,fuba"></fibra-foto><fibra-trama tipo="zigue" cores="arroz,urucum,feijao" cols="2" rows="2"></fibra-trama></div>
 </div>
 
-<div class="prancha ig bg-anil" data-nome="feed-03-B-cozinha" data-grade="72,12,24" data-linhas="72,140,208,1260">
+<div class="prancha ig bg-anil" data-nome="feed-03-B-cozinha" data-grade="72,12,24" data-linhas="72,156,214,1278">
   <div class="legenda t-chamada tb">Quem cozinha sabe<br>o valor do básico.</div><fibra-logo class="assina" cor="fuba"></fibra-logo>
-  <fibra-janela alta letra="B" foto="cozinha-sorriso" fx=".03" fy=".35" zoom="1.04" style="width:1248px;left:-240px"></fibra-janela>
-  <fibra-padrao class="barrado" tipo="prato" cores="anil,arroz,fuba,urucum" cols="12" rows="1"></fibra-padrao>
+  <fibra-janela class="letra" letra="B" foto="cozinha-sorriso" fx=".2" fy=".4"></fibra-janela>
 </div>
 
-<div class="prancha ig bg-mata" data-nome="feed-04-dado" data-grade="72,12,24" data-linhas="72,140,208,1260">
+<div class="prancha ig bg-mata" data-nome="feed-04-dado" data-grade="72,12,24" data-linhas="72,156,214,1278">
   <div class="rot t-rotulo tb">Brasil · 2024</div><fibra-logo class="assina" cor="fuba"></fibra-logo>
-  <div class="coluna" style="top:208px;gap:64px">
-    <div class="t-titulo tb c-fuba" data-ajusta="936" style="font-size:300px;letter-spacing:-.03em"><span class="ln">24,2%</span></div>
-    <div style="width:100%;display:grid;grid-template-columns:repeat(4,1fr);column-gap:24px"><fibra-grao cor="fuba"></fibra-grao><fibra-grao cor="arroz"></fibra-grao><fibra-grao cor="arroz"></fibra-grao><fibra-grao cor="arroz"></fibra-grao></div>
-    <div class="t-chamada tb" style="font-size:54px;line-height:56px;font-weight:700;letter-spacing:-.025em;width:936px">Quase 1 em cada 4 lares brasileiros conviveu com algum grau de insegurança alimentar.</div>
-  </div>
-  <div class="pe"><div class="t-rotulo tb">Fonte: IBGE, PNAD Contínua<br>Segurança Alimentar 2024</div><div class="t-rotulo tb c-fuba">A gente não aceita.</div></div>
-  <fibra-padrao class="barrado" tipo="trancado" cores="mata,fuba,couve" cols="12" rows="1"></fibra-padrao>
+  <div class="grande t-titulo tb c-fuba" data-ajusta="936" style="font-size:380px;letter-spacing:0"><span class="ln">24,2%</span></div>
+  <div class="t-chamada tb" style="left:72px;top:622px;width:936px;font-size:50px;line-height:58px;font-weight:700;letter-spacing:-.03em">Quase 1 em cada 4 lares brasileiros conviveu com algum grau de insegurança alimentar.</div>
+  <div class="t-rotulo tb" style="left:72px;top:856px;font-size:16px;line-height:24px;opacity:.8">Fonte: IBGE, PNAD Contínua — Segurança Alimentar 2024</div>
+  <div class="fiada"><fibra-trama tipo="graos" cores="couve,fuba,arroz" cols="2" rows="2"></fibra-trama><fibra-prato foto="tex-feijao-preto" fundo="fuba" raios="dende" aro="arroz"></fibra-prato><fibra-foto foto="mesa-menina" w="234" h="234" fx=".3" fy=".42" zoom="1.5" duo="feijao,fuba"></fibra-foto><fibra-trama tipo="sarja" cores="feijao,fuba,couve" cols="2" rows="2"></fibra-trama></div>
 </div>
 
-<div class="prancha ig bg-dende" data-nome="feed-05-R-roca" data-grade="72,12,24" data-linhas="72,140,208,1260">
+<div class="prancha ig bg-dende" data-nome="feed-05-R-roca" data-grade="72,12,24" data-linhas="72,156,214,1278">
   <div class="legenda t-chamada tb">Direto de<br>quem planta.</div><fibra-logo class="assina"></fibra-logo>
-  <fibra-janela alta letra="R" foto="agro-senhora" fx=".4" fy=".5" style="width:1248px;left:-240px"></fibra-janela>
-  <fibra-padrao class="barrado" tipo="trancado" cores="feijao,fuba,arroz" cols="12" rows="1"></fibra-padrao>
+  <fibra-janela class="letra" letra="R" foto="agro-senhora" fx=".43" fy=".4" zoom="1.05"></fibra-janela>
 </div>
 
-<div class="prancha ig bg-urucum" data-nome="feed-06-como-funciona" data-grade="72,12,24" data-linhas="72,140,208,1260">
+<div class="prancha ig bg-urucum" data-nome="feed-06-como-funciona" data-grade="72,12,24" data-linhas="72,156,214,1278">
   <div class="rot t-rotulo tb">Como funciona · 1/6</div><fibra-logo class="assina" cor="arroz"></fibra-logo>
-  <div class="grande t-titulo tb" data-ajusta="936" style="top:208px;font-size:120px"><span class="ln">Como</span><span class="ln">a Fibra</span><span class="ln c-fuba">funciona.</span></div>
-  <div class="pe"><div class="t-rotulo tb">Da roça até a sua mesa<br>em quatro passos</div><div class="t-rotulo tb">Arrasta →</div></div>
-  <fibra-padrao class="barrado" tipo="bandeirinha" cores="urucum,fuba,arroz,dende" cols="12" rows="1"></fibra-padrao>
+  <div class="grande t-titulo tb" data-ajusta="936" style="font-size:200px"><span class="ln">Como a Fibra</span><span class="ln c-fuba">funciona.</span></div>
+  <div class="t-chamada tb" style="left:72px;top:800px;font-size:36px;line-height:46px;width:700px">Da roça até a sua mesa, em quatro passos.</div>
+  <div class="t-rotulo tb" style="right:72px;top:800px;font-size:16px">Arrasta →</div>
+  <div class="fiada"><fibra-trama tipo="olho" cores="feijao,arroz,fuba" cols="2" rows="2"></fibra-trama><fibra-foto foto="agro-cafe" w="234" h="234" fx=".28" fy=".25" zoom="1.2" duo="mata,fuba"></fibra-foto><fibra-prato foto="feira-couve" fundo="fuba" raios="dende" aro="couve" fx=".4"></fibra-prato><fibra-trama tipo="escama" cores="mata,couve,fuba" cols="2" rows="2"></fibra-trama></div>
 </div>
 
-<div class="prancha ig bg-fuba" data-nome="feed-07-F-feijao" data-grade="72,12,24" data-linhas="72,140,208,1260">
+<div class="prancha ig bg-fuba" data-nome="feed-07-F-feijao" data-grade="72,12,24" data-linhas="72,156,214,1278">
   <div class="legenda t-chamada tb">F de feijão.<br>No fogo, todo dia.</div><fibra-logo class="assina"></fibra-logo>
-  <fibra-janela alta letra="F" foto="tex-feijao-carioca" style="width:1088px;left:-80px"></fibra-janela>
-  <fibra-padrao class="barrado" tipo="ladrilho" cores="fuba,couve,mata" cols="12" rows="1"></fibra-padrao>
+  <fibra-janela class="letra" letra="F" foto="tex-feijao-carioca"></fibra-janela>
 </div>
 
-<div class="prancha ig bg-arroz" data-nome="feed-08-cesta-base" data-grade="72,12,24" data-linhas="72,140,208,1260">
+<div class="prancha ig bg-arroz" data-nome="feed-08-cesta-base" data-grade="72,12,24" data-linhas="72,156,214,1278">
   <div class="rot t-rotulo tb">O que vem na cesta</div><fibra-logo class="assina"></fibra-logo>
-  <div class="coluna" style="top:208px;gap:52px">
-    <div class="t-titulo tb" data-ajusta="936" style="font-size:120px"><span class="ln">Cesta Base</span></div>
-    <div class="tabela t-dado">
-      <div><span>Arroz agulhinha</span><b>5 kg</b></div><div><span>Feijão-carioca</span><b>2 kg</b></div><div><span>Feijão-preto</span><b>1 kg</b></div>
-      <div><span>Farinha de mandioca</span><b>1 kg</b></div><div><span>Fubá</span><b>1 kg</b></div><div><span>Macarrão</span><b>1 kg</b></div>
-      <div><span>Óleo de soja</span><b>900 ml</b></div><div><span>Café torrado e moído</span><b>500 g</b></div><div><span>Açúcar e sal</span><b>2 kg + 1 kg</b></div>
-    </div>
+  <div class="grande t-titulo tb" style="font-size:150px">Cesta Base</div>
+  <div class="tabela t-dado" style="left:72px;top:396px;width:936px">
+    <div><span>Arroz agulhinha</span><b>5 kg</b></div><div><span>Feijão-carioca</span><b>2 kg</b></div><div><span>Feijão-preto</span><b>1 kg</b></div>
+    <div><span>Farinha de mandioca</span><b>1 kg</b></div><div><span>Fubá</span><b>1 kg</b></div><div><span>Macarrão</span><b>1 kg</b></div>
+    <div><span>Óleo de soja</span><b>900 ml</b></div><div><span>Café torrado e moído</span><b>500 g</b></div><div><span>Açúcar e sal</span><b>2 kg + 1 kg</b></div>
   </div>
-  <div class="pe"><div class="t-rotulo tb">Assinatura mensal · Fibra Social:<br>mesma cesta, preço menor</div><div class="t-rotulo tb">fibra.com.br</div></div>
-  <fibra-padrao class="barrado" tipo="trancado" cores="arroz,couve,feijao" cols="12" rows="1"></fibra-padrao>
+  <div class="fiada"><fibra-prato foto="tex-arroz" fundo="anil" raios="mata" aro="fuba"></fibra-prato><fibra-prato foto="tex-feijao-carioca" fundo="couve" raios="mata" aro="arroz"></fibra-prato><fibra-prato foto="tex-feijao-preto" fundo="fuba" raios="dende" aro="arroz"></fibra-prato><fibra-prato foto="comida-tropeiro" fundo="urucum" raios="feijao" aro="fuba"></fibra-prato></div>
 </div>
 
-<div class="prancha ig bg-couve" data-nome="feed-09-A-mesa" data-grade="72,12,24" data-linhas="72,140,208,1260">
+<div class="prancha ig bg-couve" data-nome="feed-09-A-mesa" data-grade="72,12,24" data-linhas="72,156,214,1278">
   <div class="legenda t-chamada tb">Mesa cheia é direito,<br>não é sorte.</div><fibra-logo class="assina" cor="fuba"></fibra-logo>
-  <fibra-janela alta letra="A" foto="comida-pf" fx=".2" fy=".5" style="width:1400px;left:-160px"></fibra-janela>
-  <fibra-padrao class="barrado" tipo="folha" cores="couve,mata,fuba,arroz" cols="12" rows="1" seed="5"></fibra-padrao>
+  <fibra-janela class="letra" letra="A" foto="comida-pf" fx=".36" fy=".5"></fibra-janela>
 </div>
 
 <!-- ═════ CARROSSEL: como funciona (2/6 → 6/6) ═════ -->
-<div class="prancha ig car bg-couve" data-nome="carrossel-2-compra" data-grade="72,12,24" data-linhas="630,720,792">
-  <fibra-foto class="foto" foto="agro-cafe" w="1080" h="630" fx=".3" fy=".25"></fibra-foto>
-  <fibra-padrao class="faixa" tipo="folha" cores="arroz,couve,mata,fuba" cols="12" rows="1" seed="9"></fibra-padrao>
+<div class="prancha ig car bg-couve" data-nome="carrossel-2-compra">
+  <fibra-foto class="foto" foto="agro-cafe" w="1080" h="480" fx=".3" fy=".22"></fibra-foto>
+  <div class="mosaico"><fibra-trama tipo="sarja" cores="mata,arroz,couve" cols="2" rows="2"></fibra-trama><fibra-prato foto="tex-feijao-carioca" fundo="fuba" raios="dende" aro="arroz"></fibra-prato><fibra-trama tipo="espinha" cores="feijao,fuba,arroz" cols="2" rows="2"></fibra-trama><fibra-foto foto="agro-enxada" w="270" h="270" fx=".5" fy=".25" zoom="1.15" duo="mata,fuba"></fibra-foto></div>
   <div class="rot t-rotulo tb">Passo 01 · 2/6</div><fibra-logo class="assina" cor="fuba"></fibra-logo>
-  <div class="coluna"><div class="t-titulo tb" data-ajusta="936" style="font-size:90px"><span class="ln">A gente compra</span><span class="ln c-fuba">de quem planta.</span></div>
-    <div class="corpo t-texto tb" style="width:856px">Direto de produtores e cooperativas da agricultura familiar brasileira. Sem atravessador no meio do caminho.</div></div>
+  <div class="coluna"><div class="t-titulo tb" style="font-size:96px">A gente compra<br><span class="c-fuba">de quem planta.</span></div><div class="corpo t-texto tb" style="width:880px">Direto de produtores e cooperativas da agricultura familiar brasileira. Sem atravessador.</div></div>
 </div>
-
-<div class="prancha ig car bg-fuba" data-nome="carrossel-3-cesta" data-grade="72,12,24" data-linhas="630,720,792">
-  <fibra-foto class="foto" foto="feira-maos" w="1080" h="630" fx=".5" fy=".55"></fibra-foto>
-  <fibra-padrao class="faixa" tipo="trancado" cores="feijao,fuba,dende" cols="12" rows="1"></fibra-padrao>
+<div class="prancha ig car bg-fuba" data-nome="carrossel-3-cesta">
+  <fibra-foto class="foto" foto="feira-maos" w="1080" h="480" fx=".5" fy=".55"></fibra-foto>
+  <div class="mosaico"><fibra-prato foto="tex-arroz" fundo="anil" raios="mata" aro="arroz"></fibra-prato><fibra-trama tipo="esteira" cores="feijao,couve,arroz" cols="2" rows="2"></fibra-trama><fibra-prato foto="tex-feijao-preto" fundo="couve" raios="mata" aro="arroz"></fibra-prato><fibra-trama tipo="zigue" cores="arroz,urucum,feijao" cols="2" rows="2"></fibra-trama></div>
   <div class="rot t-rotulo tb">Passo 02 · 3/6</div><fibra-logo class="assina"></fibra-logo>
-  <div class="coluna"><div class="t-titulo tb" data-ajusta="936" style="font-size:90px"><span class="ln">Monta a cesta</span><span class="ln c-dest">da semana.</span></div>
-    <div class="corpo t-texto tb" style="width:856px">Arroz, feijão, legumes, verduras e o básico que não pode faltar. Comida de verdade, sem enfeite.</div></div>
+  <div class="coluna"><div class="t-titulo tb" style="font-size:96px">Monta a cesta<br><span class="c-dest">da semana.</span></div><div class="corpo t-texto tb" style="width:880px">Arroz, feijão, legumes, verduras e o básico que não pode faltar. Comida de verdade, sem enfeite.</div></div>
 </div>
-
-<div class="prancha ig car bg-anil" data-nome="carrossel-4-assina" data-grade="72,12,24" data-linhas="630,720,792">
-  <fibra-foto class="foto" foto="mesa-casal2" w="1080" h="630" fx=".3" fy=".3"></fibra-foto>
-  <fibra-padrao class="faixa" tipo="prato" cores="anil,arroz,fuba,urucum" cols="12" rows="1"></fibra-padrao>
+<div class="prancha ig car bg-anil" data-nome="carrossel-4-assina">
+  <fibra-foto class="foto" foto="mesa-casal2" w="1080" h="480" fx=".3" fy=".28"></fibra-foto>
+  <div class="mosaico"><fibra-trama tipo="olho" cores="feijao,arroz,fuba" cols="2" rows="2"></fibra-trama><fibra-foto foto="mesa-maos" w="270" h="270" fx=".5" fy=".5" duo="feijao,fuba"></fibra-foto><fibra-trama tipo="losango" cores="urucum,arroz,urucum,fuba,feijao" cols="2" rows="2"></fibra-trama><fibra-prato foto="comida-pf" fundo="fuba" raios="dende" aro="arroz" fx=".2" zoom="1.55"></fibra-prato></div>
   <div class="rot t-rotulo tb">Passo 03 · 4/6</div><fibra-logo class="assina" cor="fuba"></fibra-logo>
-  <div class="coluna"><div class="t-titulo tb" data-ajusta="936" style="font-size:90px"><span class="ln">Quem pode,</span><span class="ln c-fuba">assina.</span></div>
-    <div class="corpo t-texto tb" style="width:856px">Famílias e empresas assinam e pagam o preço cheio. Recebem em casa ou no trabalho, todo mês.</div></div>
+  <div class="coluna"><div class="t-titulo tb" style="font-size:96px">Quem pode,<br><span class="c-fuba">assina.</span></div><div class="corpo t-texto tb" style="width:880px">Famílias e empresas assinam e pagam o preço cheio. Recebem em casa ou no trabalho, todo mês.</div></div>
 </div>
-
-<div class="prancha ig car bg-urucum" data-nome="carrossel-5-desconto" data-grade="72,12,24" data-linhas="630,720,792">
-  <fibra-foto class="foto" foto="mesa-menina" w="1080" h="630" fx=".3" fy=".4"></fibra-foto>
-  <fibra-padrao class="faixa" tipo="bandeirinha" cores="arroz,urucum,fuba,couve,anil" cols="12" rows="1"></fibra-padrao>
+<div class="prancha ig car bg-urucum" data-nome="carrossel-5-desconto">
+  <fibra-foto class="foto" foto="mesa-menina" w="1080" h="480" fx=".3" fy=".38"></fibra-foto>
+  <div class="mosaico"><fibra-trama tipo="escama" cores="mata,couve,fuba" cols="2" rows="2"></fibra-trama><fibra-prato foto="comida-tropeiro" fundo="fuba" raios="dende" aro="arroz"></fibra-prato><fibra-foto foto="cozinha-vovo" w="270" h="270" fx=".55" fy=".35" zoom="1.1" duo="feijao,fuba"></fibra-foto><fibra-trama tipo="sarja" cores="feijao,fuba,arroz" cols="2" rows="2"></fibra-trama></div>
   <div class="rot t-rotulo tb">Passo 04 · 5/6</div><fibra-logo class="assina" cor="arroz"></fibra-logo>
-  <div class="coluna"><div class="t-titulo tb" data-ajusta="936" style="font-size:90px"><span class="ln">Quem precisa,</span><span class="ln c-fuba">paga menos.</span></div>
-    <div class="corpo t-texto tb" style="width:856px">A margem das assinaturas vira desconto para famílias de baixa renda. A mesma cesta, por um preço que cabe no mês.</div></div>
+  <div class="coluna"><div class="t-titulo tb" style="font-size:96px">Quem precisa,<br><span class="c-fuba">paga menos.</span></div><div class="corpo t-texto tb" style="width:880px">A margem das assinaturas vira desconto para famílias de baixa renda. A mesma cesta, por um preço que cabe no mês.</div></div>
 </div>
-
-<div class="prancha ig bg-mata" data-nome="carrossel-6-assine" data-grade="72,12,24" data-linhas="72,140,208,1260">
+<div class="prancha ig bg-mata" data-nome="carrossel-6-assine" data-grade="72,12,24" data-linhas="72,156,214,1278">
   <div class="rot t-rotulo tb">Assine · 6/6</div><fibra-logo class="assina" cor="fuba"></fibra-logo>
-  <div class="grande t-titulo tb" data-ajusta="936" style="top:208px;font-size:120px"><span class="ln">Assine</span><span class="ln">uma cesta.</span><span class="ln c-fuba" style="margin-top:.36em">Apoie</span><span class="ln c-fuba">outra mesa.</span></div>
-  <div class="pe"><div class="t-rotulo tb">Fibra em Casa · Fibra Empresa<br>Fibra Social</div><div class="t-rotulo tb">fibra.com.br<br>@fibra.cestas</div></div>
-  <fibra-padrao class="barrado" tipo="ladrilho" cores="fuba,couve,mata" cols="12" rows="1"></fibra-padrao>
+  <div class="grande t-titulo tb" data-ajusta="936" style="font-size:200px"><span class="ln">Assine uma cesta.</span><span class="ln c-fuba">Apoie outra mesa.</span></div>
+  <div class="t-chamada tb" style="left:72px;top:690px;font-size:36px;line-height:46px;width:760px">Fibra em Casa, Fibra Empresa e Fibra Social. Em fibra.com.br</div>
+  <div class="fiada"><fibra-trama tipo="espinha" cores="feijao,fuba,arroz" cols="2" rows="2"></fibra-trama><fibra-prato foto="tex-feijao-preto" fundo="fuba" raios="dende" aro="arroz"></fibra-prato><fibra-foto foto="agro-lavoura" w="234" h="234" fx=".72" fy=".2" zoom="1.2" duo="feijao,fuba"></fibra-foto><fibra-trama tipo="losango" cores="anil,fuba,anil,arroz,urucum" cols="2" rows="2"></fibra-trama></div>
 </div>
 
 <!-- ═════ ABECEDÁRIO ═════ -->
-<div class="prancha ig bg-anil" data-nome="abc-B-banana" data-grade="72,12,24" data-linhas="72,140,208,1260">
+<div class="prancha ig bg-anil" data-nome="abc-B-banana" data-grade="72,12,24" data-linhas="72,156,214,1278">
   <div class="legenda t-chamada tb">B de banana.<br>Da feira, no cacho.</div><fibra-logo class="assina" cor="fuba"></fibra-logo>
-  <fibra-janela alta letra="B" foto="feira-banana" style="width:1248px;left:-240px"></fibra-janela>
-  <fibra-padrao class="barrado" tipo="prato" cores="anil,fuba,arroz" cols="12" rows="1"></fibra-padrao>
+  <fibra-janela class="letra" letra="B" foto="feira-banana" fx=".45"></fibra-janela>
 </div>
-<div class="prancha ig bg-couve" data-nome="abc-R-roca" data-grade="72,12,24" data-linhas="72,140,208,1260">
+<div class="prancha ig bg-couve" data-nome="abc-R-roca" data-grade="72,12,24" data-linhas="72,156,214,1278">
   <div class="legenda t-chamada tb">R de roça.<br>Onde tudo começa.</div><fibra-logo class="assina" cor="fuba"></fibra-logo>
-  <fibra-janela alta letra="R" foto="agro-estrada" style="width:1248px;left:-240px"></fibra-janela>
-  <fibra-padrao class="barrado" tipo="folha" cores="couve,mata,fuba,arroz" cols="12" rows="1" seed="3"></fibra-padrao>
+  <fibra-janela class="letra" letra="R" foto="agro-estrada" fx=".42"></fibra-janela>
 </div>
-<div class="prancha ig bg-urucum" data-nome="abc-A-arroz" data-grade="72,12,24" data-linhas="72,140,208,1260">
+<div class="prancha ig bg-urucum" data-nome="abc-A-arroz" data-grade="72,12,24" data-linhas="72,156,214,1278">
   <div class="legenda t-chamada tb">A de arroz.<br>Soltinho, todo dia.</div><fibra-logo class="assina" cor="arroz"></fibra-logo>
-  <fibra-janela alta letra="A" foto="tex-arroz" style="width:1400px;left:-160px"></fibra-janela>
-  <fibra-padrao class="barrado" tipo="bandeirinha" cores="urucum,arroz,fuba" cols="12" rows="1"></fibra-padrao>
+  <fibra-janela class="letra" letra="A" foto="tex-arroz"></fibra-janela>
 </div>
-<div class="prancha ig bg-dende" data-nome="abc-I-verdura" data-grade="72,12,24" data-linhas="72,140,208,1260">
+<div class="prancha ig bg-dende" data-nome="abc-I-verdura" data-grade="72,12,24" data-linhas="72,156,214,1278">
   <div class="legenda t-chamada tb">I de inteira.<br>Verdura sem atalho.</div><fibra-logo class="assina"></fibra-logo>
-  <fibra-janela alta letra="I" foto="tex-couve" style="width:456px;left:312px"></fibra-janela>
-  <fibra-padrao class="barrado" tipo="trancado" cores="feijao,arroz,fuba" cols="12" rows="1"></fibra-padrao>
+  <fibra-janela class="letra" letra="I" foto="tex-couve"></fibra-janela>
 </div>
 
-<!-- ═════ ESTAMPAS (posts de textura da marca) ═════ -->
-<div class="prancha ig" data-nome="estampa-ladrilho"><fibra-padrao tipo="ladrilho" cores="fuba,couve,mata" cols="4" rows="5" style="inset:0"></fibra-padrao></div>
-<div class="prancha ig" data-nome="estampa-folha"><fibra-padrao tipo="folha" cores="arroz,couve,mata,fuba,couve" cols="4" rows="5" seed="11" style="inset:0"></fibra-padrao></div>
-<div class="prancha ig" data-nome="estampa-bandeirinha"><fibra-padrao tipo="bandeirinha" cores="arroz,couve,fuba,anil,urucum" cols="8" rows="10" style="inset:0"></fibra-padrao></div>
-<div class="prancha ig" data-nome="estampa-prato"><fibra-padrao tipo="prato" cores="anil,arroz,fuba,urucum" cols="4" rows="5" style="inset:0"></fibra-padrao></div>
-<div class="prancha ig" data-nome="estampa-trancado"><fibra-padrao tipo="trancado" cores="feijao,fuba,dende" cols="8" rows="10" style="inset:0"></fibra-padrao></div>
+<!-- ═════ ESTAMPAS ═════ -->
+<div class="prancha ig" data-nome="estampa-sarja"><fibra-trama tipo="sarja" cores="feijao,fuba,dende" cols="4" rows="5" style="position:absolute;inset:0"></fibra-trama></div>
+<div class="prancha ig" data-nome="estampa-espinha"><fibra-trama tipo="espinha" cores="mata,couve,fuba" cols="4" rows="5" style="position:absolute;inset:0"></fibra-trama></div>
+<div class="prancha ig" data-nome="estampa-olho"><fibra-trama tipo="olho" cores="feijao,arroz,urucum" cols="4" rows="5" style="position:absolute;inset:0"></fibra-trama></div>
+<div class="prancha ig" data-nome="estampa-escama"><fibra-trama tipo="escama" cores="anil,arroz,fuba" cols="4" rows="5" style="position:absolute;inset:0"></fibra-trama></div>
+<div class="prancha ig bg-feijao" data-nome="estampa-pratos"><div class="mosaico" style="height:1350px">
+  <fibra-prato foto="tex-feijao-preto" fundo="fuba" raios="dende" aro="arroz"></fibra-prato><fibra-prato foto="tex-arroz" fundo="anil" raios="mata" aro="fuba"></fibra-prato><fibra-prato foto="feira-couve" fundo="arroz" raios="fuba" aro="couve" fx=".4"></fibra-prato><fibra-prato foto="comida-tropeiro" fundo="urucum" raios="feijao" aro="fuba"></fibra-prato>
+  <fibra-prato foto="tex-feijao-carioca" fundo="couve" raios="mata" aro="arroz"></fibra-prato><fibra-prato foto="comida-pf" fundo="fuba" raios="dende" aro="anil" fx=".2" zoom="1.55"></fibra-prato><fibra-prato foto="feira-banana" fundo="mata" raios="couve" aro="fuba" zoom="1.4"></fibra-prato><fibra-prato foto="tex-couve" fundo="dende" raios="urucum" aro="arroz"></fibra-prato>
+  <fibra-prato foto="feira-pupunha" fundo="arroz" raios="dende" aro="urucum"></fibra-prato><fibra-prato foto="tex-feijao-preto" fundo="urucum" raios="feijao" aro="arroz"></fibra-prato><fibra-prato foto="tex-arroz" fundo="couve" raios="mata" aro="fuba"></fibra-prato><fibra-prato foto="comida-feijoada" fundo="fuba" raios="dende" aro="arroz" zoom="1.3"></fibra-prato>
+  <fibra-prato foto="comida-tropeiro" fundo="anil" raios="mata" aro="fuba"></fibra-prato><fibra-prato foto="feira-couve" fundo="fuba" raios="dende" aro="couve" fx=".4"></fibra-prato><fibra-prato foto="tex-feijao-carioca" fundo="urucum" raios="feijao" aro="arroz"></fibra-prato><fibra-prato foto="tex-arroz" fundo="mata" raios="couve" aro="arroz"></fibra-prato>
+  <fibra-prato foto="feira-banana" fundo="couve" raios="mata" aro="arroz" zoom="1.4"></fibra-prato><fibra-prato foto="tex-feijao-preto" fundo="arroz" raios="fuba" aro="anil"></fibra-prato><fibra-prato foto="comida-pf" fundo="dende" raios="urucum" aro="arroz" fx=".2" zoom="1.55"></fibra-prato><fibra-prato foto="tex-couve" fundo="fuba" raios="dende" aro="mata"></fibra-prato>
+</div></div>
+<div class="prancha ig bg-feijao" data-nome="estampa-colcha"><div class="mosaico" style="height:1350px">
+  <fibra-trama tipo="sarja" cores="feijao,fuba,dende" cols="2" rows="2"></fibra-trama><fibra-foto foto="agro-senhora" w="270" h="270" fx=".42" fy=".35" zoom="1.05" duo="mata,fuba"></fibra-foto><fibra-trama tipo="zigue" cores="arroz,urucum,feijao" cols="2" rows="2"></fibra-trama><fibra-prato foto="tex-arroz" fundo="anil" raios="mata" aro="fuba"></fibra-prato>
+  <fibra-prato foto="tex-feijao-preto" fundo="fuba" raios="dende" aro="arroz"></fibra-prato><fibra-trama tipo="olho" cores="mata,fuba,arroz" cols="2" rows="2" n="12"></fibra-trama><fibra-foto foto="cozinha-vovo" w="270" h="270" fx=".55" fy=".35" zoom="1.1" duo="feijao,dende"></fibra-foto><fibra-trama tipo="escama" cores="mata,couve,fuba" cols="2" rows="2"></fibra-trama>
+  <fibra-trama tipo="losango" cores="anil,fuba,anil,arroz,urucum" cols="2" rows="2"></fibra-trama><fibra-foto foto="feira-banana" w="270" h="270" duo="anil,arroz"></fibra-foto><fibra-prato foto="feira-couve" fundo="arroz" raios="fuba" aro="couve" fx=".4"></fibra-prato><fibra-trama tipo="espinha" cores="feijao,fuba,arroz" cols="2" rows="2"></fibra-trama>
+  <fibra-foto foto="agro-enxada" w="270" h="270" fx=".5" fy=".25" zoom="1.15" duo="urucum,arroz"></fibra-foto><fibra-trama tipo="graos" cores="couve,fuba,arroz" cols="2" rows="2"></fibra-trama><fibra-trama tipo="dente" cores="urucum,fuba,arroz" cols="2" rows="2"></fibra-trama><fibra-prato foto="tex-feijao-carioca" fundo="couve" raios="mata" aro="arroz"></fibra-prato>
+  <fibra-trama tipo="esteira" cores="feijao,dende,arroz" cols="2" rows="2"></fibra-trama><fibra-prato foto="comida-tropeiro" fundo="urucum" raios="feijao" aro="fuba"></fibra-prato><fibra-foto foto="agro-lavoura" w="270" h="270" fx=".72" fy=".2" zoom="1.2" duo="feijao,fuba"></fibra-foto><fibra-trama tipo="degrau" cores="mata,fuba,arroz" cols="2" rows="2"></fibra-trama>
+</div></div>
 
 <!-- ═════ STORIES (1080 × 1920) ═════ -->
 <div class="prancha st bg-couve" data-nome="story-1-chegou" data-grade="72,12,24" data-linhas="250,1580">
-  <div class="rot t-rotulo tb">Chegou</div><div class="rot-d t-rotulo tb">Brasil</div>
-  <fibra-janela letra="empilhado" fotos="tex-feijao-preto,feira-couve,cozinha-sorriso,agro-chapeu,mesa-jovem" fx=".5,.42,.2,.5,.1" fy=".5,.5,.38,.3,.45" zoom="1,1,1.05,1.25,1.12" fundo="mata" style="width:936px;left:72px;top:346px"></fibra-janela>
-  <div class="grande t-titulo tb" data-ajusta="936" style="top:948px;font-size:100px"><span class="ln">Comida de verdade</span><span class="ln">é direito de</span><span class="ln c-fuba">todo mundo.</span></div>
-  <div class="pe"><div class="t-rotulo tb">Cestas de comida de verdade</div><div class="t-rotulo tb">@fibra.cestas</div></div>
-  <fibra-padrao tipo="ladrilho" cores="fuba,couve,mata" cols="12" rows="2" style="left:0;top:1310px;width:1080px;height:180px"></fibra-padrao>
+  <div class="legenda t-chamada tb">Comida de verdade é<br>direito de todo mundo.</div><div class="rot-d t-rotulo tb">Chegou</div>
+  <fibra-janela letra="empilhado" fotos="tex-feijao-preto,feira-couve,cozinha-sorriso,agro-lavoura,comida-pf" fx=".5,.42,.2,.71,.36" fy=".5,.5,.4,.3,.5" fundo="mata" style="left:72px;top:400px;height:940px"></fibra-janela>
+  <div class="fiada" style="bottom:340px"><fibra-trama tipo="sarja" cores="mata,fuba,arroz" cols="2" rows="2"></fibra-trama><fibra-prato foto="tex-feijao-carioca" fundo="fuba" raios="dende" aro="arroz"></fibra-prato><fibra-foto foto="agro-senhora" w="234" h="234" fx=".42" fy=".35" duo="mata,fuba"></fibra-foto><fibra-trama tipo="zigue" cores="arroz,urucum,feijao" cols="2" rows="2"></fibra-trama></div>
 </div>
-
 <div class="prancha st bg-mata" data-nome="story-2-dado" data-grade="72,12,24" data-linhas="250,1580">
   <div class="rot t-rotulo tb">Brasil · 2024</div><fibra-logo class="assina" cor="fuba"></fibra-logo>
-  <div class="coluna" style="top:400px;gap:72px">
-    <div class="t-titulo tb c-fuba" data-ajusta="936" style="font-size:300px;letter-spacing:-.03em"><span class="ln">24,2%</span></div>
-    <div style="width:100%;display:grid;grid-template-columns:repeat(4,1fr);column-gap:24px"><fibra-grao cor="fuba"></fibra-grao><fibra-grao cor="arroz"></fibra-grao><fibra-grao cor="arroz"></fibra-grao><fibra-grao cor="arroz"></fibra-grao></div>
-    <div class="t-chamada tb" style="font-size:60px;line-height:62px;font-weight:700;letter-spacing:-.025em">Quase 1 em cada 4 lares brasileiros conviveu com algum grau de insegurança alimentar.</div>
-    <div class="corpo t-texto tb">A Fibra existe pra esse número cair.</div>
-  </div>
-  <div class="pe"><div class="t-rotulo tb">Fonte: IBGE, PNAD Contínua<br>Segurança Alimentar 2024</div><div class="t-rotulo tb">fibra.com.br</div></div>
+  <div class="t-titulo tb c-fuba" data-ajusta="936" style="left:72px;top:420px;font-size:380px;letter-spacing:0"><span class="ln">24,2%</span></div>
+  <div class="t-chamada tb" style="left:72px;top:836px;width:936px;font-size:58px;line-height:66px;font-weight:700;letter-spacing:-.03em">Quase 1 em cada 4 lares brasileiros conviveu com algum grau de insegurança alimentar.</div>
+  <div class="t-chamada tb" style="left:72px;top:1150px;font-size:36px;line-height:46px">A Fibra existe pra esse número cair.</div>
+  <div class="pe"><div class="t-rotulo tb">Fonte: IBGE, PNAD Contínua<br>Segurança Alimentar 2024</div><div class="t-rotulo tb" style="text-align:right">fibra.com.br</div></div>
 </div>
-
 <div class="prancha st bg-anil" data-nome="story-3-assine" data-grade="72,12,24" data-linhas="250,1580">
-  <div class="legenda t-chamada tb">Quem pode, assina.<br>Quem precisa, paga menos.</div><fibra-logo class="assina" cor="fuba"></fibra-logo>
-  <fibra-janela alta letra="B" foto="cozinha-fogao" fx=".27" style="width:1408px;left:-400px;top:400px"></fibra-janela>
-  <div class="bg-fuba t-rotulo" style="left:72px;bottom:340px;padding:26px 32px;z-index:6"><span class="tb" style="display:block;font-size:22px">Assine em fibra.com.br →</span></div>
+  <div class="legenda t-chamada tb">Quem pode, assina.<br>Quem precisa, paga menos.</div>
+  <fibra-janela class="letra" letra="B" foto="cozinha-sorriso" fx=".2" fy=".4" style="top:420px;height:980px"></fibra-janela>
+  <div class="bg-fuba" style="left:72px;right:72px;bottom:340px;height:120px;display:flex;align-items:center;justify-content:space-between;padding:0 40px"><span class="t-rotulo tb" style="font-size:22px">Assine em fibra.com.br</span><span class="t-rotulo tb" style="font-size:22px">→</span></div>
 </div>
-
 <div class="prancha st bg-urucum" data-nome="story-4-como" data-grade="72,12,24" data-linhas="250,1580">
   <div class="rot t-rotulo tb">Como funciona</div><fibra-logo class="assina" cor="arroz"></fibra-logo>
-  <div class="coluna" style="top:420px;gap:60px">
-    <div style="width:100%"><div class="t-rotulo tb c-fuba" style="font-size:18px">Passo 01</div><div class="t-titulo tb" style="margin-top:26px;font-size:74px">A gente compra<br>de quem planta.</div></div>
+  <div class="coluna" style="top:430px;gap:54px">
+    <div style="width:100%"><div class="t-rotulo tb c-fuba" style="font-size:17px">Passo 01</div><div class="t-titulo tb" style="margin-top:26px;font-size:92px">A gente compra de quem planta.</div></div>
     <div style="width:100%;height:2px;background:var(--linha-clara)"></div>
-    <div style="width:100%"><div class="t-rotulo tb c-fuba" style="font-size:18px">Passo 02</div><div class="t-titulo tb" style="margin-top:26px;font-size:74px">Monta a cesta<br>da semana.</div></div>
+    <div style="width:100%"><div class="t-rotulo tb c-fuba" style="font-size:17px">Passo 02</div><div class="t-titulo tb" style="margin-top:26px;font-size:92px">Monta a cesta da semana.</div></div>
     <div style="width:100%;height:2px;background:var(--linha-clara)"></div>
-    <div style="width:100%"><div class="t-rotulo tb c-fuba" style="font-size:18px">Passo 03</div><div class="t-titulo tb" style="margin-top:26px;font-size:74px">Quem pode,<br>assina.</div></div>
+    <div style="width:100%"><div class="t-rotulo tb c-fuba" style="font-size:17px">Passo 03</div><div class="t-titulo tb" style="margin-top:26px;font-size:92px">Quem pode, assina.</div></div>
     <div style="width:100%;height:2px;background:var(--linha-clara)"></div>
-    <div style="width:100%"><div class="t-rotulo tb c-fuba" style="font-size:18px">Passo 04</div><div class="t-titulo tb c-fuba" style="margin-top:26px;font-size:74px">Quem precisa,<br>paga menos.</div></div>
+    <div style="width:100%"><div class="t-rotulo tb c-fuba" style="font-size:17px">Passo 04</div><div class="t-titulo tb c-fuba" style="margin-top:26px;font-size:92px">Quem precisa, paga menos.</div></div>
   </div>
-  <div class="pe"><div class="t-rotulo tb">Cestas de comida de verdade</div><div class="t-rotulo tb">fibra.com.br</div></div>
 </div>
 
-<!-- ═════ PERFIL: avatar e destaques (1080 × 1080) ═════ -->
-<div class="prancha qd bg-couve" data-nome="perfil-avatar"><fibra-logo versao="empilhado" cor="fuba" style="width:560px;left:260px;top:389px"></fibra-logo></div>
-<div class="prancha qd bg-fuba" data-nome="destaque-F-cestas"><fibra-logo alta versao="F" solido style="width:324px;left:378px;top:340px"></fibra-logo></div>
-<div class="prancha qd bg-urucum" data-nome="destaque-I-feira"><fibra-logo alta versao="I" solido cor="arroz" style="width:129px;left:475px;top:340px"></fibra-logo></div>
-<div class="prancha qd bg-anil" data-nome="destaque-B-receitas"><fibra-logo alta versao="B" solido cor="fuba" style="width:387px;left:346px;top:340px"></fibra-logo></div>
-<div class="prancha qd bg-dende" data-nome="destaque-R-quem-planta"><fibra-logo alta versao="R" solido style="width:398px;left:341px;top:340px"></fibra-logo></div>
-<div class="prancha qd bg-couve" data-nome="destaque-A-assine"><fibra-logo alta versao="A" solido cor="fuba" style="width:443px;left:319px;top:340px"></fibra-logo></div>
+<!-- ═════ PERFIL ═════ -->
+<div class="prancha qd bg-couve" data-nome="perfil-avatar"><fibra-logo versao="empilhado" cor="fuba" style="width:340px;left:370px;top:320px"></fibra-logo></div>
+<div class="prancha qd bg-fuba" data-nome="destaque-F-cestas"><fibra-logo versao="F" solido style="width:168px;left:456px;top:330px"></fibra-logo></div>
+<div class="prancha qd bg-urucum" data-nome="destaque-I-feira"><fibra-logo versao="I" solido cor="arroz" style="width:81px;left:499.5px;top:330px"></fibra-logo></div>
+<div class="prancha qd bg-anil" data-nome="destaque-B-receitas"><fibra-logo versao="B" solido cor="fuba" style="width:206px;left:437px;top:330px"></fibra-logo></div>
+<div class="prancha qd bg-dende" data-nome="destaque-R-quem-planta"><fibra-logo versao="R" solido style="width:205px;left:437.5px;top:330px"></fibra-logo></div>
+<div class="prancha qd bg-couve" data-nome="destaque-A-assine"><fibra-logo versao="A" solido cor="fuba" style="width:223px;left:428.5px;top:330px"></fibra-logo></div>
 </body></html>

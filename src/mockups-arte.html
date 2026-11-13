@@ -2,36 +2,39 @@
 <link rel="stylesheet" href="base.css"><script src="letras.js"></script><script src="fotos.js"></script><script src="fibra.js"></script>
 <style>
 .a > * { position: absolute; }
-.poster { width: 1200px; } .poster > * { position: absolute; }
-.legenda { left: 72px; top: 72px; font-size: 34.7px; line-height: 36.5px; z-index: 3; }
-.assina { right: 72px; top: 72px; width: 336px; z-index: 3; }
-.poster fibra-janela { top: 192px; }
-.barrado { left: 0; bottom: 0; width: 100%; height: 100px; z-index: 5; }
+.tiles { display: grid; } .tiles > * { width: 100%; height: 100%; }
+.alt svg { width: auto !important; height: 100% !important; }
 .painel { top: 0; height: 1000px; width: 750px; background-size: cover; }
+/* mobiliário urbano: mesma grade do poster, formato 1200 × 1764 */
+.mub { width: 1200px; height: 1764px; } .mub > * { position: absolute; }
+.mub .legenda { left: 72px; top: 72px; font-size: 50px; line-height: 61px; } .mub .assina { right: 72px; top: 72px; width: 224.3px; }
+.mub .letra { left: 50%; transform: translateX(-50%); top: 240px; height: 1380px; }
+.mub .pe { left: 72px; right: 72px; bottom: 72px; display: flex; justify-content: space-between; } .mub .pe .t-rotulo { font-size: 16px; }
 </style></head><body>
 
-<!-- OUTDOOR A · 2500 × 1000 (2,5:1) -->
+<!-- OUTDOOR A · 2500 × 1000 -->
 <div class="prancha a bg-couve" data-nome="arte-outdoor-a" style="width:2500px;height:1000px">
-  <div class="t-titulo tb" data-ajusta="1500" style="left:80px;top:80px;font-size:100px"><span class="ln">Comida de verdade é</span><span class="ln c-fuba">direito de todo mundo.</span></div>
-  <div class="t-rotulo tb" style="right:80px;top:80px;font-size:26px;text-align:right;line-height:38px">Cestas de comida de verdade<br>fibra.com.br</div>
-  <fibra-janela letra="FIBRA" fotos="tex-feijao-preto,feira-couve,cozinha-sorriso,agro-lavoura,mesa-jovem" fx=".5,.42,.2,.72,.1" fy=".5,.5,.38,.2,.45" zoom="1,1,1.05,1.1,1.12" fundo="mata" style="left:80px;width:2340px;top:378px"></fibra-janela>
-  <fibra-padrao class="barrado" tipo="ladrilho" cores="fuba,couve,mata" cols="25" rows="1"></fibra-padrao>
+  <div class="t-chamada tb" style="left:96px;top:96px;font-size:66px;line-height:80px">Comida de verdade é<br>direito de todo mundo.</div>
+  <div class="t-rotulo tb" style="right:96px;top:96px;font-size:26px;line-height:40px;text-align:right">Cestas de comida de verdade<br>fibra.com.br</div>
+  <fibra-janela class="alt" letra="FIBRA" fotos="tex-feijao-preto,feira-couve,cozinha-sorriso,agro-lavoura,comida-pf" fx=".5,.42,.2,.71,.36" fy=".5,.5,.4,.3,.5" fundo="mata" style="left:96px;top:304px;height:600px"></fibra-janela>
+  <div class="tiles" style="right:96px;top:304px;width:900px;height:600px;grid-template-columns:repeat(3,300px);grid-template-rows:repeat(2,300px)">
+    <fibra-trama tipo="sarja" cores="mata,fuba,arroz" cols="2" rows="2"></fibra-trama><fibra-prato foto="tex-feijao-carioca" fundo="fuba" raios="dende" aro="arroz"></fibra-prato><fibra-foto foto="agro-senhora" w="300" h="300" fx=".42" fy=".35" duo="mata,fuba"></fibra-foto>
+    <fibra-foto foto="cozinha-vovo" w="300" h="300" fx=".55" fy=".35" zoom="1.1" duo="feijao,dende"></fibra-foto><fibra-trama tipo="zigue" cores="arroz,urucum,feijao" cols="2" rows="2"></fibra-trama><fibra-prato foto="tex-arroz" fundo="anil" raios="mata" aro="fuba"></fibra-prato>
+  </div>
 </div>
 
-<!-- OUTDOOR B · 3800 × 1000 (3,8:1) -->
+<!-- OUTDOOR B · 3800 × 1000 -->
 <div class="prancha a bg-fuba" data-nome="arte-outdoor-b" style="width:3800px;height:1000px">
-  <fibra-logo style="left:100px;top:100px;width:620px"></fibra-logo>
-  <div class="t-titulo tb" data-ajusta="1560" style="left:100px;top:330px;font-size:120px"><span class="ln">Quem pode, assina.</span><span class="ln">Quem precisa,</span><span class="ln c-couve">paga menos.</span></div>
-  <div class="t-rotulo tb" style="left:100px;bottom:200px;font-size:30px">Cestas de comida de verdade · fibra.com.br</div>
-  <fibra-janela alta letra="BRA" fotos="cozinha-fogao,agro-lavoura,comida-pf" fx=".27,.72,.2" fy=".5,.3,.5" zoom="1,1.05,1" style="left:1820px;width:1880px;top:100px"></fibra-janela>
-  <fibra-padrao class="barrado" tipo="trancado" cores="feijao,fuba,couve" cols="38" rows="1"></fibra-padrao>
+  <div class="t-titulo tb" data-ajusta="1560" style="left:110px;top:110px;font-size:200px"><span class="ln">Quem pode, assina.</span><span class="ln">Quem precisa,</span><span class="ln c-couve">paga menos.</span></div>
+  <div class="t-rotulo tb" style="left:110px;bottom:110px;font-size:32px">Cestas de comida de verdade · fibra.com.br</div>
+  <fibra-janela class="alt" letra="FIBRA" fotos="tex-feijao-preto,feira-couve,cozinha-sorriso,agro-lavoura,comida-pf" fx=".5,.42,.2,.71,.36" fy=".5,.5,.4,.3,.5" style="right:110px;top:110px;height:780px"></fibra-janela>
 </div>
 
-<!-- TAPUME · 4900 × 1000 (4,9:1): painel de marca + série F-I-B-R-A -->
+<!-- TAPUME · 4900 × 1000: painel de marca + série F-I-B-R-A -->
 <div class="prancha a bg-couve" data-nome="arte-tapume" style="width:4900px;height:1000px">
-  <fibra-logo versao="empilhado" cor="fuba" style="left:110px;top:110px;width:760px"></fibra-logo>
-  <div class="t-chamada tb" style="left:110px;bottom:210px;font-size:54px;line-height:58px;width:900px">Comida de verdade é direito de todo mundo.</div>
-  <fibra-padrao tipo="ladrilho" cores="fuba,couve,mata" cols="11" rows="1" style="left:0;bottom:0;width:1150px;height:104.5px"></fibra-padrao>
+  <fibra-logo class="alt" versao="empilhado" cor="fuba" style="left:110px;top:110px;height:560px"></fibra-logo>
+  <div class="t-chamada tb" style="left:110px;bottom:110px;font-size:58px;line-height:70px;width:900px">Comida de verdade é direito de todo mundo.</div>
+  <div class="tiles" style="left:650px;top:110px;width:390px;height:560px;grid-template-columns:195px 195px;grid-template-rows:repeat(2,280px)"><fibra-trama tipo="olho" cores="mata,fuba,arroz" cols="2" rows="2.87"></fibra-trama><fibra-trama tipo="zigue" cores="arroz,urucum,feijao" cols="2" rows="2.87"></fibra-trama><fibra-trama tipo="sarja" cores="feijao,fuba,dende" cols="2" rows="2.87"></fibra-trama><fibra-trama tipo="escama" cores="mata,couve,fuba" cols="2" rows="2.87"></fibra-trama></div>
   <div class="painel" style="left:1150px;background-image:url(../entregas/02-posters/fibra-poster-01-F-feijao.jpg)"></div>
   <div class="painel" style="left:1900px;background-image:url(../entregas/02-posters/fibra-poster-02-I-verdura.jpg)"></div>
   <div class="painel" style="left:2650px;background-image:url(../entregas/02-posters/fibra-poster-03-B-cozinha.jpg)"></div>
@@ -39,47 +42,52 @@
   <div class="painel" style="left:4150px;background-image:url(../entregas/02-posters/fibra-poster-05-A-mesa.jpg)"></div>
 </div>
 
-<!-- PAREDE · 1470 × 1000 (1,47:1) -->
-<div class="prancha a bg-arroz" data-nome="arte-parede" style="width:1470px;height:1000px">
-  <div class="t-rotulo tb" style="left:64px;top:64px;font-size:17px">Cestas de comida de verdade</div><div class="t-rotulo tb" style="right:64px;top:64px;font-size:17px">fibra.com.br</div>
-  <fibra-janela letra="empilhado" fotos="tex-feijao-preto,feira-couve,cozinha-sorriso,agro-chapeu,mesa-jovem" fx=".5,.42,.2,.5,.1" fy=".5,.5,.38,.3,.45" zoom="1,1,1.05,1.25,1.12" style="width:1342px;left:64px;top:128px"></fibra-janela>
-  <div class="t-titulo tb" style="left:64px;top:866px;font-size:0"></div>
-  <fibra-padrao tipo="bandeirinha" cores="arroz,couve,fuba,anil,urucum" cols="21" rows="1" style="left:0;bottom:0;width:1470px;height:70px"></fibra-padrao>
+<!-- PAREDE · 1471 × 1000: bloco de marca + colcha 4 × 4 -->
+<div class="prancha a bg-mata" data-nome="arte-parede" style="width:1471px;height:1000px">
+  <fibra-logo cor="fuba" style="left:56px;top:56px;width:359px"></fibra-logo>
+  <div class="t-chamada tb" style="left:56px;bottom:112px;font-size:34px;line-height:43px;width:360px">Comida de verdade é direito de todo mundo.</div>
+  <div class="t-rotulo tb" style="left:56px;bottom:56px;font-size:15px">fibra.com.br</div>
+  <div class="tiles" style="left:471px;top:0;width:1000px;height:1000px;grid-template-columns:repeat(4,250px);grid-template-rows:repeat(4,250px)">
+    <fibra-prato foto="tex-feijao-preto" fundo="fuba" raios="dende" aro="arroz"></fibra-prato><fibra-trama tipo="zigue" cores="arroz,urucum,feijao" cols="2" rows="2"></fibra-trama><fibra-foto foto="agro-senhora" w="250" h="250" fx=".42" fy=".35" duo="mata,fuba"></fibra-foto><fibra-trama tipo="olho" cores="feijao,dende,fuba" cols="2" rows="2"></fibra-trama>
+    <fibra-trama tipo="espinha" cores="feijao,fuba,arroz" cols="2" rows="2"></fibra-trama><fibra-foto foto="feira-banana" w="250" h="250" duo="anil,arroz"></fibra-foto><fibra-prato foto="tex-arroz" fundo="anil" raios="mata" aro="fuba"></fibra-prato><fibra-trama tipo="escama" cores="feijao,urucum,dende,fuba" cols="2" rows="2"></fibra-trama>
+    <fibra-foto foto="cozinha-vovo" w="250" h="250" fx=".55" fy=".35" zoom="1.1" duo="feijao,dende"></fibra-foto><fibra-trama tipo="losango" cores="anil,fuba,anil,arroz,urucum" cols="2" rows="2"></fibra-trama><fibra-trama tipo="sarja" cores="feijao,arroz,couve" cols="2" rows="2"></fibra-trama><fibra-prato foto="tex-feijao-carioca" fundo="couve" raios="mata" aro="arroz"></fibra-prato>
+    <fibra-trama tipo="graos" cores="couve,fuba,arroz" cols="2" rows="2"></fibra-trama><fibra-prato foto="feira-couve" fundo="arroz" raios="fuba" aro="couve" fx=".4"></fibra-prato><fibra-trama tipo="dente" cores="urucum,fuba,arroz" cols="2" rows="2"></fibra-trama><fibra-foto foto="agro-enxada" w="250" h="250" fx=".5" fy=".25" zoom="1.15" duo="urucum,arroz"></fibra-foto>
+  </div>
 </div>
 
-<!-- MOBILIÁRIO URBANO · 1200 × 1764 (0,68:1) -->
-<div class="prancha poster bg-dende" data-nome="arte-mub-R" style="height:1764px">
+<!-- MOBILIÁRIO URBANO · 1200 × 1764 -->
+<div class="prancha mub bg-dende" data-nome="arte-mub-R">
   <div class="legenda t-chamada tb">Da roça pra panela,<br>sem atravessador.</div><fibra-logo class="assina"></fibra-logo>
-  <fibra-janela alta letra="R" foto="agro-lavoura" fx=".72" style="width:1560px;left:-432px"></fibra-janela>
-  <fibra-padrao class="barrado" tipo="trancado" cores="feijao,fuba,arroz" cols="12" rows="1"></fibra-padrao>
+  <fibra-janela class="letra alt" letra="R" foto="agro-lavoura" fx=".71" fy=".3"></fibra-janela>
+  <div class="pe"><div class="t-rotulo tb">Cestas de comida de verdade</div><div class="t-rotulo tb">fibra.com.br</div></div>
 </div>
-<div class="prancha poster bg-anil" data-nome="arte-mub-B" style="height:1764px">
+<div class="prancha mub bg-anil" data-nome="arte-mub-B">
   <div class="legenda t-chamada tb">Quem cozinha sabe<br>o valor do básico.</div><fibra-logo class="assina" cor="fuba"></fibra-logo>
-  <fibra-janela alta letra="B" foto="cozinha-fogao" fx=".27" style="width:1560px;left:-432px"></fibra-janela>
-  <fibra-padrao class="barrado" tipo="prato" cores="anil,arroz,fuba,urucum" cols="12" rows="1"></fibra-padrao>
+  <fibra-janela class="letra alt" letra="B" foto="cozinha-sorriso" fx=".2" fy=".4"></fibra-janela>
+  <div class="pe"><div class="t-rotulo tb">Cestas de comida de verdade</div><div class="t-rotulo tb">fibra.com.br</div></div>
 </div>
 
 <!-- CAMINHÃO · 1540 × 1000 -->
 <div class="prancha a bg-couve" data-nome="arte-caminhao" style="width:1540px;height:1000px">
-  <fibra-logo cor="fuba" style="left:90px;top:120px;width:1360px"></fibra-logo>
-  <div class="t-titulo tb" style="left:90px;top:452px;font-size:71px;line-height:1">Comida de verdade<br>é direito de todo mundo.</div>
-  <div class="t-rotulo tb c-fuba" style="left:90px;top:680px;font-size:30px">Cestas de arroz, feijão, legumes e verduras · fibra.com.br</div>
-  <fibra-padrao tipo="ladrilho" cores="fuba,couve,mata" cols="14" rows="2" style="left:0;bottom:0;width:1540px;height:220px"></fibra-padrao>
+  <fibra-logo class="alt" cor="fuba" style="left:88px;top:88px;height:380px"></fibra-logo>
+  <div class="t-chamada tb" style="left:88px;top:540px;font-size:50px;line-height:62px">Comida de verdade é<br>direito de todo mundo.</div>
+  <div class="t-rotulo tb c-fuba" style="right:88px;top:88px;font-size:24px;line-height:36px;text-align:right">Cestas de comida<br>de verdade<br>fibra.com.br</div>
+  <div class="tiles" style="left:0;bottom:0;width:1540px;height:220px;grid-template-columns:repeat(7,220px)"><fibra-trama tipo="sarja" cores="mata,fuba,arroz" cols="2" rows="2"></fibra-trama><fibra-prato foto="tex-feijao-preto" fundo="fuba" raios="dende" aro="arroz"></fibra-prato><fibra-trama tipo="zigue" cores="arroz,urucum,feijao" cols="2" rows="2"></fibra-trama><fibra-prato foto="tex-arroz" fundo="anil" raios="mata" aro="fuba"></fibra-prato><fibra-trama tipo="olho" cores="feijao,dende,fuba" cols="2" rows="2"></fibra-trama><fibra-prato foto="feira-couve" fundo="arroz" raios="fuba" aro="couve" fx=".4"></fibra-prato><fibra-trama tipo="escama" cores="mata,couve,fuba" cols="2" rows="2"></fibra-trama></div>
 </div>
 
-<!-- CAIXA · 1760 × 1000 · impressão a uma cor sobre kraft (fundo branco = sem tinta) -->
+<!-- CAIXA · 1760 × 1000 · impressão a uma cor sobre kraft (branco = sem tinta) -->
 <div class="prancha a" data-nome="arte-caixa" style="width:1760px;height:1000px;background:#fff;color:var(--feijao)">
-  <fibra-logo style="left:120px;top:130px;width:1010px"></fibra-logo>
-  <div class="t-titulo tb" style="left:120px;top:390px;font-size:76px">Cesta Base</div>
-  <div class="t-dado" style="left:120px;top:520px;font-size:27px;line-height:46px;width:1010px;border-top:4px solid var(--feijao);padding-top:18px">Arroz · Feijão · Farinha · Fubá · Macarrão · Óleo · Café<br>Origem: agricultura familiar · Brasil</div>
-  <div class="t-chamada tb" style="left:120px;bottom:120px;font-size:38px;width:1000px">Comida de verdade é direito de todo mundo.</div>
-  <fibra-padrao tipo="trancado" cores="#ffffff,feijao,feijao" cols="4" rows="8" style="left:1300px;top:130px;width:375px;height:750px"></fibra-padrao>
+  <fibra-logo class="alt" style="left:120px;top:120px;height:330px"></fibra-logo>
+  <div class="t-titulo tb" style="left:120px;top:540px;font-size:100px">Cesta Base</div>
+  <div class="t-dado tb" style="left:120px;top:700px;font-size:29px;line-height:46px;font-weight:600">Arroz · feijão · farinha · fubá · macarrão · óleo · café<br>Origem: agricultura familiar brasileira</div>
+  <div class="t-chamada tb" style="left:120px;bottom:120px;font-size:30px">Comida de verdade é direito de todo mundo.</div>
+  <fibra-trama tipo="olho" cores="#ffffff,feijao,#ffffff" cols="3" rows="5.066" n="8" style="left:1190px;top:120px;width:450px;height:760px"></fibra-trama>
 </div>
 
-<!-- ECOBAG · 1100 × 900 · serigrafia em duas cores (fundo branco = sem tinta) -->
+<!-- ECOBAG · 1100 × 900 · serigrafia em duas cores (branco = sem tinta) -->
 <div class="prancha a" data-nome="arte-ecobag" style="width:1100px;height:900px;background:#fff">
-  <fibra-logo versao="empilhado" cor="couve" style="left:150px;top:90px;width:800px"></fibra-logo>
-  <div class="t-rotulo tb c-couve" style="left:150px;top:572px;font-size:27px;width:800px;text-align:center">Comida de verdade é direito de todo mundo</div>
-  <fibra-padrao tipo="bandeirinha" cores="#ffffff,couve,fuba,urucum" cols="10" rows="1" style="left:150px;top:660px;width:800px;height:80px"></fibra-padrao>
+  <fibra-logo class="alt" versao="empilhado" cor="couve" style="left:345px;top:70px;height:520px"></fibra-logo>
+  <fibra-trama tipo="zigue" cores="#ffffff,couve,fuba" cols="8" rows="1.2" p="50" e="12.5" style="left:150px;top:650px;width:800px;height:120px"></fibra-trama>
+  <div class="t-rotulo tb c-couve" style="left:150px;top:806px;font-size:23px;width:800px;text-align:center">Comida de verdade é direito de todo mundo</div>
 </div>
 </body></html>

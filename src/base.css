@@ -1,35 +1,32 @@
-/* FIBRA — fundamentos compartilhados por todas as peças (v2: Archivo · paleta nacional · padronagens) */
-@font-face { font-family: 'Archivo'; font-style: normal; font-weight: 100 900; font-stretch: 62% 125%; font-display: block;
-  src: url('../marca/fontes/Archivo-VF-latin.woff2') format('woff2');
+/* FIBRA — fundamentos compartilhados por todas as peças (v3: Anton + Sora · paleta nacional · colcha de cestaria) */
+@font-face { font-family: 'Anton'; font-style: normal; font-weight: 400; font-display: block; src: url('../marca/fontes/Anton-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: 'Archivo'; font-style: normal; font-weight: 100 900; font-stretch: 62% 125%; font-display: block;
-  src: url('../marca/fontes/Archivo-VF-latin-ext.woff2') format('woff2');
+@font-face { font-family: 'Anton'; font-style: normal; font-weight: 400; font-display: block; src: url('../marca/fontes/Anton-latin-ext.woff2') format('woff2');
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-@font-face { font-family: 'Archivo'; font-style: italic; font-weight: 100 900; font-stretch: 62% 125%; font-display: block;
-  src: url('../marca/fontes/Archivo-Italic-VF-latin.woff2') format('woff2');
+@font-face { font-family: 'Sora'; font-style: normal; font-weight: 100 800; font-display: block; src: url('../marca/fontes/Sora-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: 'DM Mono'; font-style: normal; font-weight: 400; font-display: block; src: url('../marca/fontes/DMMono-400-latin.woff2') format('woff2'); }
-@font-face { font-family: 'DM Mono'; font-style: normal; font-weight: 500; font-display: block; src: url('../marca/fontes/DMMono-500-latin.woff2') format('woff2'); }
+@font-face { font-family: 'Sora'; font-style: normal; font-weight: 100 800; font-display: block; src: url('../marca/fontes/Sora-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
 
 :root {
   /* neutros */        --feijao: #2A1611; --arroz: #F4ECD8; --arroz-claro: #FBF7EC;
   /* nacionais */      --couve: #0B7A3B; --mata: #073D26; --fuba: #FFC72C; --anil: #2152C8;
   /* terra e cozinha */--dende: #F28A1C; --urucum: #C8402A;
-  --linha: rgba(42,22,17,.18); --linha-clara: rgba(244,236,216,.3);
-  --sans: 'Archivo', system-ui, sans-serif; --mono: 'DM Mono', ui-monospace, monospace;
+  --linha: rgba(42,22,17,.2); --linha-clara: rgba(244,236,216,.32);
+  --titulo: 'Anton', 'Arial Narrow', sans-serif; --sans: 'Sora', system-ui, sans-serif;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { background: #1b1b1b; }
 body { font-family: var(--sans); color: var(--feijao); -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; font-feature-settings: 'kern', 'liga'; padding: 40px; display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
 .prancha { position: relative; overflow: hidden; flex: none; background: var(--arroz); color: var(--feijao); }
-fibra-logo, fibra-janela, fibra-grao, fibra-padrao { display: block; line-height: 0; }
+fibra-logo, fibra-janela, fibra-grao, fibra-trama, fibra-foto, fibra-prato { display: block; line-height: 0; }
 fibra-logo svg, fibra-janela svg, fibra-grao svg { display: block; width: 100%; height: auto; overflow: visible; }
-fibra-padrao svg { display: block; width: 100%; height: 100%; }
+fibra-trama svg, fibra-prato svg { display: block; width: 100%; height: 100%; }
 
-/* fundos: cada cor de fundo já define a cor de texto e a cor de destaque corretas */
+/* fundos: cada cor de fundo define a cor de texto e a cor de destaque corretas */
 .bg-arroz { background: var(--arroz); color: var(--feijao); --dest: var(--couve); }
 .bg-claro { background: var(--arroz-claro); color: var(--feijao); --dest: var(--couve); }
-.bg-fuba { background: var(--fuba); color: var(--feijao); --dest: var(--mata); }
+.bg-fuba { background: var(--fuba); color: var(--feijao); --dest: var(--couve); }
 .bg-dende { background: var(--dende); color: var(--feijao); --dest: var(--arroz); }
 .bg-couve { background: var(--couve); color: var(--arroz); --dest: var(--fuba); }
 .bg-mata { background: var(--mata); color: var(--arroz); --dest: var(--fuba); }
@@ -39,16 +36,16 @@ fibra-padrao svg { display: block; width: 100%; height: 100%; }
 .c-feijao { color: var(--feijao); } .c-arroz { color: var(--arroz); } .c-fuba { color: var(--fuba); } .c-couve { color: var(--couve); }
 .c-mata { color: var(--mata); } .c-anil { color: var(--anil); } .c-dende { color: var(--dende); } .c-urucum { color: var(--urucum); } .c-dest { color: var(--dest); }
 
-/* ── tipografia ──
-   .t-titulo  manchete: Archivo Black expandida, caixa-alta
-   .t-chamada frase de apoio: Archivo SemiBold
-   .t-texto   leitura: Archivo Regular
-   .t-rotulo  rótulo: Archivo SemiBold, caixa-alta espacejada */
-.t-titulo { font-weight: 900; font-stretch: 112.5%; text-transform: uppercase; letter-spacing: -0.012em; line-height: .92; }
-.t-chamada { font-weight: 600; font-stretch: 100%; letter-spacing: -0.012em; line-height: 1.1; }
-.t-texto { font-weight: 400; letter-spacing: -0.003em; line-height: 1.38; }
-.t-rotulo { font-weight: 600; font-stretch: 100%; text-transform: uppercase; letter-spacing: .09em; line-height: 1.35; }
-.t-dado { font-family: var(--mono); font-weight: 500; text-transform: uppercase; letter-spacing: .05em; }
+/* ── tipografia: duas famílias ──
+   .t-titulo  manchete — Anton, caixa-alta
+   .t-chamada frase de apoio — Sora SemiBold
+   .t-texto   leitura — Sora Regular
+   .t-rotulo  rótulo — Sora SemiBold, caixa-alta espacejada */
+.t-titulo { font-family: var(--titulo); font-weight: 400; text-transform: uppercase; letter-spacing: .012em; line-height: 1.04; }
+.t-chamada { font-weight: 600; letter-spacing: -0.022em; line-height: 1.14; }
+.t-texto { font-weight: 400; letter-spacing: -0.012em; line-height: 1.45; }
+.t-rotulo { font-weight: 600; text-transform: uppercase; letter-spacing: .1em; line-height: 1.4; }
+.t-dado { font-weight: 500; letter-spacing: -0.005em; font-variant-numeric: tabular-nums; }
 
 /* alinhamento óptico: apara a caixa de texto na altura da caixa-alta e na linha de base */
 .tb { text-box: trim-both cap alphabetic; }
