@@ -169,6 +169,16 @@
     }
   }
 
+
+  /* <fibra-foto foto="mesa-jovem" w="1080" h="630" fx=".5" fy=".3" zoom="1"> — fotografia retangular que cobre a caixa w × h */
+  class Foto extends HTMLElement {
+    connectedCallback() {
+      const g = (a, d) => parseFloat(this.getAttribute(a) ?? d), w = g('w', 100), h = g('h', 100);
+      this.style.display = 'block'; this.style.lineHeight = 0;
+      this.innerHTML = `<svg viewBox="0 0 ${w} ${h}" style="display:block;width:100%;height:100%" preserveAspectRatio="none"><clipPath id="f${++uid}"><rect width="${w}" height="${h}"/></clipPath><g clip-path="url(#f${uid})">${cobre(this.getAttribute('foto'), 0, 0, w, h, g('fx', .5), g('fy', .5), g('zoom', 1))}</g></svg>`;
+    }
+  }
+  customElements.define('fibra-foto', Foto);
   customElements.define('fibra-padrao', Padrao);
   customElements.define('fibra-logo', Logo); customElements.define('fibra-janela', Janela); customElements.define('fibra-grao', Grao);
   window.FIBRA = { dados: D, cor, padrao, graoPath, letraD, disposicao, plantio, fotoUrl,
