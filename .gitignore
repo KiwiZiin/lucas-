@@ -1,0 +1,7 @@
+fotos/originais/
+fotos/trabalho/
+node_modules/
+__pycache__/
+*.pyc
+.DS_Store
+motion/out/
