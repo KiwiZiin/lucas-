@@ -1,145 +1,179 @@
 <!DOCTYPE html>
-<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FIBRA identidade visual</title>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fibra, identidade visual</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-/* VOICE: quente, direta, de feira — a marca falando por si.
-   IDEA: um cartaz lambe-lambe que vira caderno de marca; faixas de cor como bancas de feira.
-   PICTURE: as peças reais (posters, outdoor, colcha) ocupam a tela inteira.
-   COLOUR and TYPE: couve, fubá, anil, dendê, urucum, feijão e arroz · Anton nos títulos, Sora no apoio.
-   LAYOUT: faixas de largura total, uma ideia por faixa, imagens grandes, grades que empilham no celular. */
-:root{color-scheme:light dark;--couve:#0B7A3B;--mata:#073D26;--fuba:#FFC72C;--anil:#2152C8;--dende:#F28A1C;--urucum:#C8402A;--feijao:#2A1611;--arroz:#F4ECD8;
---bg:light-dark(#F4ECD8,#1b100c);--ink:light-dark(#2A1611,#F4ECD8)}
+/* VOICE: popular, direta, orgulhosa — a página fala como a feira, sem letra miúda.
+   IDEA: um cartaz de feira que vira caderno de marca: bandas de cor chapada como papel colado, uma de cada vez.
+   PICTURE: o produtor recortado à frente do grão em anel, ocupando a primeira tela.
+   COLOUR and TYPE: fubá, couve, anil e feijão em bandas inteiras; Gabarito (Naipe Foundry, RJ) do texto ao título.
+   LAYOUT: bandas de largura total, conteúdo até 1240px, grade de 12 colunas que vira uma coluna no celular. */
+:root{color-scheme:light dark;--fuba:#FFC72C;--couve:#0B7A3B;--anil:#2152C8;--feijao:#2A1611;--arroz:#F4ECD8;--dende:#F28A1C;--urucum:#C8402A;
+  --bg:light-dark(#F4ECD8,#1a0f0b);--ink:light-dark(#2A1611,#F4ECD8);--muted:light-dark(rgba(42,22,17,.72),rgba(244,236,216,.72));--rule:light-dark(rgba(42,22,17,.16),rgba(244,236,216,.18))}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
-body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 Sora,system-ui,sans-serif;overflow-x:clip}
-img,video{display:block;width:100%;height:auto}
-h1,h2,h3{font-family:Anton,'Arial Narrow',sans-serif;font-weight:400;text-transform:uppercase;line-height:1.02;letter-spacing:.01em;margin:0;text-wrap:balance}
-h2{font-size:clamp(40px,6vw,84px)} h3{font-size:clamp(24px,2.4vw,32px)}
-p{margin:0;max-width:62ch}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 Gabarito,'Helvetica Neue',Arial,sans-serif;overflow-x:clip;-webkit-font-smoothing:antialiased}
+img,video{display:block;max-width:100%}
+h1,h2,h3{font-weight:900;letter-spacing:-.025em;line-height:1.02;margin:0;text-wrap:balance}
+h1{font-size:clamp(40px,6.4vw,84px)}h2{font-size:clamp(32px,4.2vw,52px)}h3{font-size:22px;font-weight:800;letter-spacing:-.01em}
+p{margin:0}
 .band{padding:clamp(40px,6vw,96px) max(5vw,16px)}
 .in{max-width:1240px;margin:0 auto}
-.couve{background:var(--couve);color:var(--arroz)}.mata{background:var(--mata);color:var(--arroz)}.fuba{background:var(--fuba);color:var(--feijao)}
-.anil{background:var(--anil);color:var(--arroz)}.urucum{background:var(--urucum);color:var(--arroz)}.feijao{background:var(--feijao);color:var(--arroz)}
-.dest{color:var(--fuba)}.fuba .dest{color:var(--couve)}
-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:20px max(5vw,16px);background:var(--couve)}
-nav img{width:120px}nav div{display:flex;gap:22px;flex-wrap:wrap}
-nav a{color:var(--arroz);text-decoration:none;font-weight:600;font-size:15px}nav a:hover,nav a:focus-visible{color:var(--fuba);outline:none}
-.hero{background:var(--couve);color:var(--arroz);padding:0 max(5vw,16px) clamp(40px,5vw,72px)}
-.hero h1{font-size:clamp(52px,9vw,148px);margin:clamp(16px,3vw,40px) 0 clamp(24px,3vw,40px)}
-.hero figure{margin:0}.hero img{border-radius:4px;box-shadow:0 30px 60px -25px rgba(0,0,0,.5)}
-.lede{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:end;margin-top:clamp(24px,3vw,40px)}
-.lede p{font-size:clamp(17px,1.6vw,21px)}
-.big{font-family:Anton,sans-serif;font-size:clamp(96px,17vw,240px);line-height:.9;color:var(--fuba)}
-.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:center}
-.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:48px}
-.steps div{border-top:3px solid currentColor;padding-top:20px}
-.steps b{display:block;font:400 64px/1 Anton,sans-serif;margin-bottom:14px}
-.steps h3{font:700 19px/1.25 Sora,sans-serif;text-transform:none;margin-bottom:10px}
-.steps p{font-size:15px}
+.g{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px}
+.fuba{background:var(--fuba);color:var(--feijao)}.couve{background:var(--couve);color:var(--arroz)}.anil{background:var(--anil);color:var(--arroz)}.feijao{background:var(--feijao);color:var(--arroz)}
+.lede{font-size:clamp(18px,1.6vw,22px);line-height:1.45;max-width:62ch}
+.small{font-size:14px;color:var(--muted)}
+.logo svg{width:100%;height:auto;display:block}
+.hero .g{align-items:center}
+.hero .t{grid-column:span 5;display:flex;flex-direction:column;gap:28px;padding-bottom:8px}
+.hero .p{grid-column:span 7}
+.hero .p img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.hero .logo{width:min(440px,90%)}
+.num{font-weight:900;font-size:clamp(96px,16vw,220px);line-height:.85;letter-spacing:-.05em;color:var(--fuba)}
+.grains{display:grid;grid-template-columns:repeat(20,1fr);gap:6px 4px;margin-top:28px}
+.grains i{display:block;aspect-ratio:2.2/1;border-radius:50%;transform:rotate(-42deg) scale(.82);background:rgba(244,236,216,.22)}
+.grains i.on{background:var(--fuba)}
 .plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:40px}
-.plans div{background:rgba(255,255,255,.06);border:1px solid rgba(244,236,216,.2);padding:24px;border-radius:4px}
-.plans h3{font-size:30px;margin-bottom:10px}.plans p{font-size:15px}
+.plan{padding:28px;display:flex;flex-direction:column;gap:12px;min-height:240px}
+.plan .pr{font-weight:900;font-size:64px;letter-spacing:-.04em;line-height:1;white-space:nowrap}
+.plan .pr small{font-size:22px;font-weight:700;letter-spacing:0}
+.plan.casa{background:light-dark(#FBF8F1,#2f1b14);box-shadow:inset 0 0 0 3px var(--couve)}
+.cols2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
 .posters{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;margin-top:40px}
-.posters img,.trio img{box-shadow:0 20px 40px -20px rgba(0,0,0,.5)}
-.trio{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:16px}
-.wide{margin-top:40px;border-radius:4px;overflow:hidden}
-.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}
-.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:16px}
-.grid2 img,.grid3 img{aspect-ratio:3/2;object-fit:cover;border-radius:4px}
-.cap{font-size:14px;opacity:.8;margin-top:14px}
-.say{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:40px}
-.say div{border-top:3px solid currentColor;padding-top:18px}
-.say s{opacity:.7;font-size:15px}
-footer{padding:48px max(5vw,16px);background:var(--mata);color:var(--arroz);font-size:14px}
-footer img{width:180px;margin-bottom:20px}
-@media(max-width:860px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.posters{grid-template-columns:repeat(3,minmax(0,1fr))}.trio{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:600px){.lede,.two,.plans,.say,.grid2,.grid3{grid-template-columns:minmax(0,1fr)}.posters{grid-template-columns:repeat(2,minmax(0,1fr))}.steps{grid-template-columns:minmax(0,1fr)}nav div{gap:14px}}
-@media(prefers-reduced-motion:no-preference){.hero img{animation:sobe .9s cubic-bezier(.2,.8,.2,1) both}@keyframes sobe{from{transform:translateY(24px);opacity:0}}}
-</style></head><body>
+.posters img{aspect-ratio:3/4;width:100%;object-fit:cover}
+.igrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;max-width:820px}
+.igrid img{aspect-ratio:4/5;width:100%;object-fit:cover}
+.mk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:40px}
+.mk figure{margin:0}.mk img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.mk figcaption{font-size:14px;margin-top:10px;color:var(--muted)}
+.packs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:40px;max-width:900px}
+.sw{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px;margin-top:32px}
+.sw div{height:150px;padding:14px;display:flex;flex-direction:column;justify-content:flex-end;font-size:14px;line-height:1.35}
+.sw b{font-size:20px;font-weight:900}
+.specimen{font-weight:900;font-size:clamp(56px,9vw,128px);line-height:.9;letter-spacing:-.03em}
+.ver{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;align-items:end;margin-top:40px}
+.cap{font-size:14px;margin-top:12px;color:var(--muted)}
+video{width:100%;aspect-ratio:16/9;background:#000}
+.foot{font-size:15px;line-height:1.6}
+.foot .logo{width:200px;margin-bottom:24px}
+@media(max-width:900px){.posters{grid-template-columns:repeat(3,minmax(0,1fr))}.sw{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:600px){.g{grid-template-columns:minmax(0,1fr)}.hero .t,.hero .p{grid-column:auto}.plans,.cols2,.mk,.ver{grid-template-columns:minmax(0,1fr)}
+  .posters{grid-template-columns:repeat(2,minmax(0,1fr))}.packs{grid-template-columns:repeat(3,minmax(0,1fr))}.sw{grid-template-columns:repeat(2,minmax(0,1fr))}.grains{gap:4px 2px}}
+@media(prefers-reduced-motion:no-preference){.rise{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}@keyframes rise{from{opacity:0;transform:translateY(18px)}}}
+</style></head>
+<body>
 
-<nav><img src="img/fibra-logo-fuba.svg" alt="Fibra"><div><a href="#empresa">A empresa</a><a href="#marca">A marca</a><a href="#pecas">Peças</a><a href="#motion">Motion</a></div></nav>
-
-<header class="hero">
-  <div class="in">
-    <h1>Comida de verdade é <span class="dest">direito de todo mundo.</span></h1>
-    <figure><img src="img/hero.jpg" alt="Logotipo FIBRA com fotografias de feijão, couve, uma cozinheira, um agricultor e um prato feito dentro das letras"></figure>
-    <div class="lede"><p>A Fibra é uma rede de cestas populares de arroz, feijão, legumes e verduras, compradas direto de produtores brasileiros e entregues por um preço que cabe no mês.</p>
-    <p style="font-size:14px;opacity:.85">Marca fictícia · projeto autoral de identidade visual</p></div>
+<header class="band fuba hero"><div class="in g">
+  <div class="t rise">
+    <div class="logo" aria-label="Fibra"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2336.5 1000.0"><g fill="currentColor"><path transform="translate(0 0)" fill-rule="evenodd" d="M0 1000V0H400V194.9H201.1V354H389.8V546.6H201.1V1000Z"/><path transform="translate(461.1 0)" fill-rule="evenodd" d="M0 1000V0H193.2V1000Z"/><path transform="translate(739.8 0)" fill-rule="evenodd" d="M0 1000V0H271Q380.1 0 429.8 53.1Q479.5 106.2 479.5 228.4V272.2Q479.5 342.6 454.3 386.4Q429 430.1 377.3 443.8Q444.9 460.8 467.9 523.6Q490.9 586.4 490.9 676.7Q490.9 773.9 472.7 846.6Q454.5 919.3 406.8 959.7Q359.1 1000 271 1000Z M298.7 210.7C311.7 225.1 294.9 261.3 261.2 291.6C227.6 321.9 189.8 334.8 176.9 320.5C163.9 306.1 180.7 269.9 214.4 239.6C248.0 209.3 285.8 196.4 298.7 210.7Z M305.2 623.5C318.2 637.9 301.4 674.1 267.7 704.4C234.1 734.7 196.3 747.6 183.4 733.3C170.4 718.9 187.2 682.7 220.9 652.4C254.5 622.1 292.3 609.2 305.2 623.5Z"/><path transform="translate(1302.6 0)" fill-rule="evenodd" d="M0 1000V0H306.8Q383.5 0 422.7 34.9Q461.9 69.9 475.3 132.7Q488.6 195.5 488.6 280.1Q488.6 361.9 467.9 410.8Q447.2 459.7 389.8 478.4Q436.9 488.1 456 525.3Q475 562.5 475 621.6V1000H277.8V608.5Q277.8 564.8 259.9 554.3Q242 543.8 202.3 543.8V1000Z M309.2 222.9C322.2 237.3 305.4 273.5 271.7 303.8C238.1 334.1 200.3 347.0 187.4 332.7C174.4 318.3 191.2 282.1 224.9 251.8C258.5 221.5 296.3 208.6 309.2 222.9Z"/><path transform="translate(1805.8 0)" fill-rule="evenodd" d="M0 1000 96.6 0H435.8L530.7 1000H341.5L327.3 838.6H206.8L194.3 1000Z M327.4 535.1C340.4 549.5 323.6 585.7 289.9 616.0C256.3 646.3 218.5 659.2 205.6 644.9C192.6 630.5 209.4 594.3 243.1 564.0C276.7 533.7 314.5 520.8 327.4 535.1Z"/></g></svg>
+</div>
+    <h1>Comida de verdade é direito de todo mundo.</h1>
+    <p class="lede">Identidade visual da Fibra, rede de cestas de arroz, feijão, legumes e verduras compradas direto da agricultura familiar. Quem pode, assina. Quem precisa, paga menos.</p>
+    <p class="small" style="color:rgba(42,22,17,.75)">Marca fictícia, projeto autoral.</p>
   </div>
-</header>
+  <div class="p"><img src="img/retrato.jpg" alt="Produtor rural de chapéu, de braços cruzados, recortado à frente do grão amarelo em anel, sobre fundo verde" fetchpriority="high"></div>
+</div></header>
 
-<section class="band mata" id="problema"><div class="in two">
-  <div><div class="big">24,2%</div><h3 style="margin-top:24px;font:700 clamp(20px,2vw,26px)/1.3 Sora,sans-serif;text-transform:none">Quase 1 em cada 4 lares brasileiros conviveu com algum grau de insegurança alimentar em 2024.</h3>
-  <p style="margin-top:20px">Num país que planta comida para o mundo, arroz e feijão ainda pesam no orçamento de milhões de famílias. Entre a roça e a panela, o caminho é longo, e cada intermediário encarece o prato.</p>
-  <p class="cap">Fonte: IBGE, PNAD Contínua — Segurança Alimentar 2024</p></div>
-  <img src="img/p7.jpg" alt="Poster com o dado 24,2%" style="max-width:420px;justify-self:end;box-shadow:0 30px 60px -25px rgba(0,0,0,.6)">
+<section class="band feijao"><div class="in g">
+  <div style="grid-column:span 7">
+    <p class="num">24,2%</p>
+    <p class="lede" style="margin-top:24px">dos domicílios brasileiros conviveram com algum grau de insegurança alimentar em 2024, segundo o IBGE (PNAD Contínua). Num país que planta comida para o mundo, arroz e feijão ainda pesam no orçamento.</p>
+    <div class="grains" id="graos" aria-label="Gráfico: 24,2 em cada 100 lares"></div>
+    <p class="small" style="margin-top:14px;color:rgba(244,236,216,.75)">Cada grão é um lar em cada cem.</p>
+  </div>
+  <div style="grid-column:span 5;align-self:end">
+    <h2 style="color:var(--fuba)">Um em cada quatro é muito.</h2>
+    <p style="margin-top:20px;max-width:46ch">A Fibra encurta a distância entre quem planta e quem come: compra direto do produtor, monta a cesta da semana e usa a assinatura de quem pode pagar para baratear a cesta de quem precisa.</p>
+  </div>
 </div></section>
 
-<section class="band fuba" id="empresa"><div class="in">
-  <h2>Quem pode, assina. <span class="dest">Quem precisa, paga menos.</span></h2>
-  <div class="steps">
-    <div><b>01</b><h3>Compra de quem planta</h3><p>Direto de produtores e cooperativas da agricultura familiar. Sem atravessador.</p></div>
-    <div><b>02</b><h3>Monta a cesta</h3><p>Arroz, feijão, legumes, verduras e o básico que não pode faltar na semana.</p></div>
-    <div><b>03</b><h3>Quem pode, assina</h3><p>Famílias e empresas pagam o preço cheio e recebem a cesta todo mês.</p></div>
-    <div><b>04</b><h3>Quem precisa, paga menos</h3><p>A margem das assinaturas vira desconto para famílias de baixa renda.</p></div>
+<section class="band"><div class="in">
+  <h2>Três planos, uma cesta.</h2>
+  <div class="plans">
+    <div class="plan casa"><h3>Fibra em Casa</h3><p class="pr"><small>R$ </small>119</p><p>por semana. Cesta para quatro pessoas, entregue toda semana, sem taxa.</p></div>
+    <div class="plan fuba"><h3>Fibra Social</h3><p class="pr"><small>R$ </small>39</p><p>por semana. A mesma cesta, para famílias inscritas no CadÚnico.</p></div>
+    <div class="plan couve"><h3>Fibra Empresa</h3><p class="pr" style="font-size:44px">Contrato</p><p>Cesta como benefício para equipes. Cada contrato financia cestas do Fibra Social.</p></div>
   </div>
+  <p class="small" style="margin-top:20px">A cada três cestas do Fibra em Casa, uma família do CadÚnico recebe a mesma cesta por R$ 39. Valores ilustrativos.</p>
+</div></section>
+
+<section class="band couve"><div class="in g">
+  <div style="grid-column:span 5">
+    <h2>Letra grande.</h2>
+    <p class="lede" style="margin-top:20px">Na feira, o que importa vem escrito grande: o nome, o preço, a procedência. A Fibra fala do mesmo jeito. Títulos compostos em bloco, como os cartazes de gráfica popular; plaquinha de preço com prendedor; carimbo, sacaria e lambe-lambe.</p>
+  </div>
+  <div style="grid-column:span 7" class="cols2">
+    <img src="img/cartaz-01-manifesto.jpg" alt="Cartaz amarelo com a frase Comida de verdade é direito de todo mundo em letras grandes" loading="lazy">
+    <img src="img/cartaz-03-sem-letra-miuda.jpg" alt="Cartaz com Sem letra miúda e duas plaquinhas de preço" loading="lazy">
+  </div>
+</div></section>
+
+<section class="band"><div class="in">
+  <h2>Logotipo, tipografia e cor</h2>
+  <div class="ver">
+    <div><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2336.5 1000.0"><g fill="currentColor"><path transform="translate(0 0)" fill-rule="evenodd" d="M0 1000V0H400V194.9H201.1V354H389.8V546.6H201.1V1000Z"/><path transform="translate(461.1 0)" fill-rule="evenodd" d="M0 1000V0H193.2V1000Z"/><path transform="translate(739.8 0)" fill-rule="evenodd" d="M0 1000V0H271Q380.1 0 429.8 53.1Q479.5 106.2 479.5 228.4V272.2Q479.5 342.6 454.3 386.4Q429 430.1 377.3 443.8Q444.9 460.8 467.9 523.6Q490.9 586.4 490.9 676.7Q490.9 773.9 472.7 846.6Q454.5 919.3 406.8 959.7Q359.1 1000 271 1000Z M298.7 210.7C311.7 225.1 294.9 261.3 261.2 291.6C227.6 321.9 189.8 334.8 176.9 320.5C163.9 306.1 180.7 269.9 214.4 239.6C248.0 209.3 285.8 196.4 298.7 210.7Z M305.2 623.5C318.2 637.9 301.4 674.1 267.7 704.4C234.1 734.7 196.3 747.6 183.4 733.3C170.4 718.9 187.2 682.7 220.9 652.4C254.5 622.1 292.3 609.2 305.2 623.5Z"/><path transform="translate(1302.6 0)" fill-rule="evenodd" d="M0 1000V0H306.8Q383.5 0 422.7 34.9Q461.9 69.9 475.3 132.7Q488.6 195.5 488.6 280.1Q488.6 361.9 467.9 410.8Q447.2 459.7 389.8 478.4Q436.9 488.1 456 525.3Q475 562.5 475 621.6V1000H277.8V608.5Q277.8 564.8 259.9 554.3Q242 543.8 202.3 543.8V1000Z M309.2 222.9C322.2 237.3 305.4 273.5 271.7 303.8C238.1 334.1 200.3 347.0 187.4 332.7C174.4 318.3 191.2 282.1 224.9 251.8C258.5 221.5 296.3 208.6 309.2 222.9Z"/><path transform="translate(1805.8 0)" fill-rule="evenodd" d="M0 1000 96.6 0H435.8L530.7 1000H341.5L327.3 838.6H206.8L194.3 1000Z M327.4 535.1C340.4 549.5 323.6 585.7 289.9 616.0C256.3 646.3 218.5 659.2 205.6 644.9C192.6 630.5 209.4 594.3 243.1 564.0C276.7 533.7 314.5 520.8 327.4 535.1Z"/></g></svg>
+</div><p class="cap">Horizontal. Letras condensadas na tradição dos tipos de madeira; o grão de feijão no lugar das contraformas.</p></div>
+    <div><div class="logo" style="max-width:180px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1596.7 2070.0"><g fill="currentColor"><path transform="translate(0 0)" fill-rule="evenodd" d="M0 1000V0H400V194.9H201.1V354H389.8V546.6H201.1V1000Z"/><path transform="translate(461.1 0)" fill-rule="evenodd" d="M0 1000V0H193.2V1000Z"/><path transform="translate(0 1070.0)" fill-rule="evenodd" d="M0 1000V0H271Q380.1 0 429.8 53.1Q479.5 106.2 479.5 228.4V272.2Q479.5 342.6 454.3 386.4Q429 430.1 377.3 443.8Q444.9 460.8 467.9 523.6Q490.9 586.4 490.9 676.7Q490.9 773.9 472.7 846.6Q454.5 919.3 406.8 959.7Q359.1 1000 271 1000Z M298.7 210.7C311.7 225.1 294.9 261.3 261.2 291.6C227.6 321.9 189.8 334.8 176.9 320.5C163.9 306.1 180.7 269.9 214.4 239.6C248.0 209.3 285.8 196.4 298.7 210.7Z M305.2 623.5C318.2 637.9 301.4 674.1 267.7 704.4C234.1 734.7 196.3 747.6 183.4 733.3C170.4 718.9 187.2 682.7 220.9 652.4C254.5 622.1 292.3 609.2 305.2 623.5Z"/><path transform="translate(562.8 1070.0)" fill-rule="evenodd" d="M0 1000V0H306.8Q383.5 0 422.7 34.9Q461.9 69.9 475.3 132.7Q488.6 195.5 488.6 280.1Q488.6 361.9 467.9 410.8Q447.2 459.7 389.8 478.4Q436.9 488.1 456 525.3Q475 562.5 475 621.6V1000H277.8V608.5Q277.8 564.8 259.9 554.3Q242 543.8 202.3 543.8V1000Z M309.2 222.9C322.2 237.3 305.4 273.5 271.7 303.8C238.1 334.1 200.3 347.0 187.4 332.7C174.4 318.3 191.2 282.1 224.9 251.8C258.5 221.5 296.3 208.6 309.2 222.9Z"/><path transform="translate(1066.0 1070.0)" fill-rule="evenodd" d="M0 1000 96.6 0H435.8L530.7 1000H341.5L327.3 838.6H206.8L194.3 1000Z M327.4 535.1C340.4 549.5 323.6 585.7 289.9 616.0C256.3 646.3 218.5 659.2 205.6 644.9C192.6 630.5 209.4 594.3 243.1 564.0C276.7 533.7 314.5 520.8 327.4 535.1Z"/></g></svg>
+</div><p class="cap">Empilhada</p></div>
+    <div><div class="logo" style="max-width:220px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1596.7 1000.0"><g fill="currentColor"><path transform="translate(0.0 0)" fill-rule="evenodd" d="M0 1000V0H271Q380.1 0 429.8 53.1Q479.5 106.2 479.5 228.4V272.2Q479.5 342.6 454.3 386.4Q429 430.1 377.3 443.8Q444.9 460.8 467.9 523.6Q490.9 586.4 490.9 676.7Q490.9 773.9 472.7 846.6Q454.5 919.3 406.8 959.7Q359.1 1000 271 1000Z M298.7 210.7C311.7 225.1 294.9 261.3 261.2 291.6C227.6 321.9 189.8 334.8 176.9 320.5C163.9 306.1 180.7 269.9 214.4 239.6C248.0 209.3 285.8 196.4 298.7 210.7Z M305.2 623.5C318.2 637.9 301.4 674.1 267.7 704.4C234.1 734.7 196.3 747.6 183.4 733.3C170.4 718.9 187.2 682.7 220.9 652.4C254.5 622.1 292.3 609.2 305.2 623.5Z"/><path transform="translate(562.8 0)" fill-rule="evenodd" d="M0 1000V0H306.8Q383.5 0 422.7 34.9Q461.9 69.9 475.3 132.7Q488.6 195.5 488.6 280.1Q488.6 361.9 467.9 410.8Q447.2 459.7 389.8 478.4Q436.9 488.1 456 525.3Q475 562.5 475 621.6V1000H277.8V608.5Q277.8 564.8 259.9 554.3Q242 543.8 202.3 543.8V1000Z M309.2 222.9C322.2 237.3 305.4 273.5 271.7 303.8C238.1 334.1 200.3 347.0 187.4 332.7C174.4 318.3 191.2 282.1 224.9 251.8C258.5 221.5 296.3 208.6 309.2 222.9Z"/><path transform="translate(1066.0 0)" fill-rule="evenodd" d="M0 1000 96.6 0H435.8L530.7 1000H341.5L327.3 838.6H206.8L194.3 1000Z M327.4 535.1C340.4 549.5 323.6 585.7 289.9 616.0C256.3 646.3 218.5 659.2 205.6 644.9C192.6 630.5 209.4 594.3 243.1 564.0C276.7 533.7 314.5 520.8 327.4 535.1Z"/></g></svg>
+</div><p class="cap">Símbolo BRA</p></div>
+  </div>
+  <div class="g" style="margin-top:64px;align-items:end">
+    <p class="specimen" style="grid-column:span 7">Aa Gabarito</p>
+    <p style="grid-column:span 5">Toda a tipografia usa Gabarito, da Naipe Foundry, do Rio de Janeiro: Black para blocos e títulos, Regular para o texto. Uma família só, do rótulo ao cartaz de rua.</p>
+  </div>
+  <div class="sw">
+    <div style="background:var(--couve);color:var(--arroz)"><b>Couve</b>#0B7A3B</div>
+    <div style="background:var(--fuba);color:var(--feijao)"><b>Fubá</b>#FFC72C</div>
+    <div style="background:var(--anil);color:var(--arroz)"><b>Anil</b>#2152C8</div>
+    <div style="background:var(--feijao);color:var(--arroz)"><b>Feijão</b>#2A1611</div>
+    <div style="background:var(--arroz);color:var(--feijao);box-shadow:inset 0 0 0 1px var(--rule)"><b>Arroz</b>#F4ECD8</div>
+    <div style="background:var(--dende);color:var(--feijao)"><b>Dendê</b>apoio · #F28A1C</div>
+    <div style="background:var(--urucum);color:var(--arroz)"><b>Urucum</b>apoio · #C8402A</div>
+  </div>
+</div></section>
+
+<section class="band anil"><div class="in g">
+  <div style="grid-column:span 4">
+    <h2>Construção fotográfica</h2>
+    <p style="margin-top:20px">Três jeitos de montar a foto, a partir da comunicação do Governo Federal para a agricultura familiar: o produtor recortado à frente do grão em anel; mosaicos de módulos de foto e de cor; comida dentro da forma do grão.</p>
+    <p style="margin-top:16px">Nada se sobrepõe a um rosto e nenhuma moldura corta rosto. Uma verificação automática confere isso em todas as peças.</p>
+  </div>
+  <div style="grid-column:span 8"><div class="igrid" style="max-width:none"><img src="img/ig-01-chegou.jpg" alt="Post 1 da grade de lançamento" loading="lazy"><img src="img/ig-02-mosaico-feira.jpg" alt="Post 2 da grade de lançamento" loading="lazy"><img src="img/ig-03-manifesto.jpg" alt="Post 3 da grade de lançamento" loading="lazy"><img src="img/ig-04-dado.jpg" alt="Post 4 da grade de lançamento" loading="lazy"><img src="img/ig-05-quem-planta.jpg" alt="Post 5 da grade de lançamento" loading="lazy"><img src="img/ig-06-arroz-feijao.jpg" alt="Post 6 da grade de lançamento" loading="lazy"><img src="img/ig-07-mosaico-planos.jpg" alt="Post 7 da grade de lançamento" loading="lazy"><img src="img/ig-08-campo-mesa.jpg" alt="Post 8 da grade de lançamento" loading="lazy"><img src="img/ig-09-sem-letra-miuda.jpg" alt="Post 9 da grade de lançamento" loading="lazy"></div></div>
+</div></section>
+
+<section class="band"><div class="in">
+  <h2>Cartazes lambe-lambe</h2>
+  <div class="posters"><img src="img/cartaz-01-manifesto.jpg" alt="Cartaz 1" loading="lazy"><img src="img/cartaz-02-dado.jpg" alt="Cartaz 2" loading="lazy"><img src="img/cartaz-03-sem-letra-miuda.jpg" alt="Cartaz 3" loading="lazy"><img src="img/cartaz-04-quem-pode.jpg" alt="Cartaz 4" loading="lazy"><img src="img/cartaz-05-arroz-feijao.jpg" alt="Cartaz 5" loading="lazy"><img src="img/cartaz-06-da-roca.jpg" alt="Cartaz 6" loading="lazy"><img src="img/cartaz-07-cartilha-f.jpg" alt="Cartaz 7" loading="lazy"><img src="img/cartaz-08-cartilha-b.jpg" alt="Cartaz 8" loading="lazy"><img src="img/cartaz-09-cartilha-r.jpg" alt="Cartaz 9" loading="lazy"><img src="img/cartaz-10-cartilha-a.jpg" alt="Cartaz 10" loading="lazy"></div>
 </div></section>
 
 <section class="band feijao"><div class="in">
-  <h2>Três planos, <span class="dest">uma mesma cesta.</span></h2>
-  <div class="plans">
-    <div><h3>Fibra em Casa</h3><p>Assinatura mensal para famílias. A cesta chega em casa, com preço cheio e sem surpresa.</p></div>
-    <div><h3>Fibra Empresa</h3><p>Contratos corporativos: cestas para equipes inteiras, entregues no local de trabalho.</p></div>
-    <div><h3>Fibra Social</h3><p>A mesma cesta, com desconto, para famílias de baixa renda. Quem financia são os outros dois planos.</p></div>
+  <h2 style="color:var(--fuba)">Filme manifesto</h2>
+  <p style="margin:16px 0 28px;max-width:62ch">45 segundos cortados nos compassos da trilha a partir de 1:56: o dado no silêncio, a resposta na primeira batida, a feira no groove, o campo dentro das letras na quebra sem grave e a assinatura no pico.</p>
+  <video src="img/filme.mp4" poster="img/filme-capa.jpg" controls playsinline preload="none"></video>
+</div></section>
+
+<section class="band"><div class="in">
+  <h2>Embalagem e rua</h2>
+  <div class="packs"><img src="img/pacote-arroz.jpg" alt="" loading="lazy"><img src="img/pacote-feijao-carioca.jpg" alt="" loading="lazy"><img src="img/pacote-feijao-preto.jpg" alt="" loading="lazy"></div>
+  <p class="cap">Pacotes de 1 kg com janela em forma de grão: o produto aparece pelo próprio símbolo da marca.</p>
+  <div class="mk"><figure><img src="img/mockup-caixa-aba.jpg" alt="" loading="lazy"><figcaption>Caixa aba</figcaption></figure><figure><img src="img/mockup-caixa-cartao.jpg" alt="" loading="lazy"><figcaption>Caixa cartao</figcaption></figure><figure><img src="img/mockup-celular.jpg" alt="" loading="lazy"><figcaption>Celular</figcaption></figure><figure><img src="img/mockup-lambe-lambe.jpg" alt="" loading="lazy"><figcaption>Lambe lambe</figcaption></figure><figure><img src="img/mockup-saco-rafia.jpg" alt="" loading="lazy"><figcaption>Saco rafia</figcaption></figure><figure><img src="img/mockup-sacola-kraft.jpg" alt="" loading="lazy"><figcaption>Sacola kraft</figcaption></figure></div>
+</div></section>
+
+<footer class="band fuba foot"><div class="in g">
+  <div style="grid-column:span 6"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2336.5 1000.0"><g fill="currentColor"><path transform="translate(0 0)" fill-rule="evenodd" d="M0 1000V0H400V194.9H201.1V354H389.8V546.6H201.1V1000Z"/><path transform="translate(461.1 0)" fill-rule="evenodd" d="M0 1000V0H193.2V1000Z"/><path transform="translate(739.8 0)" fill-rule="evenodd" d="M0 1000V0H271Q380.1 0 429.8 53.1Q479.5 106.2 479.5 228.4V272.2Q479.5 342.6 454.3 386.4Q429 430.1 377.3 443.8Q444.9 460.8 467.9 523.6Q490.9 586.4 490.9 676.7Q490.9 773.9 472.7 846.6Q454.5 919.3 406.8 959.7Q359.1 1000 271 1000Z M298.7 210.7C311.7 225.1 294.9 261.3 261.2 291.6C227.6 321.9 189.8 334.8 176.9 320.5C163.9 306.1 180.7 269.9 214.4 239.6C248.0 209.3 285.8 196.4 298.7 210.7Z M305.2 623.5C318.2 637.9 301.4 674.1 267.7 704.4C234.1 734.7 196.3 747.6 183.4 733.3C170.4 718.9 187.2 682.7 220.9 652.4C254.5 622.1 292.3 609.2 305.2 623.5Z"/><path transform="translate(1302.6 0)" fill-rule="evenodd" d="M0 1000V0H306.8Q383.5 0 422.7 34.9Q461.9 69.9 475.3 132.7Q488.6 195.5 488.6 280.1Q488.6 361.9 467.9 410.8Q447.2 459.7 389.8 478.4Q436.9 488.1 456 525.3Q475 562.5 475 621.6V1000H277.8V608.5Q277.8 564.8 259.9 554.3Q242 543.8 202.3 543.8V1000Z M309.2 222.9C322.2 237.3 305.4 273.5 271.7 303.8C238.1 334.1 200.3 347.0 187.4 332.7C174.4 318.3 191.2 282.1 224.9 251.8C258.5 221.5 296.3 208.6 309.2 222.9Z"/><path transform="translate(1805.8 0)" fill-rule="evenodd" d="M0 1000 96.6 0H435.8L530.7 1000H341.5L327.3 838.6H206.8L194.3 1000Z M327.4 535.1C340.4 549.5 323.6 585.7 289.9 616.0C256.3 646.3 218.5 659.2 205.6 644.9C192.6 630.5 209.4 594.3 243.1 564.0C276.7 533.7 314.5 520.8 327.4 535.1Z"/></g></svg>
+</div><p style="font-weight:800;font-size:22px">Comida de verdade é direito de todo mundo.</p></div>
+  <div style="grid-column:span 6">
+    <p>Marca fictícia, projeto autoral de identidade visual.</p>
+    <p>Tipografia: Gabarito, Naipe Foundry (SIL OFL). Fotografia: Adobe Stock, licença padrão. Dado: IBGE, PNAD Contínua, Segurança Alimentar 2024.</p>
   </div>
-</div></section>
+</div></footer>
 
-<section class="band" id="marca"><div class="in">
-  <h2>O grão no centro <span style="color:var(--couve)">de cada letra.</span></h2>
-  <p style="margin-top:20px">O logotipo vem das letras de cartaz: altas, estreitas e firmes, como os tipos de madeira dos lambe-lambes. As contra-formas de B, R e A dão lugar a grãos inclinados. O nome tem três sentidos: é o que tem na comida de verdade, é o que o brasileiro tem de sobra e é a palha que trança a cesta.</p>
-  <div class="wide"><img src="img/constr.jpg" alt="Construção do logotipo FIBRA"></div>
-  <div class="grid2"><img src="img/cores.jpg" alt="Paleta: couve, mata, fubá, anil, dendê, urucum, feijão e arroz" style="aspect-ratio:16/9"><img src="img/tipo.jpg" alt="Tipografia: Anton e Sora" style="aspect-ratio:16/9"></div>
-  <p class="cap">Paleta tirada da mesa e da bandeira · Anton nos títulos, Sora no apoio</p>
-</div></section>
-
-<section class="band anil"><div class="in">
-  <h2>Do grão à mesa, <span class="dest">em cinco letras.</span></h2>
-  <p style="margin-top:20px">Cada letra abre uma janela para o Brasil que planta e cozinha: F grão, I verdura, B cozinha, R roça, A mesa. Uma letra por peça, sempre inteira.</p>
-  <div class="posters"><img src="img/p1.jpg" alt="Poster F, feijão"><img src="img/p2.jpg" alt="Poster I, verdura"><img src="img/p3.jpg" alt="Poster B, cozinha"><img src="img/p4.jpg" alt="Poster R, roça"><img src="img/p5.jpg" alt="Poster A, mesa"></div>
-  <div class="trio"><img src="img/p6.jpg" alt="Poster manifesto"><img src="img/p7.jpg" alt="Poster dado"><img src="img/p8.jpg" alt="Poster de lançamento"><img src="img/p9.jpg" alt="Poster colcha"></div>
-</div></section>
-
-<section class="band" style="background:var(--feijao);color:var(--arroz)"><div class="in">
-  <h2>Tramas de cestaria, <span class="dest">costuradas numa colcha.</span></h2>
-  <p style="margin-top:20px">As padronagens são tecidas fio a fio, como num cesto de palha: sarja, espinha, olho, esteira, degrau e tela. Somadas a pratos vistos de cima e retratos em duotom, formam a colcha que costura todo o sistema.</p>
-  <div class="grid2"><img src="img/tramas.jpg" alt="Doze tramas de cestaria" style="aspect-ratio:16/9"><img src="img/colcha.jpg" alt="Colcha de retalhos com tramas, pratos e retratos" style="aspect-ratio:16/9"></div>
-</div></section>
-
-<section class="band urucum" id="pecas"><div class="in">
-  <h2>Na rua, <span class="dest">na mesa, no celular.</span></h2>
-  <div class="wide"><img src="img/outdoor.jpg" alt="Outdoor da Fibra"></div>
-  <div class="wide" style="margin-top:16px"><img src="img/tapume.jpg" alt="Tapume com a série de posters formando FIBRA"></div>
-  <div class="grid3"><img src="img/onibus.jpg" alt="Ponto de ônibus"><img src="img/totem.jpg" alt="Totem"><img src="img/caminhao.jpg" alt="Caminhão de entrega"></div>
-  <div class="grid2"><img src="img/caixa.jpg" alt="Caixa da Cesta Base"><img src="img/ecobag.jpg" alt="Ecobag"></div>
-  <div class="grid2"><img src="img/feed.jpg" alt="Grade do Instagram" style="aspect-ratio:16/9"><img src="img/car.jpg" alt="Carrossel e stories" style="aspect-ratio:16/9"></div>
-  <p class="cap">Aplicações sobre fotografias reais (Adobe Stock)</p>
-</div></section>
-
-<section class="band mata" id="motion"><div class="in">
-  <h2>As fotografias passam <span class="dest">por dentro das letras.</span></h2>
-  <video class="wide" src="img/motion.mp4" controls muted loop playsinline preload="metadata" poster="img/motion-poster.jpg" style="margin-top:32px;border-radius:4px"></video>
-</div></section>
-
-<section class="band fuba"><div class="in">
-  <h2>A Fibra fala como <span class="dest">quem serve o prato.</span></h2>
-  <div class="say">
-    <div><h3>Comida de verdade é direito de todo mundo.</h3><p style="margin-top:12px"><s>Ajude quem tem fome.</s></p></div>
-    <div><h3>Quem precisa, paga menos.</h3><p style="margin-top:12px"><s>Doe para famílias carentes.</s></p></div>
-    <div><h3>Da roça pra panela, sem atravessador.</h3><p style="margin-top:12px"><s>Produtos selecionados premium.</s></p></div>
-  </div>
-</div></section>
-
-<footer><div class="in"><img src="img/fibra-logo-fuba.svg" alt="Fibra"><p>Marca fictícia, projeto autoral de identidade visual. Tipografia: Anton (Vernon Adams) e Sora (Jonathan Barnbrook, Julián Moncada). Fotografia: Adobe Stock. Dado: IBGE, PNAD Contínua 2024.</p></div></footer>
+<script>
+{
+  const g = document.getElementById('graos');
+  if (g) g.innerHTML = Array.from({ length: 100 }, (_, i) => `<i class="${i < 24 ? 'on' : ''}"${i === 24 ? ' style="background:linear-gradient(90deg,var(--fuba) 20%,rgba(244,236,216,.22) 20%)"' : ''}></i>`).join('');
+}
+</script>
 </body></html>

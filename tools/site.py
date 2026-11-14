@@ -12,7 +12,7 @@ def red(src, nome, lado, q=84):
     im.save(f'{I}/{nome}', quality=q, optimize=True, progressive=True); return nome
 
 E = f'{R}/entregas'
-red(f'{E}/08-behance/shot-2-retrato.jpg', 'retrato.jpg', 1600)
+red(f'{E}/08-behance/hero-site.jpg', 'retrato.jpg', 1600)
 red(f'{E}/08-behance/shot-1-dado.jpg', 'dado.jpg', 1600)
 cart = [red(f, os.path.basename(f), 900) for f in sorted(glob.glob(f'{E}/02-cartazes/*.jpg'))]
 ig = [red(f'{E}/03-instagram/{n}.jpg', f'{n}.jpg', 720) for n in ['ig-01-chegou', 'ig-02-mosaico-feira', 'ig-03-manifesto', 'ig-04-dado', 'ig-05-quem-planta', 'ig-06-arroz-feijao', 'ig-07-mosaico-planos', 'ig-08-campo-mesa', 'ig-09-sem-letra-miuda']]

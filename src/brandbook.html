@@ -357,8 +357,8 @@
 </section>
 
 <section class="prancha pg bg-arroz papel" data-nome="bb-37" data-sec="10 · Aplicações · Instagram">
-  <div class="abs" id="insta" style="left:96px;top:120px;width:1144px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px"></div>
-  <div class="abs" style="left:1264px;top:120px;width:560px;display:grid;grid-template-columns:repeat(2,1fr);gap:16px" id="stories"></div>
+  <div class="abs" id="insta" style="left:96px;top:120px;width:668px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px"></div>
+  <div class="abs" style="left:840px;top:120px;width:984px;display:grid;grid-template-columns:repeat(2,1fr);gap:16px" id="stories"></div>
 </section>
 
 <section class="prancha pg bg-arroz papel" data-nome="bb-38" data-sec="10 · Aplicações · Embalagens">
@@ -460,7 +460,7 @@
   // cartazes
   $('#cartazes').innerHTML = ['01-manifesto', '02-dado', '03-sem-letra-miuda', '04-quem-pode', '05-arroz-feijao', '06-da-roca', '07-cartilha-f', '08-cartilha-b', '09-cartilha-r', '10-cartilha-a'].map(n => `<img src="../site/img/cartaz-${n}.jpg" style="width:100%;height:100%;object-fit:cover;display:block">`).join('');
   $('#insta').innerHTML = ['01-chegou', '02-mosaico-feira', '03-manifesto', '04-dado', '05-quem-planta', '06-arroz-feijao', '07-mosaico-planos', '08-campo-mesa', '09-sem-letra-miuda'].map(n => `<img src="../site/img/ig-${n}.jpg" style="width:100%;aspect-ratio:4/5;object-fit:cover;display:block">`).join('');
-  $('#stories').innerHTML = ['story-01-chegou', 'story-04-assine'].map(n => `<img class="som" src="../site/img/${n}.jpg" style="width:100%;aspect-ratio:9/16;object-fit:cover;display:block">`).join('');
+  $('#stories').innerHTML = ['story-01-chegou', 'story-04-assine'].map(n => n).map(n => `<img class="som" src="../site/img/${n}.jpg" style="width:100%;aspect-ratio:9/16;object-fit:cover;display:block">`).join('');
   $('#filme').innerHTML = ['01', '02', '03', '04', '05', '06', '07', '08'].map(n => `<img src="../site/img/filme-${n}.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block" onerror="this.style.background='#2A1611'">`).join('');
 })();
 </script>
