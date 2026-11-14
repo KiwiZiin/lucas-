@@ -71,14 +71,14 @@
       const graos = this.getAttribute('graos'), fundo = cor(this.getAttribute('fundo') || 'feijao'), id = 'j' + (++uid);
       let defs = '', corpo = '';
       if (unica) {
-        defs = `<clipPath id="${id}">` + d.itens.map(i => `<path transform="translate(${i.x} ${i.y})" d="${L[i.l].d}"/>`).join('') + '</clipPath>';
+        defs = `<clipPath id="${id}">` + d.itens.map(i => `<path transform="translate(${i.x} ${i.y})" clip-rule="evenodd" d="${L[i.l].d} ${L[i.l].miolo || ''}"/>`).join('') + '</clipPath>';
         corpo = `<g clip-path="url(#${id})"><rect width="${d.w}" height="${d.h}" fill="${fundo}"/>` + (fotos[0] ? cobre(fotos[0], 0, 0, d.w, d.h, num(fx, 0, .5), num(fy, 0, .5), num(zm, 0, 1)) : '') + '</g>';
       } else d.itens.forEach((i, n) => {
         const f = fotos[Math.min(n, fotos.length - 1)], w = L[i.l].w;
-        defs += `<clipPath id="${id}_${n}"><path transform="translate(${i.x} ${i.y})" d="${L[i.l].d}"/></clipPath>`;
+        defs += `<clipPath id="${id}_${n}"><path transform="translate(${i.x} ${i.y})" clip-rule="evenodd" d="${L[i.l].d} ${L[i.l].miolo || ''}"/></clipPath>`;
         corpo += `<g clip-path="url(#${id}_${n})"><rect x="${i.x}" y="${i.y}" width="${w}" height="${CAP}" fill="${fundo}"/>` + (f ? cobre(f, i.x, i.y, w, CAP, num(fx, n, .5), num(fy, n, .5), num(zm, n, 1)) : '') + '</g>';
       });
-      if (graos) corpo += d.itens.map(i => L[i.l].graos.length ? `<path transform="translate(${i.x} ${i.y})" fill="${cor(graos)}" d="${L[i.l].graos.map(([x, y]) => graoPath(x, y)).join(' ')}"/>` : '').join('');
+      // regra da marca: com fotografia dentro das letras, não há grão — as contraformas ficam abertas
       this.innerHTML = `<svg viewBox="0 0 ${d.w} ${d.h}"><defs>${defs}</defs>${corpo}</svg>`;
     }
   }
@@ -110,6 +110,19 @@
     connectedCallback() {
       const u = base + 'fotos/recortes/' + this.getAttribute('nome') + (this.hasAttribute('sem-papel') ? '' : '-papel') + '.png'; carrega(u);
       this.innerHTML = `<img src="${u}" alt="">`;
+    }
+  }
+
+  /* <fibra-pessoa nome="agro-chapeu"> — retrato recortado (fotos/pessoas), sempre apoiado na borda inferior da peça */
+  class Pessoa extends HTMLElement {
+    connectedCallback() { const u = base + 'fotos/pessoas/' + this.getAttribute('nome') + '.png'; carrega(u); this.innerHTML = `<img src="${u}" alt="">`; }
+  }
+  /* <fibra-anel cor="fuba" traco="15"> — o grão como anel de traço grosso, atrás do retrato (construção fotográfica) */
+  class Anel extends HTMLElement {
+    connectedCallback() {
+      const ang = D.grao.ang, rx = 100, ry = rx * D.grao.ry / D.grao.rx, a = ang * Math.PI / 180, sw = rx * parseFloat(this.getAttribute('traco') || 15) / 100;
+      const hw = Math.hypot(rx * Math.cos(a), ry * Math.sin(a)) + sw / 2, hh = Math.hypot(rx * Math.sin(a), ry * Math.cos(a)) + sw / 2;
+      this.innerHTML = `<svg viewBox="${-hw} ${-hh} ${2 * hw} ${2 * hh}"><path d="${graoPath(0, 0, rx, ry, ang)}" fill="${this.hasAttribute('cheio') ? cor(this.getAttribute('cor') || 'fuba') : 'none'}" stroke="${cor(this.getAttribute('cor') || 'fuba')}" stroke-width="${sw}"/></svg>`;
     }
   }
 
@@ -211,7 +224,35 @@
   customElements.define('fibra-logo', Logo); customElements.define('fibra-janela', Janela); customElements.define('fibra-grao', Grao);
   customElements.define('fibra-foto', Foto); customElements.define('fibra-recorte', Recorte); customElements.define('fibra-plaq', Plaq);
   customElements.define('fibra-carimbo', Carimbo); customElements.define('fibra-isotipo', Isotipo);
-  window.FIBRA = { dados: D, cor, graoPath, disposicao, fotoUrl, medida, bloco,
+  customElements.define('fibra-pessoa', Pessoa); customElements.define('fibra-anel', Anel);
+
+  // ── verificação: rostos livres, rostos inteiros, nada fora da peça ──
+  function qa() {
+    const RO = window.FIBRA_ROSTOS || {}, PE = window.FIBRA_PESSOAS || {}, out = [];
+    const inter = (a, b) => Math.max(0, Math.min(a.right, b.right) - Math.max(a.left, b.left)) * Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top));
+    document.querySelectorAll('.prancha').forEach(p => {
+      const nome = p.dataset.nome, P = p.getBoundingClientRect(), rostos = [];
+      p.querySelectorAll('fibra-foto').forEach(f => { const n = f.getAttribute('foto'), im = f.querySelector('image'); if (!RO[n] || !im) return;
+        const r = f.getBoundingClientRect(), vb = f.querySelector('svg').viewBox.baseVal, sx = r.width / vb.width, sy = r.height / vb.height;
+        const x = +im.getAttribute('x'), y = +im.getAttribute('y'), w = +im.getAttribute('width'), h = +im.getAttribute('height');
+        RO[n].forEach(([a, b, c, d]) => rostos.push({ el: f, foto: n, box: { left: r.left + (x + a * w) * sx, top: r.top + (y + b * h) * sy, right: r.left + (x + c * w) * sx, bottom: r.top + (y + d * h) * sy }, quadro: r })); });
+      p.querySelectorAll('fibra-pessoa').forEach(f => { const n = f.getAttribute('nome'), bb = PE[n] && PE[n].bbox; if (!RO[n] || !bb) return; const r = f.querySelector('img').getBoundingClientRect();
+        RO[n].forEach(([a, b, c, d]) => { const fx = v => (v - bb[0]) / (bb[2] - bb[0]), fy = v => (v - bb[1]) / (bb[3] - bb[1]);
+          rostos.push({ el: f, foto: n, box: { left: r.left + fx(a) * r.width, top: r.top + fy(b) * r.height, right: r.left + fx(c) * r.width, bottom: r.top + fy(d) * r.height }, quadro: P }); }); });
+      const ordem = [...p.querySelectorAll('*')];
+      rostos.forEach(ro => {
+        const A = (ro.box.right - ro.box.left) * (ro.box.bottom - ro.box.top), q = ro.quadro, vis = inter(ro.box, q) / A;
+        if (vis < .97) out.push(`${nome}: rosto cortado pela moldura em ${ro.foto} (${Math.round(vis * 100)}% visível)`);
+        const iFoto = ordem.indexOf(ro.el);
+        p.querySelectorAll('fibra-plaq, fibra-carimbo, fibra-logo, fibra-recorte, fibra-isotipo, .t-bloco, p, .cobre').forEach(e => {
+          if (e.contains(ro.el) || ro.el.contains(e) || ordem.indexOf(e) < iFoto) return;   // só o que está por cima
+          const c = inter(ro.box, e.getBoundingClientRect()) / A; if (c > .02) out.push(`${nome}: ${e.tagName.toLowerCase()}${e.className ? '.' + String(e.className).split(' ')[0] : ''} cobre ${Math.round(c * 100)}% de um rosto em ${ro.foto}`); });
+      });
+      p.querySelectorAll('.t-bloco .ln, p:not(.num), fibra-plaq, fibra-logo').forEach(e => { const r = e.getBoundingClientRect(); if (r.width && (r.left < P.left - 1 || r.right > P.right + 1 || r.bottom > P.bottom + 1 || r.top < P.top - 1)) out.push(`${nome}: ${e.tagName.toLowerCase()} sai da peça`); });
+    });
+    return out;
+  }
+  window.FIBRA = { dados: D, cor, graoPath, disposicao, fotoUrl, medida, bloco, qa,
     pronto: async () => {
       await document.fonts.ready; await Promise.all(['900 40px Gabarito', '800 40px Gabarito', '700 20px Gabarito', '600 20px Gabarito', '500 20px Gabarito', '400 20px Gabarito'].map(f => document.fonts.load(f, 'AÃÇÉ')));
       bloco(); document.querySelectorAll('fibra-foto').forEach(f => f.desenha()); grade();

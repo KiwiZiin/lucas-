@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fibra, identidade visual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* VOICE: popular, direta, orgulhosa — a página fala como a feira, sem letra miúda.
+   IDEA: um cartaz de feira que vira caderno de marca: bandas de cor chapada como papel colado, uma de cada vez.
+   PICTURE: o produtor recortado à frente do grão em anel, ocupando a primeira tela.
+   COLOUR and TYPE: fubá, couve, anil e feijão em bandas inteiras; Gabarito (Naipe Foundry, RJ) do texto ao título.
+   LAYOUT: bandas de largura total, conteúdo até 1240px, grade de 12 colunas que vira uma coluna no celular. */
+:root{color-scheme:light dark;--fuba:#FFC72C;--couve:#0B7A3B;--anil:#2152C8;--feijao:#2A1611;--arroz:#F4ECD8;--dende:#F28A1C;--urucum:#C8402A;
+  --bg:light-dark(#F4ECD8,#1a0f0b);--ink:light-dark(#2A1611,#F4ECD8);--muted:light-dark(rgba(42,22,17,.72),rgba(244,236,216,.72));--rule:light-dark(rgba(42,22,17,.16),rgba(244,236,216,.18))}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 Gabarito,'Helvetica Neue',Arial,sans-serif;overflow-x:clip;-webkit-font-smoothing:antialiased}
+img,video{display:block;max-width:100%}
+h1,h2,h3{font-weight:900;letter-spacing:-.025em;line-height:1.02;margin:0;text-wrap:balance}
+h1{font-size:clamp(40px,6.4vw,84px)}h2{font-size:clamp(32px,4.2vw,52px)}h3{font-size:22px;font-weight:800;letter-spacing:-.01em}
+p{margin:0}
+.band{padding:clamp(40px,6vw,96px) max(5vw,16px)}
+.in{max-width:1240px;margin:0 auto}
+.g{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px}
+.fuba{background:var(--fuba);color:var(--feijao)}.couve{background:var(--couve);color:var(--arroz)}.anil{background:var(--anil);color:var(--arroz)}.feijao{background:var(--feijao);color:var(--arroz)}
+.lede{font-size:clamp(18px,1.6vw,22px);line-height:1.45;max-width:62ch}
+.small{font-size:14px;color:var(--muted)}
+.logo svg{width:100%;height:auto;display:block}
+.hero .g{align-items:end}
+.hero .t{grid-column:span 6;display:flex;flex-direction:column;gap:28px;padding-bottom:8px}
+.hero .p{grid-column:span 6}
+.hero .p img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.hero .logo{width:min(440px,90%)}
+.num{font-weight:900;font-size:clamp(96px,16vw,220px);line-height:.85;letter-spacing:-.05em;color:var(--fuba)}
+.grains{display:grid;grid-template-columns:repeat(20,1fr);gap:6px 4px;margin-top:28px}
+.grains i{display:block;aspect-ratio:2.2/1;border-radius:50%;transform:rotate(-42deg) scale(.82);background:rgba(244,236,216,.22)}
+.grains i.on{background:var(--fuba)}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:40px}
+.plan{padding:28px;display:flex;flex-direction:column;gap:12px;min-height:240px}
+.plan .pr{font-weight:900;font-size:64px;letter-spacing:-.04em;line-height:1;white-space:nowrap}
+.plan .pr small{font-size:22px;font-weight:700;letter-spacing:0}
+.plan.casa{background:light-dark(#FBF8F1,#2f1b14);box-shadow:inset 0 0 0 3px var(--couve)}
+.cols2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.posters{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;margin-top:40px}
+.posters img{aspect-ratio:3/4;width:100%;object-fit:cover}
+.igrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;max-width:820px}
+.igrid img{aspect-ratio:4/5;width:100%;object-fit:cover}
+.mk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:40px}
+.mk figure{margin:0}.mk img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.mk figcaption{font-size:14px;margin-top:10px;color:var(--muted)}
+.packs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:40px;max-width:900px}
+.sw{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px;margin-top:32px}
+.sw div{height:150px;padding:14px;display:flex;flex-direction:column;justify-content:flex-end;font-size:14px;line-height:1.35}
+.sw b{font-size:20px;font-weight:900}
+.specimen{font-weight:900;font-size:clamp(56px,9vw,128px);line-height:.9;letter-spacing:-.03em}
+.ver{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;align-items:end;margin-top:40px}
+.cap{font-size:14px;margin-top:12px;color:var(--muted)}
+video{width:100%;aspect-ratio:16/9;background:#000}
+.foot{font-size:15px;line-height:1.6}
+.foot .logo{width:200px;margin-bottom:24px}
+@media(max-width:900px){.posters{grid-template-columns:repeat(3,minmax(0,1fr))}.sw{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:600px){.g{grid-template-columns:minmax(0,1fr)}.hero .t,.hero .p{grid-column:auto}.plans,.cols2,.mk,.ver{grid-template-columns:minmax(0,1fr)}
+  .posters{grid-template-columns:repeat(2,minmax(0,1fr))}.packs{grid-template-columns:repeat(3,minmax(0,1fr))}.sw{grid-template-columns:repeat(2,minmax(0,1fr))}.grains{gap:4px 2px}}
+@media(prefers-reduced-motion:no-preference){.rise{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}@keyframes rise{from{opacity:0;transform:translateY(18px)}}}
+</style></head>
+<body>
+
+<header class="band fuba hero"><div class="in g">
+  <div class="t rise">
+    <div class="logo" aria-label="Fibra">{{LOGO}}</div>
+    <h1>Comida de verdade é direito de todo mundo.</h1>
+    <p class="lede">Identidade visual da Fibra, rede de cestas de arroz, feijão, legumes e verduras compradas direto da agricultura familiar. Quem pode, assina. Quem precisa, paga menos.</p>
+    <p class="small" style="color:rgba(42,22,17,.75)">Marca fictícia, projeto autoral.</p>
+  </div>
+  <div class="p"><img src="img/retrato.jpg" alt="Produtor rural de chapéu recortado à frente do grão amarelo em anel, sobre fundo verde" fetchpriority="high"></div>
+</div></header>
+
+<section class="band feijao"><div class="in g">
+  <div style="grid-column:span 7">
+    <p class="num">24,2%</p>
+    <p class="lede" style="margin-top:24px">dos domicílios brasileiros conviveram com algum grau de insegurança alimentar em 2024, segundo o IBGE (PNAD Contínua). Num país que planta comida para o mundo, arroz e feijão ainda pesam no orçamento.</p>
+    <div class="grains" id="graos" aria-label="Gráfico: 24,2 em cada 100 lares"></div>
+    <p class="small" style="margin-top:14px;color:rgba(244,236,216,.75)">Cada grão é um lar em cada cem.</p>
+  </div>
+  <div style="grid-column:span 5;align-self:end">
+    <h2 style="color:var(--fuba)">Um em cada quatro é muito.</h2>
+    <p style="margin-top:20px;max-width:46ch">A Fibra encurta a distância entre quem planta e quem come: compra direto do produtor, monta a cesta da semana e usa a assinatura de quem pode pagar para baratear a cesta de quem precisa.</p>
+  </div>
+</div></section>
+
+<section class="band"><div class="in">
+  <h2>Três planos, uma cesta.</h2>
+  <div class="plans">
+    <div class="plan casa"><h3>Fibra em Casa</h3><p class="pr"><small>R$ </small>119</p><p>por semana. Cesta para quatro pessoas, entregue toda semana, sem taxa.</p></div>
+    <div class="plan fuba"><h3>Fibra Social</h3><p class="pr"><small>R$ </small>39</p><p>por semana. A mesma cesta, para famílias inscritas no CadÚnico.</p></div>
+    <div class="plan couve"><h3>Fibra Empresa</h3><p class="pr" style="font-size:44px">Contrato</p><p>Cesta como benefício para equipes. Cada contrato financia cestas do Fibra Social.</p></div>
+  </div>
+  <p class="small" style="margin-top:20px">A cada três cestas do Fibra em Casa, uma família do CadÚnico recebe a mesma cesta por R$ 39. Valores ilustrativos.</p>
+</div></section>
+
+<section class="band couve"><div class="in g">
+  <div style="grid-column:span 5">
+    <h2>Letra grande.</h2>
+    <p class="lede" style="margin-top:20px">Na feira, o que importa vem escrito grande: o nome, o preço, a procedência. A Fibra fala do mesmo jeito. Títulos compostos em bloco, como os cartazes de gráfica popular; plaquinha de preço com prendedor; carimbo, sacaria e lambe-lambe.</p>
+  </div>
+  <div style="grid-column:span 7" class="cols2">
+    <img src="img/cartaz-01-manifesto.jpg" alt="Cartaz amarelo com a frase Comida de verdade é direito de todo mundo em letras grandes" loading="lazy">
+    <img src="img/cartaz-03-sem-letra-miuda.jpg" alt="Cartaz com Sem letra miúda e duas plaquinhas de preço" loading="lazy">
+  </div>
+</div></section>
+
+<section class="band"><div class="in">
+  <h2>Logotipo, tipografia e cor</h2>
+  <div class="ver">
+    <div><div class="logo">{{LOGO}}</div><p class="cap">Horizontal. Letras condensadas na tradição dos tipos de madeira; o grão de feijão no lugar das contraformas.</p></div>
+    <div><div class="logo" style="max-width:180px">{{PILHA}}</div><p class="cap">Empilhada</p></div>
+    <div><div class="logo" style="max-width:220px">{{SIMBOLO}}</div><p class="cap">Símbolo BRA</p></div>
+  </div>
+  <div class="g" style="margin-top:64px;align-items:end">
+    <p class="specimen" style="grid-column:span 7">Aa Gabarito</p>
+    <p style="grid-column:span 5">Toda a tipografia usa Gabarito, da Naipe Foundry, do Rio de Janeiro: Black para blocos e títulos, Regular para o texto. Uma família só, do rótulo ao cartaz de rua.</p>
+  </div>
+  <div class="sw">
+    <div style="background:var(--couve);color:var(--arroz)"><b>Couve</b>#0B7A3B</div>
+    <div style="background:var(--fuba);color:var(--feijao)"><b>Fubá</b>#FFC72C</div>
+    <div style="background:var(--anil);color:var(--arroz)"><b>Anil</b>#2152C8</div>
+    <div style="background:var(--feijao);color:var(--arroz)"><b>Feijão</b>#2A1611</div>
+    <div style="background:var(--arroz);color:var(--feijao);box-shadow:inset 0 0 0 1px var(--rule)"><b>Arroz</b>#F4ECD8</div>
+    <div style="background:var(--dende);color:var(--feijao)"><b>Dendê</b>apoio · #F28A1C</div>
+    <div style="background:var(--urucum);color:var(--arroz)"><b>Urucum</b>apoio · #C8402A</div>
+  </div>
+</div></section>
+
+<section class="band anil"><div class="in g">
+  <div style="grid-column:span 4">
+    <h2>Construção fotográfica</h2>
+    <p style="margin-top:20px">Três jeitos de montar a foto, a partir da comunicação do Governo Federal para a agricultura familiar: o produtor recortado à frente do grão em anel; mosaicos de módulos de foto e de cor; comida dentro da forma do grão.</p>
+    <p style="margin-top:16px">Nada se sobrepõe a um rosto e nenhuma moldura corta rosto. Uma verificação automática confere isso em todas as peças.</p>
+  </div>
+  <div style="grid-column:span 8"><div class="igrid" style="max-width:none">{{IG}}</div></div>
+</div></section>
+
+<section class="band"><div class="in">
+  <h2>Cartazes lambe-lambe</h2>
+  <div class="posters">{{CARTAZES}}</div>
+</div></section>
+
+<section class="band feijao"><div class="in">
+  <h2 style="color:var(--fuba)">Filme manifesto</h2>
+  <p style="margin:16px 0 28px;max-width:62ch">45 segundos cortados nos compassos da trilha a partir de 1:56: o dado no silêncio, a resposta na primeira batida, a feira no groove, o campo dentro das letras na quebra sem grave e a assinatura no pico.</p>
+  <video src="img/filme.mp4" poster="img/filme-capa.jpg" controls playsinline preload="none"></video>
+</div></section>
+
+<section class="band"><div class="in">
+  <h2>Embalagem e rua</h2>
+  <div class="packs">{{PACOTES}}</div>
+  <p class="cap">Pacotes de 1 kg com janela em forma de grão: o produto aparece pelo próprio símbolo da marca.</p>
+  <div class="mk">{{MOCKUPS}}</div>
+</div></section>
+
+<footer class="band fuba foot"><div class="in g">
+  <div style="grid-column:span 6"><div class="logo">{{LOGO}}</div><p style="font-weight:800;font-size:22px">Comida de verdade é direito de todo mundo.</p></div>
+  <div style="grid-column:span 6">
+    <p>Marca fictícia, projeto autoral de identidade visual.</p>
+    <p>Tipografia: Gabarito, Naipe Foundry (SIL OFL). Fotografia: Adobe Stock, licença padrão. Dado: IBGE, PNAD Contínua, Segurança Alimentar 2024.</p>
+  </div>
+</div></footer>
+
+<script>
+{
+  const g = document.getElementById('graos');
+  if (g) g.innerHTML = Array.from({ length: 100 }, (_, i) => `<i class="${i < 24 ? 'on' : ''}"${i === 24 ? ' style="background:linear-gradient(90deg,var(--fuba) 20%,rgba(244,236,216,.22) 20%)"' : ''}></i>`).join('');
+}
+</script>
+</body></html>

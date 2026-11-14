@@ -105,3 +105,14 @@ Sem tremor de câmera. Movimento de recorte em passos de 12 quadros por segundo 
 - Automática: estouro de texto, elementos fora da prancha, fontes carregadas, imagens carregadas, foto repetida na mesma peça, contraste mínimo 4,5:1 em texto corrido e 3:1 em títulos, áreas seguras do Instagram.
 - Visual: provas em folha de contato, recorte de cantos a 200% nos mockups, quadro a quadro nas viradas do motion.
 - Crítica: hierarquia, proximidade, contraste, repetição e alinhamento em cada família de peça.
+
+## 7. Segunda rodada (retorno do cliente)
+
+| Pedido | Resposta |
+|---|---|
+| Com fotografia dentro do logotipo, não usar o grão | Letras-janela sem grão; as contraformas originais ficam abertas |
+| Nada cobrindo rosto; nada cortando rosto | Mapa de rostos (`src/rostos.js`) e verificação automática (`tools/qa.mjs`) em todas as peças |
+| Peças fora da grade | Cartilha alinhada à margem; posts em 6 colunas; final do filme alinhado pela esquerda |
+| Mais verde, amarelo e azul; feijão com fubá funcionou | Paleta reordenada: couve, fubá, anil e feijão na frente; dendê e urucum só no apoio |
+| Construção fotográfica inspirada no Governo Federal | A partir do manual do PAA (MDS): retrato recortado à frente do anel de grão, mosaico modular e foto dentro do grão |
+| Recorte ruim da sacola | Fundo trocado sem preencher o vão das alças |

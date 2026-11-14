@@ -1,131 +1,225 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>FIBRA — Motion</title>
-<link rel="stylesheet" href="base.css"><script src="letras.js"></script><script src="fotos.js"></script>
-<script>window.FIBRA_FOTOS_URL = '../fotos/motion/';</script><script src="fibra.js"></script>
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>FIBRA — filme manifesto</title>
+<link rel="stylesheet" href="base.css">
 <style>
-html, body { margin: 0; padding: 0; background: #000; display: block; }
-#palco { position: relative; overflow: hidden; }
-.cena { position: absolute; inset: 0; overflow: hidden; display: none; }
-.cena > * { position: absolute; }
-.l { display: block; overflow: hidden; height: 1.34em; line-height: 1.34em; margin-bottom: -.3em; white-space: nowrap; }
-.l > span { display: block; will-change: transform; }
-.manchete { font-size: 100px; }
-.faixa { left: 0; width: 100%; }
-</style></head><body><div id="palco"></div>
+  /* Filme manifesto: 27 compassos da trilha a partir de 1:56,255 (141,95 BPM; 1 compasso = 1,6907 s). Roteiro em docs/ROTEIRO.md. */
+  html, body { margin: 0; padding: 0; background: #000; overflow: hidden; display: block; }
+  #palco { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: var(--arroz); }
+  .v #palco { width: 1080px; height: 1920px; }
+  .cena { position: absolute; inset: 0; display: none; overflow: hidden; }
+  .papel::after { opacity: .5; }
+  .mk { overflow: hidden; display: block; }               /* máscara de revelação de linha */
+  .mk > * { display: block; will-change: transform; }
+  .pal { display: inline-block; will-change: transform, opacity; }
+  img.rec { position: absolute; display: block; filter: drop-shadow(0 18px 22px rgba(42,22,17,.32)) drop-shadow(0 2px 3px rgba(42,22,17,.25)); will-change: transform; }
+  .leg { position: absolute; font-weight: 800; letter-spacing: -0.015em; line-height: 1; }
+  #janela { position: absolute; }
+  #janela svg { display: block; width: 100%; height: auto; overflow: visible; }
+</style></head>
+<body>
+<div id="palco">
+
+  <!-- ATO 1 · O dado (compassos 0–4) -->
+  <section class="cena bg-feijao" id="c1">
+    <div class="abs t-chamada" id="c1-em" style="font-size:var(--f-em)"><span class="pal">Em</span> <span class="pal">2024,</span> <span class="pal">no</span> <span class="pal">Brasil,</span></div>
+    <div class="abs t-bloco c-fuba" id="c1-num" data-bloco><span class="ln">24,2%</span></div>
+    <div class="abs t-titulo" id="c1-frase"></div>
+    <fibra-isotipo class="abs" id="c1-iso" valor="24.2" total="100" cols="20" cor="fuba" base="arroz" opac=".22"></fibra-isotipo>
+    <div class="abs t-rotulo" id="c1-fonte">IBGE · PNAD Contínua · Segurança Alimentar 2024</div>
+  </section>
+
+  <!-- ATO 2 · A resposta (4–6) -->
+  <section class="cena bg-fuba papel" id="c2">
+    <div class="abs t-bloco" id="c2-bloco" data-bloco>
+
+    </div>
+  </section>
+
+  <!-- ATO 3 · A feira (6–8) -->
+  <section class="cena bg-couve papel" id="c3" style="--fibra-papel:.4"></section>
+
+  <!-- ATO 4 · Como funciona (8–13) -->
+  <section class="cena bg-arroz papel" id="c4">
+    <fibra-foto class="abs" id="c4-f1" foto="mesa-jovem" fy=".3"></fibra-foto>
+    <fibra-foto class="abs" id="c4-f3" foto="mesa-familia" fy=".35"></fibra-foto>
+    <div class="abs" id="c4-obj"></div>
+    <div class="abs t-display" id="c4-t1"><span class="mk"><span>Quem pode,</span></span><span class="mk"><span>assina.</span></span></div>
+    <div class="abs t-display" id="c4-t2"><span class="mk"><span>Quem precisa,</span></span><span class="mk"><span>paga menos.</span></span></div>
+    <div class="abs t-display" id="c4-t3"><span class="mk"><span>Todo mundo</span></span><span class="mk"><span>come bem.</span></span></div>
+    <fibra-plaq class="abs" id="c4-p1" prendedor rotulo="Fibra em Casa" preco="119" unid="por semana"></fibra-plaq>
+    <fibra-plaq class="abs" id="c4-p2" cor="fuba" prendedor rotulo="Fibra Social · CadÚnico" preco="39" unid="por semana" style="--plaq-fio:var(--feijao)"></fibra-plaq>
+    <fibra-plaq class="abs" id="c4-p3" cor="couve" prendedor rotulo="Fibra Empresa" nome="Cesta como benefício"></fibra-plaq>
+    <p class="abs t-chamada" id="c4-nota">A diferença é paga pelas assinaturas e pelos contratos com empresas.</p>
+  </section>
+
+  <!-- virada · carimbo (13–14) -->
+  <section class="cena bg-arroz papel" id="c5">
+    <fibra-carimbo class="abs" id="c5-car" cor="couve" texto="Direto de quem planta • Preço justo • " centro="grao" semente="11"></fibra-carimbo>
+  </section>
+
+  <!-- ATO 5 · Do campo à mesa (14–24) -->
+  <section class="cena bg-feijao" id="c6">
+    <div id="janela"></div>
+    <div class="leg c-fuba" id="c6-leg"></div>
+  </section>
+
+  <!-- ATO 6 · Assinatura (24–27) -->
+  <section class="cena bg-fuba papel" id="c7">
+    <div class="abs" id="c7-logo"></div>
+    <p class="abs t-titulo" id="c7-tag">Comida de verdade é direito de todo mundo.</p>
+    <p class="abs t-rotulo" id="c7-url">fibra.com.br</p>
+    <p class="abs t-texto" id="c7-mec">Quem pode, assina. Quem precisa, paga menos.</p>
+  </section>
+</div>
+
+<script src="letras.js"></script><script src="fotos.js"></script><script src="fibra.js"></script>
 <script>
-/* Motion da FIBRA — linha do tempo determinística: window.quadro(f) desenha o quadro f (30 qps).
-   ?v na URL gera o formato vertical (1080 × 1920); sem parâmetro, 1920 × 1080. */
-const V = /[?&]v\b/.test(location.search), W = V ? 1080 : 1920, H = V ? 1920 : 1080, FPS = 30, TOTAL = 600;
-const D = FIBRA.dados, C = D.cores, FOT = window.FIBRA_FOTOS, palco = document.getElementById('palco');
-palco.style.width = W + 'px'; palco.style.height = H + 'px';
-const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x)), p = (f, a, b) => clamp((f - a) / (b - a));
-const eo = t => 1 - Math.pow(1 - t, 4), eio = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2, ei = t => t * t * t;
-const M = 96, MV = 72, m = V ? MV : M;
+(() => {
+  const V = /[?&]v/.test(location.search); if (V) document.documentElement.classList.add('v');
+  const W = V ? 1080 : 1920, H = V ? 1920 : 1080, L = (h, v) => V ? v : h, $ = s => document.querySelector(s);
+  const BPM = 141.95, COMP = 240 / BPM, BAT = .25, COL = .125;
+  const cl = x => Math.max(0, Math.min(1, x)), p = (b, a, z) => cl((b - a) / (z - a));
+  const eo = x => 1 - Math.pow(1 - x, 3), eio = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+  const back = x => { const c = 1.55; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+  const passo = (b, fps = 12) => Math.floor(b * COMP * fps) / (COMP * fps);   // tempo em passos de 12 q/s (papel)
+  const D = window.FIBRA_DADOS, G = D.letras, gp = window.FIBRA.graoPath, url = window.FIBRA.fotoUrl;
+  const M = L(120, 84);   // margem
 
-// imagem que cobre a caixa
-function cobre(n, bx, by, bw, bh, fx = .5, fy = .5, z = 1, cls = '') {
-  const [iw, ih] = FOT[n], a = iw / ih, h = Math.max(bh, bw / a) * z, w = h * a;
-  return `<image class="${cls}" href="${FIBRA.fotoUrl(n)}" x="${(bx + (bw - w) * fx).toFixed(1)}" y="${(by + (bh - h) * fy).toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" preserveAspectRatio="none"/>`;
-}
-const disp = V ? FIBRA.disposicao('empilhado') : FIBRA.disposicao('horizontal');
-const LH = V ? 1040 : 560, LW = LH * disp.w / disp.h, LX = (W - LW) / 2, LY = (H - LH) / 2 - (V ? 40 : 0);
-const letraPath = (l, graos) => FIBRA.letraD(l, graos);
+  // ── ATO 1 ──
+  const frase = 'dos lares brasileiros conviveram com algum grau de insegurança alimentar.'.split(' ');
+  $('#c1-frase').innerHTML = frase.map(w => `<span class="pal">${w}</span>`).join(' ');
+  Object.assign($('#c1-em').style, { left: M + 'px', top: L(150, 300) + 'px', '--f-em': L(54, 56) + 'px', fontSize: L(54, 56) + 'px' });
+  Object.assign($('#c1-num').style, { left: M + 'px', width: L(1150, 912) + 'px', top: L(250, 420) + 'px' });
+  Object.assign($('#c1-frase').style, { left: M + 'px', top: L(640, 840) + 'px', width: L(1300, 912) + 'px', fontSize: L(64, 64) + 'px' });
+  Object.assign($('#c1-iso').style, { left: M + 'px', top: L(860, 1240) + 'px', width: L(1680, 912) + 'px' });
+  Object.assign($('#c1-fonte').style, { left: M + 'px', bottom: L(70, 180) + 'px', fontSize: '18px' });
 
-// ciclos de fotos por letra (cotidiano brasileiro): [foto, fx, fy, zoom]
-const CICLO = {
-  F: [['tex-feijao-preto'], ['tex-feijao-carioca'], ['comida-tropeiro'], ['tex-arroz'], ['feira-banana'], ['comida-feijoada']],
-  I: [['feira-couve', .42], ['tex-couve'], ['feira-vagem'], ['feira-pupunha'], ['agro-estrada'], ['lugar-obrigado']],
-  B: [['cozinha-sorriso', .2, .38, 1.05], ['cozinha-fogao', .3, .4], ['cozinha-vovo', .6, .4, 1.1], ['mesa-geracoes', .3, .4], ['cozinha-avental', .55, .3], ['mesa-casal', .3, .35]],
-  R: [['agro-lavoura', .72, .2, 1.1], ['agro-enxada', .55, .3], ['agro-senhora', .45, .4], ['agro-cafe', .3, .3], ['agro-chapeu', .5, .32, 1.25], ['agro-bone', .7, .3]],
-  A: [['mesa-jovem', .1, .45, 1.12], ['comida-pf', .2, .5], ['mesa-menina', .3, .45, 1.1], ['comida-prato', .3, .5], ['mesa-maos', .5, .5], ['comida-panelas', .5, .5]],
-};
-const FUNDOS = ['fuba', 'dende', 'anil', 'urucum', 'couve'];
+  // ── ATO 2 ── (16:9 em três linhas; 9:16 em cinco)
+  $('#c2-bloco').innerHTML = (V ? ['Comida', 'de verdade', 'é direito', 'de todo', 'mundo.'] : ['Comida de verdade', 'é direito de', 'todo mundo.']).map(t => `<span class="mk"><span class="ln">${t}</span></span>`).join('');
+  Object.assign($('#c2-bloco').style, { left: M + 'px', right: M + 'px', top: L(150, 560) + 'px', gap: L(18, 20) + 'px' });
+  if (!V) $('#c2-bloco').style.width = (1920 - 2 * M) + 'px';
 
-const el = (h) => { const d = document.createElement('div'); d.innerHTML = h; return d.firstElementChild; };
-const logoSVG = (cor, id) => `<svg id="${id}" viewBox="0 0 ${disp.w} ${disp.h}" style="left:${LX}px;top:${LY}px;width:${LW}px;height:${LH}px;overflow:visible">` +
-  disp.itens.map((i, n) => `<g class="lt" data-n="${n}" data-y="${i.y}"><path transform="translate(${i.x} ${i.y})" fill="${C[cor]}" fill-rule="evenodd" d="${letraPath(i.l, true)}"/></g>`).join('') + '</svg>';
-const linhas = t => t.map(x => `<span class="l"><span>${x}</span></span>`).join('');
+  // ── ATO 3: recortes em colagem + plaquinhas ──
+  const rec = V
+    ? [['mandioca-folha', 60, 300, 520, -10], ['milho', 560, 260, 440, 14], ['banana', 90, 820, 520, -6], ['abobora', 610, 780, 400, 8], ['chapeu', 330, 1200, 460, -4], ['saco-feijao-preto', 80, 1380, 380, 6], ['peneira', 660, 1250, 340, 0], ['saco-arroz', 610, 1460, 380, -5]]
+    : [['mandioca-folha', 90, 120, 560, -10], ['milho', 640, 90, 420, 14], ['banana', 1150, 80, 520, -6], ['abobora', 1500, 420, 360, 8], ['chapeu', 300, 560, 480, -4], ['saco-feijao-preto', 800, 520, 380, 6], ['peneira', 1180, 590, 330, 0], ['saco-arroz', 60, 560, 300, -5]];
+  const etq = V ? [['Mandioca', 330, 560], ['Milho', 700, 600], ['Feijão', 150, 1720], ['Arroz', 690, 1790]] : [['Mandioca', 420, 470], ['Milho', 830, 410], ['Feijão', 980, 880], ['Arroz', 150, 900]];
+  $('#c3').innerHTML = rec.map(([n, x, y, w, r], i) => `<img class="rec" data-i="${i}" data-r="${r}" src="${new URL('../fotos/recortes/' + n + '-papel.png', location.href).href}" style="left:${x}px;top:${y}px;width:${w}px">`).join('') +
+    etq.map(([n, x, y], i) => `<fibra-plaq class="abs c3-plaq" data-i="${i}" prendedor nome="${n}" style="font-size:${L(54, 56)}px;width:${L(300, 320)}px;left:${x}px;top:${y}px"></fibra-plaq>`).join('');
 
-// ── cena 1: logotipo sobe letra a letra ──
-const c1 = el(`<div class="cena bg-couve" id="c1">${logoSVG('fuba', 'logo1')}</div>`);
-// ── cena 2: letras viram janelas; fotos passam em ritmo rápido ──
-let j = `<svg viewBox="0 0 ${disp.w} ${disp.h}" id="jan" style="left:${LX}px;top:${LY}px;width:${LW}px;height:${LH}px;overflow:visible"><defs>`;
-disp.itens.forEach((i, n) => j += `<clipPath id="cj${n}"><path transform="translate(${i.x} ${i.y})" d="${D.letras[i.l].d}"/></clipPath>`); j += '</defs>';
-disp.itens.forEach((i, n) => { j += `<g clip-path="url(#cj${n})"><rect x="${i.x}" y="${i.y}" width="${D.letras[i.l].w}" height="1000" fill="${C.mata}"/>` + CICLO[i.l].map((q, k) => cobre(q[0], i.x, i.y, D.letras[i.l].w, 1000, q[1], q[2], q[3], `fj fj${n} k${k}`)).join('') + '</g>'; });
-const c2 = el(`<div class="cena" id="c2">${j}</svg><div class="t-rotulo" id="c2r" style="left:${m}px;top:${V ? 250 : m}px;font-size:${V ? 18 : 20}px">Cestas de comida de verdade</div><div class="t-rotulo" id="c2d" style="right:${m}px;top:${V ? 250 : m}px;font-size:${V ? 18 : 20}px">Brasil</div></div>`);
-// ── cenas 3a–c: uma letra inteira, uma história ──
-const HEROI = [
-  { l: 'B', bg: 'anil', logo: 'fuba', foto: ['cozinha-sorriso', .2, .4, 1.06], t: ['Quem cozinha', 'sabe o valor', 'do básico.'] },
-  { l: 'R', bg: 'dende', logo: 'feijao', foto: ['agro-lavoura', .71, .3, 1.06], t: ['Da roça', 'pra panela, sem', 'atravessador.'] },
-  { l: 'A', bg: 'couve', logo: 'fuba', foto: ['comida-pf', .36, .5, 1.06], t: ['Mesa cheia', 'é direito,', 'não é sorte.'] },
-];
-const c3 = HEROI.map((h, n) => {
-  const L = D.letras[h.l], hh = V ? 740 : 888, ww = hh * L.w / 1000, lx = V ? (W - ww) / 2 : M, ly = V ? 840 : M;
-  const tx = V ? m : M + 640, tw = V ? W - 2 * m : W - tx - M;
-  return el(`<div class="cena bg-${h.bg}" id="c3${n}">
-    <svg class="letra" viewBox="0 0 ${L.w} 1000" style="left:${lx}px;top:${ly}px;width:${ww}px;height:${hh}px;overflow:visible"><defs><clipPath id="ch${n}"><path d="${L.d}"/></clipPath></defs><g clip-path="url(#ch${n})"><g class="pan">${cobre(h.foto[0], -40, 0, L.w + 80, 1000, h.foto[1], h.foto[2], h.foto[3])}</g></g></svg>
-    <fibra-logo cor="${h.logo}" style="${V ? `left:${m}px` : `right:${M}px`};top:${V ? 250 : M}px;width:${V ? 196 : 224}px"></fibra-logo>
-    <div class="manchete t-titulo" data-w="${V ? 640 : 960}" style="left:${tx}px;top:${V ? 400 : 330}px">${linhas(h.t)}</div></div>`);
-});
-// ── cena 4: as cinco padronagens atravessam a tela ──
-const PADS = [['sarja', 'feijao,fuba,dende'], ['zigue', 'arroz,urucum,feijao'], ['olho', 'mata,fuba,arroz'], ['escama', 'anil,arroz,fuba'], ['espinha', 'mata,couve,fuba']];
-const bh = H / 5;
-const c4 = el(`<div class="cena" id="c4" style="display:none;z-index:9;background:transparent">` + PADS.map((q, n) => `<fibra-trama class="faixa bd" tipo="${q[0]}" cores="${q[1]}" cols="${(W / (bh / 2)).toFixed(3)}" rows="2" style="top:${n * bh}px;height:${bh + 1}px"></fibra-trama>`).join('') + '</div>');
-// ── cena 5: assinatura ──
-const T5 = V ? 234 : 216, N5 = V ? 4 : 8;
-const RET = [`<fibra-trama tipo="tela" cores="fuba,dende" cols="1" rows="1"></fibra-trama>`, `<fibra-prato foto="tex-feijao-preto"></fibra-prato>`, `<fibra-foto foto="agro-senhora" w="100" h="100" fx=".42" fy=".35" duo="anil,fuba"></fibra-foto>`, `<fibra-trama tipo="zigue" cores="urucum" cols="1" rows="1"></fibra-trama>`,
-  `<fibra-trama tipo="escama" cores="couve" cols="1" rows="1"></fibra-trama>`, `<fibra-trama tipo="olho" cores="fuba" cols="1" rows="1"></fibra-trama>`, `<fibra-foto foto="cozinha-vovo" w="100" h="100" fx=".55" fy=".35" zoom="1.1" duo="anil,fuba"></fibra-foto>`, `<fibra-trama tipo="espinha" cores="dende" cols="1" rows="1"></fibra-trama>`];
-const c5 = el(`<div class="cena bg-couve" id="c5">
-  <div class="manchete t-titulo" data-w="${V ? W - 2 * m : 1180}" style="left:${m}px;top:${V ? 400 : M}px">${linhas(['Comida de verdade', 'é direito de', '<i class="c-fuba" style="font-style:normal">todo mundo.</i>'])}</div>
-  <fibra-logo id="lf" cor="fuba" style="${V ? `left:${m}px;top:1010px` : `right:${M}px;top:${M}px`};width:${V ? 380 : 420}px"></fibra-logo>
-  <div class="t-rotulo" id="url" style="${V ? `left:${m}px;top:1220px` : `right:${M}px;top:${M + 210}px;text-align:right`};font-size:${V ? 20 : 22}px;line-height:1.5">Cestas de comida de verdade<br>fibra.com.br</div>
-  <div id="f5" style="left:${V ? m : M}px;bottom:${V ? 340 : M}px;width:${T5 * N5}px;height:${T5}px;display:grid;grid-template-columns:repeat(${N5},${T5}px)">${RET.slice(0, N5).map(x => `<div class="ret" style="overflow:hidden;position:relative">${x.replace('>', ' style="width:100%;height:100%">')}</div>`).join('')}</div></div>`);
-[c1, c2, ...c3, c5, c4].forEach(c => palco.appendChild(c));
+  // ── ATO 4 ──
+  const fw = L(860, 1080), fh = L(1080, 900);
+  $('#c4-f1').setAttribute('fx', L(.43, .5)); $('#c4-f3').setAttribute('fx', L(.316, 0));
+  ['#c4-f1', '#c4-f3'].forEach(s => Object.assign($(s).style, { left: L(1060, 0) + 'px', top: '0px', width: fw + 'px', height: fh + 'px' }));
+  ['#c4-t1', '#c4-t2', '#c4-t3'].forEach(s => Object.assign($(s).style, { left: M + 'px', top: L(150, 980) + 'px', width: L(880, 912) + 'px', fontSize: L(124, 120) + 'px' }));
+  Object.assign($('#c4-p1').style, { left: M + 'px', top: L(640, 1430) + 'px', width: L(420, 440) + 'px', fontSize: L(78, 80) + 'px', '--rot': '-2deg' });
+  Object.assign($('#c4-p2').style, { left: M + 'px', top: L(640, 1430) + 'px', width: L(460, 470) + 'px', fontSize: L(78, 80) + 'px', '--rot': '1.6deg' });
+  Object.assign($('#c4-p3').style, { left: M + 'px', top: L(640, 1430) + 'px', width: L(480, 500) + 'px', fontSize: L(66, 66) + 'px', '--rot': '-1deg' });
+  Object.assign($('#c4-nota').style, { left: M + 'px', top: L(900, 1700) + 'px', width: L(1300, 900) + 'px', fontSize: L(38, 36) + 'px' });
+  $('#c4-obj').innerHTML = `<img class="rec" src="${new URL('../fotos/recortes/saco-feijao-preto-papel.png', location.href).href}" style="left:${L(1180, 120)}px;top:${L(200, 120)}px;width:${L(560, 520)}px">` +
+    `<img class="rec" src="${new URL('../fotos/recortes/saco-arroz-papel.png', location.href).href}" style="left:${L(1420, 520)}px;top:${L(420, 260)}px;width:${L(440, 460)}px">`;
 
-window.prepara = async () => {
-  await FIBRA.pronto();
-  document.querySelectorAll('.manchete').forEach(mm => {   // ajusta o corpo para a linha mais larga ocupar data-w; alinhamento óptico à esquerda
-    const sp = [...mm.querySelectorAll('.l > span')]; const pai = mm.closest('.cena'), era = pai.style.display; pai.style.display = 'block';
-    for (let k = 0; k < 3; k++) { const larg = Math.max(...sp.map(s => { const t = FIBRA.tinta(s); return t.dir - t.esq; })); mm.style.fontSize = (parseFloat(getComputedStyle(mm).fontSize) * parseFloat(mm.dataset.w) / larg) + 'px'; }
-    sp.forEach(s => { s.dataset.ox = (-FIBRA.tinta(s).esq).toFixed(2); }); pai.style.display = era;
-  });
-  await Promise.all([...document.querySelectorAll('image')].map(i => { const im = new Image(); im.src = i.getAttribute('href'); return im.decode().catch(() => 0); }));
-  return TOTAL;
-};
-const mostra = (c, on) => { c.style.display = on ? 'block' : 'none'; };
-const sobe = (mm, f, f0, passo = 5, dur = 18) => mm.querySelectorAll('.l > span').forEach((s, n) => { const t = eo(p(f, f0 + n * passo, f0 + n * passo + dur)); s.style.transform = `translate(${s.dataset.ox || 0}px, ${(1 - t) * 105}%)`; });
+  // ── virada ──
+  Object.assign($('#c5-car').style, { left: (W - L(720, 760)) / 2 + 'px', top: (H - L(720, 760)) / 2 + 'px', width: L(720, 760) + 'px', mixBlendMode: 'multiply' });
 
-window.quadro = f => {
-  // cena 1 · 0–60
-  mostra(c1, f < 60);
-  if (f < 60) c1.querySelectorAll('.lt').forEach(g => { const n = +g.dataset.n, t = eo(p(f, n * 7.5, n * 7.5 + 7)); g.style.transform = `translateY(${(1 - t) * 1250}px)`; g.style.opacity = t > 0 ? 1 : 0; });
-  // cena 2 · 60–210
-  mostra(c2, f >= 60 && f < 210);
-  if (f >= 60 && f < 210) {
-    const g = f - 60, bg = FUNDOS[Math.floor(g / 37.5) % FUNDOS.length]; c2.style.background = C[bg]; const claro = ['fuba', 'dende'].includes(bg);
-    c2.querySelector('#c2r').style.color = c2.querySelector('#c2d').style.color = claro ? C.feijao : C.arroz;
-    disp.itens.forEach((i, n) => { const k = (Math.floor(g / 9.375) + n) % CICLO[i.l].length; c2.querySelectorAll('.fj' + n).forEach((im, q) => im.style.display = q === k ? 'block' : 'none'); });
-    const z = 1 + .05 * (g / 150); c2.querySelector('#jan').style.transform = `scale(${z})`;
-  }
-  // cenas 3 · 210–390 (60 quadros cada)
-  c3.forEach((c, n) => {
-    const a = 210 + n * 60, on = f >= a && f < a + (n === 2 ? 210 : 60) && f < 420; mostra(c, on); if (!on) return; const g = f - a, t = eo(p(g, 0, 22));   // a última cena fica por baixo das faixas
-    c.querySelector('.letra').style.transform = `translateY(${(1 - t) * 70}px) scale(${1.04 - .04 * t})`; c.querySelector('.letra').style.transformOrigin = '50% 60%';
-    c.querySelector('.pan').style.transform = `translateX(${-g * .55}px)`;
-    sobe(c.querySelector('.manchete'), g, 3, 7.5, 7);
-    c.querySelector('fibra-logo').style.opacity = p(g, 4, 12);
-  });
-  // cena 5 · 420–600 (por baixo da cena 4)
-  const on5 = f >= 420; mostra(c5, on5);
-  if (on5) { const g = f - 438; sobe(c5.querySelector('.manchete'), g + 12, 0, 12.5, 11); const t = eo(p(g, 26, 46));
-    c5.querySelector('#lf').style.opacity = c5.querySelector('#url').style.opacity = t; c5.querySelector('#lf').style.transform = c5.querySelector('#url').style.transform = `translateY(${(1 - t) * 30}px)`;
-    c5.querySelectorAll('.ret').forEach((r, q) => { const u = eo(p(g, 40 + q * 6.25, 46 + q * 6.25)); r.firstElementChild.style.transform = `translateY(${(1 - u) * 101}%)`; }); }
-  // cena 4 · 390–450: faixas de padronagem entram e saem em sentidos alternados
-  const on4 = f >= 390 && f < 452; mostra(c4, on4);
-  if (on4) c4.querySelectorAll('.bd').forEach((b, n) => { const g = f - 390, s = n % 2 ? 1 : -1, ent = eo(p(g, n * 3, 18 + n * 3)), sai = ei(p(g, 36 + n * 3, 56 + n * 3)); b.style.transform = `translateX(${s * (1 - ent) * 100 + (-s) * sai * 100}%)`; });
-};
+  // ── ATO 5: letras-janela (uma foto atravessa a palavra inteira) ──
+  const lw = L(1500, 960), lay = window.FIBRA.disposicao(V ? 'empilhado' : 'horizontal'), esc = lw / lay.w;
+  const jan = $('#janela'); Object.assign(jan.style, { width: lw + 'px', left: (W - lw) / 2 + 'px', top: L(170, 300) + 'px' });
+  // dentro das letras só entram comida, mãos e paisagem: rosto nunca fica recortado pela letra
+  const FOTOS = ['tex-couve', 'agro-maos', 'feira-banana', 'feira-pupunha', 'comida-panelas', 'fogao-taipa', 'comida-prato', 'comida-pf2',
+    'tex-feijao-carioca', 'feira-couve', 'comida-feijoada', 'tex-arroz', 'feira-vagem', 'comida-tropeiro', 'feira-maos', 'comida-barro', 'tex-feijao-preto', 'comida-pf'];
+  const [ww, hh] = [lay.w, lay.h];
+  const cobre = n => { const [iw, ih] = (window.FIBRA_FOTOS[n] || [3, 2]); const a = iw / ih; let h2 = Math.max(hh, ww / a) * 1.18, w2 = h2 * a; return { w: w2, h: h2 }; };
+  const clip = lay.itens.map(i => `<path transform="translate(${i.x} ${i.y})" clip-rule="evenodd" d="${G[i.l].d} ${G[i.l].miolo || ''}"/>`).join('');
+  const letraClip = lay.itens.map((i, k) => `<clipPath id="l${k}"><path transform="translate(${i.x} ${i.y})" clip-rule="evenodd" d="${G[i.l].d} ${G[i.l].miolo || ''}"/></clipPath>`).join('');
+  jan.innerHTML = `<svg viewBox="0 0 ${ww} ${hh}"><defs><clipPath id="todas">${clip}</clipPath>${letraClip}</defs>` +
+    lay.itens.map((i, k) => `<g class="let" data-k="${k}" clip-path="url(#l${k})"><rect x="${i.x}" y="${i.y}" width="${G[i.l].w}" height="${D.cap}" fill="#F4ECD8"/></g>`).join('') +
+    `<g id="fotos" clip-path="url(#todas)">` + FOTOS.map((n, k) => { const c = cobre(n); return `<image data-n="${k}" href="${url(n)}" x="0" y="0" width="${c.w.toFixed(1)}" height="${c.h.toFixed(1)}" preserveAspectRatio="none" style="display:none"/>`; }).join('') + `</g>` +
+    `<g id="graos"></g></svg>`;   // com fotografia, as letras ficam sem grão (contraformas abertas)
+  Object.assign($('#c6-leg').style, { left: (W - lw) / 2 + 'px', top: (parseFloat(jan.style.top) + hh * esc + L(56, 64)) + 'px', fontSize: L(76, 84) + 'px' });
 
-{ const q0 = window.quadro;
-  window.quadro = (f, r) => { q0(f); const k = (window.PULSO || [])[r | 0] || 0;
-    document.querySelectorAll('.cena').forEach(c => { if (c.id !== 'c4') c.style.transform = c.style.display === 'block' ? `scale(${(1 + .018 * k).toFixed(4)})` : ''; });
-  }; }
-</script></body></html>
+  // ── ATO 6 ──
+  const logoW = L(1180, 700), X7 = L((1920 - 1180) / 2, 84), lay2 = window.FIBRA.disposicao(V ? 'empilhado' : 'horizontal');
+  $('#c7-logo').innerHTML = `<svg viewBox="0 0 ${lay2.w} ${lay2.h}" style="display:block;width:100%;height:auto;overflow:visible" fill="#2A1611">` +
+    lay2.itens.map(i => `<path transform="translate(${i.x} ${i.y})" d="${G[i.l].d}"/>`).join('') +
+    lay2.itens.map((i, k) => G[i.l].graos.map(([x, y], j) => `<g transform="translate(${i.x} ${i.y})"><path class="g7" d="${gp(x, y)}" fill="#FFC72C" style="transform-box:fill-box;transform-origin:center"/></g>`).join('')).join('') + '</svg>';
+  Object.assign($('#c7-logo').style, { left: X7 + 'px', top: L(170, 300) + 'px', width: logoW + 'px' });
+  const logoH = logoW * lay2.h / lay2.w;
+  Object.assign($('#c7-tag').style, { left: (W - logoW) / 2 + 'px', top: (L(170, 300) + logoH + L(70, 80)) + 'px', width: L(logoW, 912) + 'px', fontSize: L(64, 66) + 'px', ...(V ? { left: '84px' } : {}) });
+  Object.assign($('#c7-url').style, { left: L((W - logoW) / 2, 84) + 'px', bottom: L(96, 220) + 'px', fontSize: '24px' });
+  Object.assign($('#c7-mec').style, { right: (W - logoW) / 2 + 'px', bottom: L(92, 160) + 'px', fontSize: '26px', textAlign: 'right', ...(V ? { left: '84px', right: 'auto', textAlign: 'left', bottom: 'auto', top: '1500px', width: '900px' } : {}) });
+
+  // ═══ linha do tempo: quadro(t) com t em segundos desde 1:56,255 ═══
+  const mostra = id => document.querySelectorAll('.cena').forEach(c => c.style.display = c.id === id ? 'block' : 'none');
+  const sobe = (el, k, d = 1) => { el.style.transform = `translateY(${((1 - eo(k)) * 105 * d).toFixed(2)}%)`; };
+  const pals = sel => [...document.querySelectorAll(sel + ' .pal')];
+
+  window.quadro = t => {
+    const b = t / COMP;
+    if (b < 4) {                                                     // ATO 1
+      mostra('c1');
+      pals('#c1-em').forEach((w, i) => { const k = eo(p(b, .08 + i * .2, .2 + i * .2)); w.style.opacity = k; w.style.transform = `translateY(${(1 - k) * 18}px)`; });
+      const n = $('#c1-num'), kn = p(b, 1, 1 + BAT * .5); n.style.opacity = kn > 0 ? 1 : 0; n.style.transform = `scale(${(1.045 - .045 * eo(kn)).toFixed(4)})`; n.style.transformOrigin = 'left top';
+      n.style.filter = `blur(${((1 - eo(kn)) * 6).toFixed(2)}px)`;
+      pals('#c1-frase').forEach((w, i) => { const t0 = 2 + i * .17, k = eo(p(b, t0, t0 + .14)); w.style.opacity = k; w.style.transform = `translateY(${(1 - k) * 22}px)`; });
+      const ki = eio(p(b, 3.25, 3.85)); $('#c1-iso').style.clipPath = `inset(0 ${(100 - ki * 100).toFixed(2)}% 0 0)`;
+      $('#c1-fonte').style.opacity = eo(p(b, 2, 2.4));
+    } else if (b < 6) {                                              // ATO 2
+      mostra('c2'); const c = $('#c2'); c.style.clipPath = `inset(${((1 - eo(p(b, 4, 4 + BAT * .9))) * 100).toFixed(2)}% 0 0 0)`;
+      document.querySelectorAll('#c2-bloco .mk > .ln').forEach((l, i) => { const t0 = 4 + i * BAT; const k = p(b, t0, t0 + BAT * .45); l.style.transform = `translateY(${((1 - eo(k)) * 110).toFixed(2)}%) translateX(${l.dataset.x || 0}px)`; });
+    } else if (b < 8) {                                              // ATO 3
+      mostra('c3'); const bs = passo(b);
+      document.querySelectorAll('#c3 img.rec').forEach(im => { const i = +im.dataset.i, t0 = 6 + i * COL, k = p(bs, t0, t0 + COL * 1.2), r = +im.dataset.r;
+        const s = k <= 0 ? 0 : back(k); im.style.opacity = k > 0 ? 1 : 0; im.style.transform = `scale(${s.toFixed(3)}) rotate(${(r + (1 - k) * 18).toFixed(2)}deg)`; });
+      document.querySelectorAll('#c3 .c3-plaq').forEach(pq => { const i = +pq.dataset.i, t0 = 7 + i * BAT, k = p(b, t0, t0 + BAT * 2.2);
+        const ang = k <= 0 ? 0 : 7 * Math.exp(-5 * k) * Math.cos(k * 11) ; pq.style.opacity = k > 0 ? 1 : 0;
+        pq.style.transform = `translateY(${((1 - eo(p(b, t0, t0 + BAT * .4))) * -60).toFixed(1)}px) rotate(${(ang + (i % 2 ? 2 : -2)).toFixed(2)}deg)`; pq.style.transformOrigin = '50% -20%'; });
+    } else if (b < 13) {                                             // ATO 4
+      mostra('c4');
+      const seg = b < 9.5 ? 0 : b < 11 ? 1 : b < 12 ? 2 : 3, ini = [8, 9.5, 11, 12][seg];
+      ['#c4-t1', '#c4-t2', '#c4-t3'].forEach((s, i) => { const el = $(s); el.style.display = (seg === i) ? 'block' : 'none'; if (seg === i) el.querySelectorAll('.mk > span').forEach((sp, j) => sobe(sp, p(b, ini + j * BAT * .5, ini + j * BAT * .5 + BAT * .5))); });
+      $('#c4-f1').style.display = seg === 0 ? 'block' : 'none'; $('#c4-f3').style.display = seg === 2 ? 'block' : 'none'; $('#c4-obj').style.display = seg === 1 ? 'block' : 'none';
+      const rev = el => { const k = eo(p(b, ini, ini + BAT)); el.style.clipPath = V ? `inset(0 0 ${(100 - k * 100).toFixed(2)}% 0)` : `inset(0 0 0 ${(100 - k * 100).toFixed(2)}%)`; };
+      if (seg === 0) rev($('#c4-f1')); if (seg === 2) rev($('#c4-f3'));
+      if (seg === 1) $('#c4-obj').querySelectorAll('img').forEach((im, j) => { const k = p(passo(b), 9.5 + j * COL, 9.5 + j * COL + COL * 1.2); im.style.transform = `scale(${(k <= 0 ? 0 : back(k)).toFixed(3)}) rotate(${j ? -5 : 6}deg)`; });
+      ['#c4-p1', '#c4-p2', '#c4-p3'].forEach((s, i) => { const el = $(s); let vis = seg === i || seg === 3; el.style.display = vis ? 'flex' : 'none'; if (!vis) return;
+        if (seg === 3) { const k = eio(p(b, 12, 12 + BAT * 2)); const x0 = M, alvo = L([M, M + 520, M + 1040][i], [M, M + 460, M + 120][i]), y0 = L(640, 1430), ya = L(560, [1150, 1170, 1460][i]);
+          el.style.left = (x0 + (alvo - x0) * k) + 'px'; el.style.top = (y0 + (ya - y0) * k) + 'px'; el.style.transform = `rotate(${[-2, 1.6, -1][i]}deg) scale(${1 - .12 * k})`; }
+        else { el.style.left = M + 'px'; el.style.top = L(640, 1430) + 'px'; const k = p(b, ini + BAT, ini + BAT * 2.4); const ang = k <= 0 ? 0 : 6 * Math.exp(-5 * k) * Math.cos(k * 10);
+          el.style.opacity = k > 0 ? 1 : 0; el.style.transform = `translateY(${((1 - eo(p(b, ini + BAT, ini + BAT * 1.4))) * -80).toFixed(1)}px) rotate(${([-2, 1.6, -1][i] + ang).toFixed(2)}deg)`; } });
+      const tt = $('#c4-t1'); if (seg === 3) { $('#c4-t3').style.display = 'block'; $('#c4-t3').querySelectorAll('.mk > span').forEach(sp => sp.style.transform = 'none'); }
+      const nota = $('#c4-nota'); nota.style.display = seg === 3 ? 'block' : 'none'; nota.style.opacity = eo(p(b, 12.25, 12.6));
+      if (seg === 3) { $('#c4-t3').style.top = L(150, 820) + 'px'; nota.style.top = L(900, 1740) + 'px'; } else $('#c4-t3').style.top = L(150, 980) + 'px';
+    } else if (b < 14) {                                             // virada: carimbo nas batidas da virada (8ª colcheia)
+      mostra('c5'); const k = p(b, 13.625, 13.625 + COL * .6), car = $('#c5-car');
+      car.style.opacity = k > 0 ? 1 : 0; car.style.transform = `scale(${(1.14 - .14 * eo(k)).toFixed(4)}) rotate(-8deg)`;
+    } else if (b < 24) {                                             // ATO 5
+      mostra('c6');
+      const lets = document.querySelectorAll('#janela .let'); lets.forEach((g, k) => { const t0 = 14 + k * BAT; g.style.opacity = b >= t0 ? 1 : 0; });
+      const ims = document.querySelectorAll('#fotos image');
+      let idx, pan;
+      if (b < 15.25) { idx = -1; }
+      else if (b < 16) { idx = 0; pan = p(b, 15.25, 16); }
+      else if (b < 20) { const n = Math.floor(b - 16); idx = [1, 2, 4, 6][n]; pan = b - 16 - n; }
+      else if (b < 22) { const n = Math.floor((b - 20) / BAT); idx = (8 + n) % FOTOS.length; pan = ((b - 20) / BAT) % 1; }
+      else { const n = Math.floor((b - 22) / COL); idx = (n * 5 + 3) % FOTOS.length; pan = ((b - 22) / COL) % 1; }
+      $('#fotos').style.display = (b >= 15) ? 'block' : 'none';
+      ims.forEach((im, k) => { const on = k === idx || (b < 15.25 && b >= 15 && k === 0); im.style.display = on ? 'block' : 'none';
+        if (on) { const w2 = +im.getAttribute('width'), h2 = +im.getAttribute('height'), dx = (ww - w2), dy = (hh - h2); const pp = pan ?? 0;
+          im.setAttribute('x', (dx * (.2 + .6 * pp)).toFixed(1)); im.setAttribute('y', (dy * .5).toFixed(1)); } });
+      const g = $('#graos'); g.style.opacity = b >= 15 ? 1 : 0;
+      const leg = $('#c6-leg'), cap = b >= 16 && b < 20 ? ['da roça', 'pra feira', 'pra panela', 'pra mesa'][Math.floor(b - 16)] : '';
+      leg.textContent = cap; const kl = p(b - Math.floor(b), 0, BAT * .6); leg.style.opacity = cap ? eo(kl) : 0; leg.style.transform = `translateY(${(1 - eo(kl)) * 24}px)`;
+    } else {                                                         // ATO 6
+      mostra('c7'); const c = $('#c7'); c.style.clipPath = `circle(${(eo(p(b, 24, 24 + BAT * .8)) * 120).toFixed(2)}% at 50% 45%)`;
+      document.querySelectorAll('.g7').forEach((g, i) => { const k = p(b, 24.25 + i * COL * .5, 24.25 + i * COL * .5 + COL * 1.4); g.style.transform = `scale(${(k <= 0 ? 0 : back(k)).toFixed(3)})`; });
+      const kt = eo(p(b, 24.5, 24.9)); $('#c7-tag').style.opacity = kt; $('#c7-tag').style.transform = `translateY(${(1 - kt) * 30}px)`;
+      const ku = eo(p(b, 25, 25.4)); $('#c7-url').style.opacity = ku; $('#c7-mec').style.opacity = ku;
+    }
+  };
+  window.prepara = async () => { document.querySelectorAll('.cena').forEach(c => { c.style.display = 'block'; c.style.visibility = 'hidden'; }); await window.FIBRA.pronto(); document.querySelectorAll('.cena').forEach(c => { c.style.visibility = ''; c.style.display = 'none'; }); document.querySelectorAll('#c2-bloco .ln').forEach(l => { const m = /translateX\(([-\d.]+)px\)/.exec(l.style.transform); l.dataset.x = m ? m[1] : 0; });
+    await Promise.all([...document.querySelectorAll('#fotos image')].map(im => new Promise(r => { const i = new Image(); i.onload = i.onerror = () => r(); i.src = im.getAttribute('href'); })));
+    window.quadro(0); return Math.ceil(27 * COMP * 30); };
+})();
+</script>
+</body></html>

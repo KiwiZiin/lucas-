@@ -72,5 +72,11 @@ fibra-recorte img { width: 100%; height: auto; display: block; filter: drop-shad
 .plaq .prendedor { position: absolute; left: 50%; top: -1.15em; width: .62em; transform: translateX(-50%) rotate(var(--prend, 2deg)); filter: drop-shadow(0 .08em .1em rgba(42,22,17,.4)); }
 .plaq.fuba { background: var(--fuba); } .plaq.couve { background: var(--couve); color: var(--arroz); --plaq-fio: var(--fuba); }
 
+/* ── retrato recortado e anel de grão ── */
+fibra-pessoa { position: absolute; display: block; line-height: 0; }
+fibra-pessoa img { width: 100%; height: auto; display: block; }
+fibra-anel { position: absolute; display: block; line-height: 0; }
+fibra-anel svg { display: block; width: 100%; height: auto; overflow: visible; }
+
 /* ── grade de construção (?grade) ── */
 .ver-grade .grade { position: absolute; inset: 0; z-index: 999; pointer-events: none; }

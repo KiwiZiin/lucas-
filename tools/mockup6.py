@@ -53,8 +53,11 @@ def fundo_arroz(base, limiar=14):
     obj = cv2.morphologyEx(obj, cv2.MORPH_CLOSE, np.ones((15, 15), np.uint8))
     n, lab, st, _ = cv2.connectedComponentsWithStats(obj)
     if n > 1: obj = (lab == 1 + np.argmax(st[1:, cv2.CC_STAT_AREA])).astype(np.uint8)
-    inv = (1 - obj).copy(); ff = np.zeros((obj.shape[0] + 2, obj.shape[1] + 2), np.uint8); cv2.floodFill(inv, ff, (0, 0), 0); obj = obj | inv
-    obj = cv2.erode(obj, np.ones((3, 3), np.uint8)); m = cv2.GaussianBlur(obj.astype(np.float32), (0, 0), 1.2)[..., None]
+    # só fecha buracos pequenos: o vão entre as alças continua sendo fundo
+    nn, ll, ss, _ = cv2.connectedComponentsWithStats((1 - obj).astype(np.uint8))
+    for i in range(1, nn):
+        if ss[i, cv2.CC_STAT_AREA] < 0.0015 * obj.size: obj[ll == i] = 1
+    obj = cv2.erode(obj, np.ones((3, 3), np.uint8)); m = cv2.GaussianBlur(obj.astype(np.float32), (0, 0), 1.0)[..., None]
     return f * m + (f * ARROZ / 255) * (1 - m)
 
 def grava(nome, out):
