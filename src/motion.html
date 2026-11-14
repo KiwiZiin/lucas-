@@ -72,8 +72,8 @@ const bh = H / 5;
 const c4 = el(`<div class="cena" id="c4" style="display:none;z-index:9;background:transparent">` + PADS.map((q, n) => `<fibra-trama class="faixa bd" tipo="${q[0]}" cores="${q[1]}" cols="${(W / (bh / 2)).toFixed(3)}" rows="2" style="top:${n * bh}px;height:${bh + 1}px"></fibra-trama>`).join('') + '</div>');
 // ── cena 5: assinatura ──
 const T5 = V ? 234 : 216, N5 = V ? 4 : 8;
-const RET = [`<fibra-trama tipo="sarja" cores="feijao,fuba,dende" cols="2" rows="2"></fibra-trama>`, `<fibra-prato foto="tex-feijao-preto" fundo="fuba" raios="dende" aro="arroz"></fibra-prato>`, `<fibra-foto foto="agro-senhora" w="100" h="100" fx=".42" fy=".35" duo="mata,fuba"></fibra-foto>`, `<fibra-trama tipo="zigue" cores="arroz,urucum,feijao" cols="2" rows="2"></fibra-trama>`,
-  `<fibra-prato foto="tex-arroz" fundo="anil" raios="mata" aro="fuba"></fibra-prato>`, `<fibra-trama tipo="olho" cores="feijao,dende,fuba" cols="2" rows="2"></fibra-trama>`, `<fibra-foto foto="cozinha-vovo" w="100" h="100" fx=".55" fy=".35" zoom="1.1" duo="feijao,dende"></fibra-foto>`, `<fibra-trama tipo="escama" cores="mata,couve,fuba" cols="2" rows="2"></fibra-trama>`];
+const RET = [`<fibra-trama tipo="tela" cores="fuba,dende" cols="1" rows="1"></fibra-trama>`, `<fibra-prato foto="tex-feijao-preto"></fibra-prato>`, `<fibra-foto foto="agro-senhora" w="100" h="100" fx=".42" fy=".35" duo="anil,fuba"></fibra-foto>`, `<fibra-trama tipo="zigue" cores="urucum" cols="1" rows="1"></fibra-trama>`,
+  `<fibra-trama tipo="escama" cores="couve" cols="1" rows="1"></fibra-trama>`, `<fibra-trama tipo="olho" cores="fuba" cols="1" rows="1"></fibra-trama>`, `<fibra-foto foto="cozinha-vovo" w="100" h="100" fx=".55" fy=".35" zoom="1.1" duo="anil,fuba"></fibra-foto>`, `<fibra-trama tipo="espinha" cores="dende" cols="1" rows="1"></fibra-trama>`];
 const c5 = el(`<div class="cena bg-couve" id="c5">
   <div class="manchete t-titulo" data-w="${V ? W - 2 * m : 1180}" style="left:${m}px;top:${V ? 400 : M}px">${linhas(['Comida de verdade', 'é direito de', '<i class="c-fuba" style="font-style:normal">todo mundo.</i>'])}</div>
   <fibra-logo id="lf" cor="fuba" style="${V ? `left:${m}px;top:1010px` : `right:${M}px;top:${M}px`};width:${V ? 380 : 420}px"></fibra-logo>
@@ -111,16 +111,21 @@ window.quadro = f => {
     const a = 210 + n * 60, on = f >= a && f < a + (n === 2 ? 210 : 60) && f < 420; mostra(c, on); if (!on) return; const g = f - a, t = eo(p(g, 0, 22));   // a última cena fica por baixo das faixas
     c.querySelector('.letra').style.transform = `translateY(${(1 - t) * 70}px) scale(${1.04 - .04 * t})`; c.querySelector('.letra').style.transformOrigin = '50% 60%';
     c.querySelector('.pan').style.transform = `translateX(${-g * .55}px)`;
-    sobe(c.querySelector('.manchete'), g, 6);
+    sobe(c.querySelector('.manchete'), g, 3, 7.5, 7);
     c.querySelector('fibra-logo').style.opacity = p(g, 4, 12);
   });
   // cena 5 · 420–600 (por baixo da cena 4)
   const on5 = f >= 420; mostra(c5, on5);
-  if (on5) { const g = f - 438; sobe(c5.querySelector('.manchete'), g, 0, 6, 20); const t = eo(p(g, 26, 46));
+  if (on5) { const g = f - 438; sobe(c5.querySelector('.manchete'), g + 12, 0, 12.5, 11); const t = eo(p(g, 26, 46));
     c5.querySelector('#lf').style.opacity = c5.querySelector('#url').style.opacity = t; c5.querySelector('#lf').style.transform = c5.querySelector('#url').style.transform = `translateY(${(1 - t) * 30}px)`;
-    c5.querySelectorAll('.ret').forEach((r, q) => { const u = eo(p(g, 30 + q * 3, 48 + q * 3)); r.firstElementChild.style.transform = `translateY(${(1 - u) * 101}%)`; }); }
+    c5.querySelectorAll('.ret').forEach((r, q) => { const u = eo(p(g, 40 + q * 6.25, 46 + q * 6.25)); r.firstElementChild.style.transform = `translateY(${(1 - u) * 101}%)`; }); }
   // cena 4 · 390–450: faixas de padronagem entram e saem em sentidos alternados
   const on4 = f >= 390 && f < 452; mostra(c4, on4);
   if (on4) c4.querySelectorAll('.bd').forEach((b, n) => { const g = f - 390, s = n % 2 ? 1 : -1, ent = eo(p(g, n * 3, 18 + n * 3)), sai = ei(p(g, 36 + n * 3, 56 + n * 3)); b.style.transform = `translateX(${s * (1 - ent) * 100 + (-s) * sai * 100}%)`; });
 };
+
+{ const q0 = window.quadro;
+  window.quadro = (f, r) => { q0(f); const k = (window.PULSO || [])[r | 0] || 0;
+    document.querySelectorAll('.cena').forEach(c => { if (c.id !== 'c4') c.style.transform = c.style.display === 'block' ? `scale(${(1 + .03 * k).toFixed(4)})` : ''; });
+    const j = document.getElementById('jan'); if (j) j.style.filter = `brightness(${(1 + .12 * k).toFixed(3)})`; }; }
 </script></body></html>

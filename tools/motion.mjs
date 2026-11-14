@@ -30,8 +30,19 @@ o.save('/tmp/claude-0/-home-user-lucas-/0d3f7e90-dd37-558c-a2ec-9141744b3677/scr
 const BPM = 141.95, COMP = 4 * 60 / BPM, CHAVES = [[0, 0], [60, 2], [210, 6], [270, 8], [330, 10], [390, 12], [450, 13], [600, 16]];
 const warp = t => { const c = t / COMP; for (let k = 1; k < CHAVES.length; k++) { const [f0, c0] = CHAVES[k - 1], [f1, c1] = CHAVES[k]; if (c <= c1) return f0 + (f1 - f0) * (c - c0) / (c1 - c0); } return 600; };
 const NQ = Math.ceil((16 * COMP + 1.2) * 30);
+// pulso do bumbo: força de ataque em graves (< 180 Hz), por quadro de vídeo, com decaimento rápido
+const PULSO = JSON.parse(execFileSync('python3', ['-c', `
+import subprocess, numpy as np, json, sys
+sr = 22050; x = np.frombuffer(subprocess.run(['ffmpeg','-loglevel','error','-ss','116.255','-t',sys.argv[2],'-i',sys.argv[1],'-ac','1','-ar',str(sr),'-f','f32le','-'],capture_output=True).stdout, np.float32)
+hop = 147; fr = np.lib.stride_tricks.sliding_window_view(x, 2048)[::hop] * np.hanning(2048)
+S = np.abs(np.fft.rfft(fr, axis=1)); lo = np.log1p(S[:, 1:18].sum(1)); fl = np.maximum(np.diff(lo, prepend=lo[0]), 0)
+n = int(float(sys.argv[2]) * 30); v = np.array([fl[int(i * sr / 30 / hop):int((i + 1) * sr / 30 / hop) + 1].max(initial=0) for i in range(n)])
+v = np.clip(v / np.percentile(v[v > 0], 92), 0, 1); v[v < .35] = 0; o = []; e = 0
+for a in v: e = max(a, e * .72); o.append(round(float(e), 3))
+print(json.dumps(o))`, '/root/.claude/uploads/0d3f7e90-dd37-558c-a2ec-9141744b3677/286b67ac-Rio_Soundtrack-_01_Real_In_Rio.m4a', String(NQ / 30)]).toString());
+await page.evaluate(p => { window.PULSO = p; }, PULSO); console.log('pulsos fortes:', PULSO.filter(x => x > .9).length);
 const de = parseInt(opt('de', '0')), ate = parseInt(opt('ate', String(NQ))); const t0 = Date.now();
-for (let f = de; f < ate; f++) { await page.evaluate(f => window.quadro(f), Math.min(599.9, warp(f / 30))); await page.screenshot({ path: `${dir}/q${String(f).padStart(4, '0')}.jpg`, type: 'jpeg', quality: 95 }); if (f % 100 === 0) console.log('quadro', f, ((Date.now() - t0) / 1000).toFixed(0) + 's'); }
+for (let f = de; f < ate; f++) { await page.evaluate(([a, b]) => window.quadro(a, b), [Math.min(599.9, warp(f / 30)), f]); await page.screenshot({ path: `${dir}/q${String(f).padStart(4, '0')}.jpg`, type: 'jpeg', quality: 95 }); if (f % 100 === 0) console.log('quadro', f, ((Date.now() - t0) / 1000).toFixed(0) + 's'); }
 await b.close();
 const out = `${raiz}/entregas/05-motion`; fs.mkdirSync(out, { recursive: true });
 const AUD = '/root/.claude/uploads/0d3f7e90-dd37-558c-a2ec-9141744b3677/286b67ac-Rio_Soundtrack-_01_Real_In_Rio.m4a', DUR = (NQ / 30).toFixed(3);

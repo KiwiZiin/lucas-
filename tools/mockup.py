@@ -12,8 +12,8 @@ CENAS = {
  '05-ponto-de-onibus': dict(cena='mk-onibus',   arte='arte-mub-R',     quad=[(861, 749), (1990, 752), (1994, 2404), (864, 2413)], modo='papel', refina=True),
  '06-totem':           dict(cena='mk-totem',    arte='arte-mub-B',     quad=[(2181, 292), (3386, 183), (3434, 2043), (2170, 2004)], modo='papel', refina=True),
  '07-caminhao':        dict(cena='mk-caminhao', arte='arte-caminhao',  quad=[(480, 500), (2590, 540), (2575, 1905), (480, 1850)], modo='vinil'),
- '08-caixa':           dict(cena='mk-caixa',    arte='arte-caixa',     quad=[(1757, 1024), (3852, 923), (3844, 1963), (1791, 2334)], modo='tinta', margem=.045),
- '09-ecobag':          dict(cena='mk-ecobag',   arte='arte-ecobag',    quad=[(2620, 1560), (3760, 1600), (3700, 2400), (2640, 2360)], modo='tinta'),
+ '08-caixa':           dict(cena='mk-entrega',  arte='arte-caixa',     quad=[(1205, 1490), (3170, 1340), (3155, 2495), (1220, 2555)], modo='tinta', luvas=True, maos=[[(2700, 2040), (3260, 2040), (3260, 2660), (2700, 2660)], [(1100, 2250), (1460, 2250), (1460, 2630), (1100, 2630)]]),
+ '09-ecobag':          dict(cena='mk-ecobag',   arte='arte-ecobag',    quad=[(2560, 1480), (3700, 1490), (3660, 2380), (2600, 2360)], modo='tinta'),
 }
 
 def ordena(q):   # os cantos já são declarados em ordem: sup-esq, sup-dir, inf-dir, inf-esq
@@ -73,6 +73,12 @@ def compoe(nome, c):
         ref = np.median(L[dentro]); sombra = np.clip(L / ref, .55, 1.18); res = wa * sombra[..., None]
     else:   # tinta: multiplica sobre o suporte, mantendo a textura do papelão / tecido
         tinta = 1 - (1 - wa / 255) * .94; res = f * tinta
+        if c.get('luvas'):   # luvas brancas na frente da caixa: preserva o que é claro e sem cor
+            hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV); lv = (((hsv[..., 2] > 215) & (hsv[..., 1] < 16)) | (hsv[..., 1] > 75)).astype(np.uint8) * 255   # luvas e verduras na frente
+            zona = np.zeros(hsv.shape[:2], np.uint8); cv2.fillPoly(zona, [np.array(m, np.int32) for m in c.get('maos', [])], 255)
+            hh = hsv[..., 0].astype(np.float32); verde = np.clip((hsv[..., 1].astype(np.float32) - 30) / 15, 0, 1) * np.clip(np.minimum(hh - 28, 98 - hh) / 6, 0, 1)   # folhas: matiz verde; papelão: laranja
+            luva = np.clip((24 - hsv[..., 1].astype(np.float32)) / 10, 0, 1) * (cv2.GaussianBlur(zona, (0, 0), 3) / 255.)
+            lv = cv2.GaussianBlur(np.maximum(verde, luva), (0, 0), .8); mask = mask * (1 - lv)
     ruido = np.random.default_rng(7).normal(0, 1.6, (H, W, 1)).astype(np.float32)
     res = np.clip(res + ruido, 0, 255); out = f * (1 - mask[..., None]) + res * mask[..., None]
     os.makedirs(SAI, exist_ok=True); arq = f'{SAI}/fibra-mockup-{nome}.jpg'
