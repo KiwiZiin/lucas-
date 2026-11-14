@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FIBRA identidade visual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: quente, direta, de feira — a marca falando por si.
+   IDEA: um cartaz lambe-lambe que vira caderno de marca; faixas de cor como bancas de feira.
+   PICTURE: as peças reais (posters, outdoor, colcha) ocupam a tela inteira.
+   COLOUR and TYPE: couve, fubá, anil, dendê, urucum, feijão e arroz · Anton nos títulos, Sora no apoio.
+   LAYOUT: faixas de largura total, uma ideia por faixa, imagens grandes, grades que empilham no celular. */
+:root{color-scheme:light dark;--couve:#0B7A3B;--mata:#073D26;--fuba:#FFC72C;--anil:#2152C8;--dende:#F28A1C;--urucum:#C8402A;--feijao:#2A1611;--arroz:#F4ECD8;
+--bg:light-dark(#F4ECD8,#1b100c);--ink:light-dark(#2A1611,#F4ECD8)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 Sora,system-ui,sans-serif;overflow-x:clip}
+img,video{display:block;width:100%;height:auto}
+h1,h2,h3{font-family:Anton,'Arial Narrow',sans-serif;font-weight:400;text-transform:uppercase;line-height:1.02;letter-spacing:.01em;margin:0;text-wrap:balance}
+h2{font-size:clamp(40px,6vw,84px)} h3{font-size:clamp(24px,2.4vw,32px)}
+p{margin:0;max-width:62ch}
+.band{padding:clamp(40px,6vw,96px) max(5vw,16px)}
+.in{max-width:1240px;margin:0 auto}
+.couve{background:var(--couve);color:var(--arroz)}.mata{background:var(--mata);color:var(--arroz)}.fuba{background:var(--fuba);color:var(--feijao)}
+.anil{background:var(--anil);color:var(--arroz)}.urucum{background:var(--urucum);color:var(--arroz)}.feijao{background:var(--feijao);color:var(--arroz)}
+.dest{color:var(--fuba)}.fuba .dest{color:var(--couve)}
+nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:20px max(5vw,16px);background:var(--couve)}
+nav img{width:120px}nav div{display:flex;gap:22px;flex-wrap:wrap}
+nav a{color:var(--arroz);text-decoration:none;font-weight:600;font-size:15px}nav a:hover,nav a:focus-visible{color:var(--fuba);outline:none}
+.hero{background:var(--couve);color:var(--arroz);padding:0 max(5vw,16px) clamp(40px,5vw,72px)}
+.hero h1{font-size:clamp(52px,9vw,148px);margin:clamp(16px,3vw,40px) 0 clamp(24px,3vw,40px)}
+.hero figure{margin:0}.hero img{border-radius:4px;box-shadow:0 30px 60px -25px rgba(0,0,0,.5)}
+.lede{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:end;margin-top:clamp(24px,3vw,40px)}
+.lede p{font-size:clamp(17px,1.6vw,21px)}
+.big{font-family:Anton,sans-serif;font-size:clamp(96px,17vw,240px);line-height:.9;color:var(--fuba)}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:center}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:48px}
+.steps div{border-top:3px solid currentColor;padding-top:20px}
+.steps b{display:block;font:400 64px/1 Anton,sans-serif;margin-bottom:14px}
+.steps h3{font:700 19px/1.25 Sora,sans-serif;text-transform:none;margin-bottom:10px}
+.steps p{font-size:15px}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:40px}
+.plans div{background:rgba(255,255,255,.06);border:1px solid rgba(244,236,216,.2);padding:24px;border-radius:4px}
+.plans h3{font-size:30px;margin-bottom:10px}.plans p{font-size:15px}
+.posters{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;margin-top:40px}
+.posters img,.trio img{box-shadow:0 20px 40px -20px rgba(0,0,0,.5)}
+.trio{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:16px}
+.wide{margin-top:40px;border-radius:4px;overflow:hidden}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:16px}
+.grid2 img,.grid3 img{aspect-ratio:3/2;object-fit:cover;border-radius:4px}
+.cap{font-size:14px;opacity:.8;margin-top:14px}
+.say{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:40px}
+.say div{border-top:3px solid currentColor;padding-top:18px}
+.say s{opacity:.7;font-size:15px}
+footer{padding:48px max(5vw,16px);background:var(--mata);color:var(--arroz);font-size:14px}
+footer img{width:180px;margin-bottom:20px}
+@media(max-width:860px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.posters{grid-template-columns:repeat(3,minmax(0,1fr))}.trio{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.lede,.two,.plans,.say,.grid2,.grid3{grid-template-columns:minmax(0,1fr)}.posters{grid-template-columns:repeat(2,minmax(0,1fr))}.steps{grid-template-columns:minmax(0,1fr)}nav div{gap:14px}}
+@media(prefers-reduced-motion:no-preference){.hero img{animation:sobe .9s cubic-bezier(.2,.8,.2,1) both}@keyframes sobe{from{transform:translateY(24px);opacity:0}}}
+</style></head><body>
+
+<nav><img src="img/fibra-logo-fuba.svg" alt="Fibra"><div><a href="#empresa">A empresa</a><a href="#marca">A marca</a><a href="#pecas">Peças</a><a href="#motion">Motion</a></div></nav>
+
+<header class="hero">
+  <div class="in">
+    <h1>Comida de verdade é <span class="dest">direito de todo mundo.</span></h1>
+    <figure><img src="img/hero.jpg" alt="Logotipo FIBRA com fotografias de feijão, couve, uma cozinheira, um agricultor e um prato feito dentro das letras"></figure>
+    <div class="lede"><p>A Fibra é uma rede de cestas populares de arroz, feijão, legumes e verduras, compradas direto de produtores brasileiros e entregues por um preço que cabe no mês.</p>
+    <p style="font-size:14px;opacity:.85">Marca fictícia · projeto autoral de identidade visual</p></div>
+  </div>
+</header>
+
+<section class="band mata" id="problema"><div class="in two">
+  <div><div class="big">24,2%</div><h3 style="margin-top:24px;font:700 clamp(20px,2vw,26px)/1.3 Sora,sans-serif;text-transform:none">Quase 1 em cada 4 lares brasileiros conviveu com algum grau de insegurança alimentar em 2024.</h3>
+  <p style="margin-top:20px">Num país que planta comida para o mundo, arroz e feijão ainda pesam no orçamento de milhões de famílias. Entre a roça e a panela, o caminho é longo, e cada intermediário encarece o prato.</p>
+  <p class="cap">Fonte: IBGE, PNAD Contínua — Segurança Alimentar 2024</p></div>
+  <img src="img/p7.jpg" alt="Poster com o dado 24,2%" style="max-width:420px;justify-self:end;box-shadow:0 30px 60px -25px rgba(0,0,0,.6)">
+</div></section>
+
+<section class="band fuba" id="empresa"><div class="in">
+  <h2>Quem pode, assina. <span class="dest">Quem precisa, paga menos.</span></h2>
+  <div class="steps">
+    <div><b>01</b><h3>Compra de quem planta</h3><p>Direto de produtores e cooperativas da agricultura familiar. Sem atravessador.</p></div>
+    <div><b>02</b><h3>Monta a cesta</h3><p>Arroz, feijão, legumes, verduras e o básico que não pode faltar na semana.</p></div>
+    <div><b>03</b><h3>Quem pode, assina</h3><p>Famílias e empresas pagam o preço cheio e recebem a cesta todo mês.</p></div>
+    <div><b>04</b><h3>Quem precisa, paga menos</h3><p>A margem das assinaturas vira desconto para famílias de baixa renda.</p></div>
+  </div>
+</div></section>
+
+<section class="band feijao"><div class="in">
+  <h2>Três planos, <span class="dest">uma mesma cesta.</span></h2>
+  <div class="plans">
+    <div><h3>Fibra em Casa</h3><p>Assinatura mensal para famílias. A cesta chega em casa, com preço cheio e sem surpresa.</p></div>
+    <div><h3>Fibra Empresa</h3><p>Contratos corporativos: cestas para equipes inteiras, entregues no local de trabalho.</p></div>
+    <div><h3>Fibra Social</h3><p>A mesma cesta, com desconto, para famílias de baixa renda. Quem financia são os outros dois planos.</p></div>
+  </div>
+</div></section>
+
+<section class="band" id="marca"><div class="in">
+  <h2>O grão no centro <span style="color:var(--couve)">de cada letra.</span></h2>
+  <p style="margin-top:20px">O logotipo vem das letras de cartaz: altas, estreitas e firmes, como os tipos de madeira dos lambe-lambes. As contra-formas de B, R e A dão lugar a grãos inclinados. O nome tem três sentidos: é o que tem na comida de verdade, é o que o brasileiro tem de sobra e é a palha que trança a cesta.</p>
+  <div class="wide"><img src="img/constr.jpg" alt="Construção do logotipo FIBRA"></div>
+  <div class="grid2"><img src="img/cores.jpg" alt="Paleta: couve, mata, fubá, anil, dendê, urucum, feijão e arroz" style="aspect-ratio:16/9"><img src="img/tipo.jpg" alt="Tipografia: Anton e Sora" style="aspect-ratio:16/9"></div>
+  <p class="cap">Paleta tirada da mesa e da bandeira · Anton nos títulos, Sora no apoio</p>
+</div></section>
+
+<section class="band anil"><div class="in">
+  <h2>Do grão à mesa, <span class="dest">em cinco letras.</span></h2>
+  <p style="margin-top:20px">Cada letra abre uma janela para o Brasil que planta e cozinha: F grão, I verdura, B cozinha, R roça, A mesa. Uma letra por peça, sempre inteira.</p>
+  <div class="posters"><img src="img/p1.jpg" alt="Poster F, feijão"><img src="img/p2.jpg" alt="Poster I, verdura"><img src="img/p3.jpg" alt="Poster B, cozinha"><img src="img/p4.jpg" alt="Poster R, roça"><img src="img/p5.jpg" alt="Poster A, mesa"></div>
+  <div class="trio"><img src="img/p6.jpg" alt="Poster manifesto"><img src="img/p7.jpg" alt="Poster dado"><img src="img/p8.jpg" alt="Poster de lançamento"><img src="img/p9.jpg" alt="Poster colcha"></div>
+</div></section>
+
+<section class="band" style="background:var(--feijao);color:var(--arroz)"><div class="in">
+  <h2>Tramas de cestaria, <span class="dest">costuradas numa colcha.</span></h2>
+  <p style="margin-top:20px">As padronagens são tecidas fio a fio, como num cesto de palha: sarja, espinha, olho, esteira, degrau e tela. Somadas a pratos vistos de cima e retratos em duotom, formam a colcha que costura todo o sistema.</p>
+  <div class="grid2"><img src="img/tramas.jpg" alt="Doze tramas de cestaria" style="aspect-ratio:16/9"><img src="img/colcha.jpg" alt="Colcha de retalhos com tramas, pratos e retratos" style="aspect-ratio:16/9"></div>
+</div></section>
+
+<section class="band urucum" id="pecas"><div class="in">
+  <h2>Na rua, <span class="dest">na mesa, no celular.</span></h2>
+  <div class="wide"><img src="img/outdoor.jpg" alt="Outdoor da Fibra"></div>
+  <div class="wide" style="margin-top:16px"><img src="img/tapume.jpg" alt="Tapume com a série de posters formando FIBRA"></div>
+  <div class="grid3"><img src="img/onibus.jpg" alt="Ponto de ônibus"><img src="img/totem.jpg" alt="Totem"><img src="img/caminhao.jpg" alt="Caminhão de entrega"></div>
+  <div class="grid2"><img src="img/caixa.jpg" alt="Caixa da Cesta Base"><img src="img/ecobag.jpg" alt="Ecobag"></div>
+  <div class="grid2"><img src="img/feed.jpg" alt="Grade do Instagram" style="aspect-ratio:16/9"><img src="img/car.jpg" alt="Carrossel e stories" style="aspect-ratio:16/9"></div>
+  <p class="cap">Aplicações sobre fotografias reais (Adobe Stock)</p>
+</div></section>
+
+<section class="band mata" id="motion"><div class="in">
+  <h2>As fotografias passam <span class="dest">por dentro das letras.</span></h2>
+  <video class="wide" src="img/motion.mp4" controls muted loop playsinline preload="metadata" poster="img/motion-poster.jpg" style="margin-top:32px;border-radius:4px"></video>
+</div></section>
+
+<section class="band fuba"><div class="in">
+  <h2>A Fibra fala como <span class="dest">quem serve o prato.</span></h2>
+  <div class="say">
+    <div><h3>Comida de verdade é direito de todo mundo.</h3><p style="margin-top:12px"><s>Ajude quem tem fome.</s></p></div>
+    <div><h3>Quem precisa, paga menos.</h3><p style="margin-top:12px"><s>Doe para famílias carentes.</s></p></div>
+    <div><h3>Da roça pra panela, sem atravessador.</h3><p style="margin-top:12px"><s>Produtos selecionados premium.</s></p></div>
+  </div>
+</div></section>
+
+<footer><div class="in"><img src="img/fibra-logo-fuba.svg" alt="Fibra"><p>Marca fictícia, projeto autoral de identidade visual. Tipografia: Anton (Vernon Adams) e Sora (Jonathan Barnbrook, Julián Moncada). Fotografia: Adobe Stock. Dado: IBGE, PNAD Contínua 2024.</p></div></footer>
+</body></html>
