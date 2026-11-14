@@ -40,7 +40,10 @@ n = int(float(sys.argv[2]) * 30); v = np.array([fl[int(i * sr / 30 / hop):int((i
 v = np.clip(v / np.percentile(v[v > 0], 92), 0, 1); v[v < .35] = 0; o = []; e = 0
 for a in v: e = max(a, e * .72); o.append(round(float(e), 3))
 print(json.dumps(o))`, '/root/.claude/uploads/0d3f7e90-dd37-558c-a2ec-9141744b3677/286b67ac-Rio_Soundtrack-_01_Real_In_Rio.m4a', String(NQ / 30)]).toString());
-await page.evaluate(p => { window.PULSO = p; }, PULSO); console.log('pulsos fortes:', PULSO.filter(x => x > .9).length);
+// só três toques, nas viradas principais (compassos 2, 6 e 13), e só se o bumbo bater ali
+const TOQUES = [2, 6, 13].map(c => Math.round(c * COMP * 30)), P2 = PULSO.map(() => 0);
+TOQUES.forEach(q => { const k0 = q + PULSO.slice(q, q + 3).indexOf(Math.max(...PULSO.slice(q, q + 3))); for (let i = 0; i < 10 && k0 + i < P2.length; i++) P2[k0 + i] = Math.pow(.7, i); });
+await page.evaluate(p => { window.PULSO = p; }, P2); console.log('pulsos fortes:', PULSO.filter(x => x > .9).length);
 const de = parseInt(opt('de', '0')), ate = parseInt(opt('ate', String(NQ))); const t0 = Date.now();
 for (let f = de; f < ate; f++) { await page.evaluate(([a, b]) => window.quadro(a, b), [Math.min(599.9, warp(f / 30)), f]); await page.screenshot({ path: `${dir}/q${String(f).padStart(4, '0')}.jpg`, type: 'jpeg', quality: 95 }); if (f % 100 === 0) console.log('quadro', f, ((Date.now() - t0) / 1000).toFixed(0) + 's'); }
 await b.close();
