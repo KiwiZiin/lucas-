@@ -1,56 +1,76 @@
-/* FIBRA — fundamentos compartilhados por todas as peças (v3: Anton + Sora · paleta nacional · colcha de cestaria) */
-@font-face { font-family: 'Anton'; font-style: normal; font-weight: 400; font-display: block; src: url('../marca/fontes/Anton-latin.woff2') format('woff2');
+/* FIBRA v6 — "Letra grande".
+   Tipografia: Gabarito, da Naipe Foundry (Rio de Janeiro), SIL OFL — títulos em Black 900, texto em Regular 400.
+   Cores: a paleta da v5 (Couve, Fubá, Anil, Dendê, Urucum, Feijão, Arroz); Mata só na guia de cores. */
+@font-face { font-family: 'Gabarito'; font-style: normal; font-weight: 400 900; font-display: block; src: url('../marca/fontes/Gabarito-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: 'Anton'; font-style: normal; font-weight: 400; font-display: block; src: url('../marca/fontes/Anton-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-@font-face { font-family: 'Sora'; font-style: normal; font-weight: 100 800; font-display: block; src: url('../marca/fontes/Sora-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: 'Sora'; font-style: normal; font-weight: 100 800; font-display: block; src: url('../marca/fontes/Sora-latin-ext.woff2') format('woff2');
+@font-face { font-family: 'Gabarito'; font-style: normal; font-weight: 400 900; font-display: block; src: url('../marca/fontes/Gabarito-latin-ext.woff2') format('woff2');
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
 
 :root {
-  /* neutros */        --feijao: #2A1611; --arroz: #F4ECD8; --arroz-claro: #FBF7EC;
-  /* nacionais */      --couve: #0B7A3B; --mata: #163A94; --fuba: #FFC72C; --anil: #2152C8;
-  /* terra e cozinha */--dende: #F28A1C; --urucum: #C8402A;
-  --linha: rgba(42,22,17,.2); --linha-clara: rgba(244,236,216,.32);
-  --titulo: 'Anton', 'Arial Narrow', sans-serif; --sans: 'Sora', system-ui, sans-serif;
+  --feijao: #2A1611; --arroz: #F4ECD8; --papel: #FBF8F1;
+  --couve: #0B7A3B; --fuba: #FFC72C; --anil: #2152C8; --dende: #F28A1C; --urucum: #C8402A; --mata: #073D26;
+  --fonte: 'Gabarito', 'Helvetica Neue', Arial, sans-serif;
+  --sombra-papel: 0 1px 0 rgba(42,22,17,.10), 0 18px 26px -16px rgba(42,22,17,.55);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { background: #1b1b1b; }
-body { font-family: var(--sans); color: var(--feijao); -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; font-feature-settings: 'kern', 'liga'; padding: 40px; display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
-.prancha { position: relative; overflow: hidden; flex: none; background: var(--arroz); color: var(--feijao); }
-fibra-logo, fibra-janela, fibra-grao, fibra-trama, fibra-foto, fibra-prato { display: block; line-height: 0; }
-fibra-logo svg, fibra-janela svg, fibra-grao svg { display: block; width: 100%; height: auto; overflow: visible; }
-fibra-trama svg, fibra-prato svg { display: block; width: 100%; height: 100%; }
+html { background: #161616; }
+body { font-family: var(--fonte); color: var(--feijao); -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision;
+  font-feature-settings: 'kern', 'liga', 'calt'; font-kerning: normal; padding: 40px; display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+.prancha { position: relative; overflow: hidden; flex: none; background: var(--arroz); color: var(--feijao); isolation: isolate; }
+.abs { position: absolute; }
+fibra-logo, fibra-janela, fibra-grao, fibra-carimbo, fibra-isotipo { display: block; line-height: 0; }
+fibra-logo svg, fibra-janela svg, fibra-grao svg, fibra-carimbo svg, fibra-isotipo svg { display: block; width: 100%; height: auto; overflow: visible; }
 
-/* fundos: cada cor de fundo define a cor de texto e a cor de destaque corretas */
-.bg-arroz { background: var(--arroz); color: var(--feijao); --dest: var(--couve); }
-.bg-claro { background: var(--arroz-claro); color: var(--feijao); --dest: var(--couve); }
-.bg-fuba { background: var(--fuba); color: var(--feijao); --dest: var(--couve); }
-.bg-dende { background: var(--dende); color: var(--feijao); --dest: var(--arroz); }
-.bg-couve { background: var(--couve); color: var(--arroz); --dest: var(--fuba); }
-.bg-mata { background: var(--mata); color: var(--arroz); --dest: var(--fuba); }
-.bg-anil { background: var(--anil); color: var(--arroz); --dest: var(--fuba); }
-.bg-urucum { background: var(--urucum); color: var(--arroz); --dest: var(--fuba); }
-.bg-feijao { background: var(--feijao); color: var(--arroz); --dest: var(--fuba); }
+/* ── papel: fibra real de papel reciclado (Adobe Stock 277280295), multiplicada sobre o fundo ── */
+.papel::after { content: ''; position: absolute; inset: 0; z-index: 90; pointer-events: none;
+  background: url('../marca/texturas/papel.jpg') center / cover; mix-blend-mode: multiply; opacity: var(--fibra-papel, .55); }
+.kraft { background: url('../marca/texturas/kraft.jpg') center / cover; color: var(--feijao); }
+
+/* ── fundos: cada cor de fundo define a tinta do texto e o destaque aprovados (contraste WCAG medido) ──
+   texto corrido ≥ 4,5:1 · títulos ≥ 3:1 */
+.bg-arroz  { background-color: var(--arroz);  color: var(--feijao); --tinta: var(--feijao); --dest: var(--couve); }   /* feijão 14,6 · couve 4,6 · anil 5,7 */
+.bg-papel  { background-color: var(--papel);  color: var(--feijao); --tinta: var(--feijao); --dest: var(--couve); }
+.bg-fuba   { background-color: var(--fuba);   color: var(--feijao); --tinta: var(--feijao); --dest: var(--anil); }    /* feijão 11,0 · anil 4,3 (título) */
+.bg-dende  { background-color: var(--dende);  color: var(--feijao); --tinta: var(--feijao); --dest: var(--feijao); }  /* feijão 6,9 */
+.bg-couve  { background-color: var(--couve);  color: var(--arroz);  --tinta: var(--arroz);  --dest: var(--fuba); }    /* arroz 4,6 · fubá 3,5 (título) */
+.bg-anil   { background-color: var(--anil);   color: var(--arroz);  --tinta: var(--arroz);  --dest: var(--fuba); }    /* arroz 5,7 · fubá 4,3 (título) */
+.bg-urucum { background-color: var(--urucum); color: var(--arroz);  --tinta: var(--arroz);  --dest: var(--fuba); }    /* só títulos: arroz 4,2 */
+.bg-feijao { background-color: var(--feijao); color: var(--arroz);  --tinta: var(--arroz);  --dest: var(--fuba); }    /* arroz 14,6 · fubá 11,0 · dendê 6,9 */
+.bg-mata   { background-color: var(--mata);   color: var(--arroz);  --tinta: var(--arroz);  --dest: var(--fuba); }
 .c-feijao { color: var(--feijao); } .c-arroz { color: var(--arroz); } .c-fuba { color: var(--fuba); } .c-couve { color: var(--couve); }
-.c-mata { color: var(--mata); } .c-anil { color: var(--anil); } .c-dende { color: var(--dende); } .c-urucum { color: var(--urucum); } .c-dest { color: var(--dest); }
+.c-anil { color: var(--anil); } .c-dende { color: var(--dende); } .c-urucum { color: var(--urucum); } .c-dest { color: var(--dest); }
 
-/* ── tipografia: duas famílias ──
-   .t-titulo  manchete — Anton, caixa-alta
-   .t-chamada frase de apoio — Sora SemiBold
-   .t-texto   leitura — Sora Regular
-   .t-rotulo  rótulo — Sora SemiBold, caixa-alta espacejada */
-.t-titulo { font-family: var(--titulo); font-weight: 400; text-transform: uppercase; letter-spacing: .012em; line-height: 1.04; }
-.t-chamada { font-weight: 600; letter-spacing: -0.022em; line-height: 1.14; }
-.t-texto { font-weight: 400; letter-spacing: -0.012em; line-height: 1.45; }
-.t-rotulo { font-weight: 600; text-transform: uppercase; letter-spacing: .1em; line-height: 1.4; }
-.t-dado { font-weight: 500; letter-spacing: -0.005em; font-variant-numeric: tabular-nums; }
+/* ── tipografia ── */
+.t-bloco { font-weight: 900; text-transform: uppercase; line-height: 1; display: flex; flex-direction: column; gap: var(--entre, 0.022em); }
+.t-bloco .ln { display: block; white-space: nowrap; text-box: trim-both cap alphabetic; letter-spacing: -0.012em; }
+.t-display { font-weight: 900; letter-spacing: -0.025em; line-height: .9; }
+.t-titulo { font-weight: 800; letter-spacing: -0.018em; line-height: .98; text-wrap: balance; }
+.t-chamada { font-weight: 700; letter-spacing: -0.01em; line-height: 1.12; text-wrap: balance; }
+.t-texto { font-weight: 400; line-height: 1.42; text-wrap: pretty; hanging-punctuation: first; }
+.t-rotulo { font-weight: 600; text-transform: uppercase; letter-spacing: .085em; line-height: 1.2; }
+.t-num, .t-display, .t-bloco { font-variant-numeric: tabular-nums; }
+.trim { text-box: trim-both cap alphabetic; }
+.fio { height: 0; border-top: 2px solid currentColor; }
 
-/* alinhamento óptico: apara a caixa de texto na altura da caixa-alta e na linha de base */
-.tb { text-box: trim-both cap alphabetic; }
-.ln { display: block; white-space: nowrap; }
+/* ── fotografia ── */
+.foto { position: absolute; overflow: hidden; background: var(--feijao); }
+.foto > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 
-/* grade de conferência (só com ?grade na URL) */
-.grade { position: absolute; inset: 0; z-index: 99; pointer-events: none; display: none; }
-html.ver-grade .grade { display: block; }
+/* ── recorte: objeto real com borda de papel ── */
+fibra-recorte { position: absolute; display: block; line-height: 0; }
+fibra-recorte img { width: 100%; height: auto; display: block; filter: drop-shadow(0 .7em .9em rgba(42,22,17,.32)) drop-shadow(0 .1em .12em rgba(42,22,17,.25)); }
+
+/* ── plaquinha: cartão de preço da feira, preso por prendedor de madeira ── */
+.plaq { position: absolute; background: var(--papel); color: var(--feijao); box-shadow: var(--sombra-papel); transform: rotate(var(--rot, 0deg));
+  padding: .62em .7em .7em; display: flex; flex-direction: column; gap: .32em; }
+.plaq::before { content: ''; position: absolute; inset: .28em; border: .07em solid var(--plaq-fio, var(--couve)); pointer-events: none; }
+.plaq .p-nome { font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; line-height: .95; font-size: 1em; }
+.plaq .p-info { font-weight: 500; font-size: .36em; line-height: 1.25; letter-spacing: .01em; }
+.plaq .p-preco { font-weight: 900; font-size: 1.5em; line-height: .85; letter-spacing: -0.03em; display: flex; align-items: flex-start; gap: .05em; text-box: trim-both cap alphabetic; }
+.plaq .p-preco small { font-size: .32em; font-weight: 800; letter-spacing: 0; margin-top: .06em; }
+.plaq .p-preco em { font-style: normal; font-size: .32em; font-weight: 600; align-self: flex-end; margin-left: .2em; letter-spacing: 0; }
+.plaq .prendedor { position: absolute; left: 50%; top: -1.15em; width: .62em; transform: translateX(-50%) rotate(var(--prend, 2deg)); filter: drop-shadow(0 .08em .1em rgba(42,22,17,.4)); }
+.plaq.fuba { background: var(--fuba); } .plaq.couve { background: var(--couve); color: var(--arroz); --plaq-fio: var(--fuba); }
+
+/* ── grade de construção (?grade) ── */
+.ver-grade .grade { position: absolute; inset: 0; z-index: 999; pointer-events: none; }

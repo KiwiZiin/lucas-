@@ -1,0 +1,121 @@
+{
+ "mandioca-folha": {
+  "id": 309940340,
+  "tamanho": [
+   1973,
+   1755
+  ]
+ },
+ "mandioca": {
+  "id": 196879036,
+  "tamanho": [
+   2000,
+   1252
+  ]
+ },
+ "banana": {
+  "id": 661969000,
+  "tamanho": [
+   2000,
+   1304
+  ]
+ },
+ "milho": {
+  "id": 87760868,
+  "tamanho": [
+   1593,
+   1432
+  ]
+ },
+ "milho-2": {
+  "id": 424990080,
+  "tamanho": [
+   1838,
+   1402
+  ]
+ },
+ "abobora": {
+  "id": 262711757,
+  "tamanho": [
+   1759,
+   1431
+  ]
+ },
+ "chapeu": {
+  "id": 210567400,
+  "tamanho": [
+   1737,
+   1260
+  ]
+ },
+ "peneira": {
+  "id": 483748408,
+  "tamanho": [
+   1460,
+   1459
+  ]
+ },
+ "prendedor": {
+  "id": 1553223320,
+  "tamanho": [
+   427,
+   1230
+  ]
+ },
+ "saco-arroz": {
+  "id": 173386899,
+  "tamanho": [
+   516,
+   528
+  ]
+ },
+ "saco-feijao-preto": {
+  "id": 173386899,
+  "tamanho": [
+   512,
+   520
+  ]
+ },
+ "saco-feijao-vermelho": {
+  "id": 173386899,
+  "tamanho": [
+   518,
+   540
+  ]
+ },
+ "saco-milho": {
+  "id": 173386899,
+  "tamanho": [
+   517,
+   526
+  ]
+ },
+ "saco-soja": {
+  "id": 173386899,
+  "tamanho": [
+   516,
+   516
+  ]
+ },
+ "saco-amendoim": {
+  "id": 173386899,
+  "tamanho": [
+   519,
+   525
+  ]
+ },
+ "saco-arroz-casca": {
+  "id": 173386899,
+  "tamanho": [
+   520,
+   525
+  ]
+ },
+ "saco-cafe": {
+  "id": 173386899,
+  "tamanho": [
+   520,
+   521
+  ]
+ }
+}

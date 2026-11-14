@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>FIBRA — telas</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  /* tela de celular 1080 × 2470 (proporção da tela da foto): feed genérico com o post da Fibra */
+  .tela { width: 1080px; height: 2470px; background: #fff; color: #111; font-family: var(--fonte); }
+  .barra { position: absolute; left: 0; right: 0; top: 0; height: 120px; display: flex; justify-content: space-between; align-items: center; padding: 0 64px; font-weight: 600; font-size: 38px; }
+  .cab { position: absolute; left: 0; right: 0; top: 130px; height: 150px; display: flex; align-items: center; gap: 26px; padding: 0 40px; }
+  .av { width: 96px; height: 96px; border-radius: 50%; background: var(--fuba); position: relative; overflow: hidden; box-shadow: 0 0 0 4px #fff, 0 0 0 7px var(--urucum); }
+  .av fibra-logo { position: absolute; left: 31px; top: 22px; width: 34px; }
+  .icone { width: 64px; height: 64px; fill: none; stroke: #111; stroke-width: 5; stroke-linejoin: round; stroke-linecap: round; }
+</style></head>
+<body>
+<section class="prancha tela" data-nome="tela-feed">
+  <div class="barra"><span>9:41</span><span style="display:flex;gap:18px;align-items:center"><svg width="46" height="30" viewBox="0 0 46 30"><rect x="0" y="18" width="7" height="12" rx="2" fill="#111"/><rect x="12" y="12" width="7" height="18" rx="2" fill="#111"/><rect x="24" y="6" width="7" height="24" rx="2" fill="#111"/><rect x="36" y="0" width="7" height="30" rx="2" fill="#111"/></svg><svg width="66" height="32" viewBox="0 0 66 32"><rect x="1.5" y="1.5" width="56" height="29" rx="8" fill="none" stroke="#111" stroke-width="3"/><rect x="6" y="6" width="40" height="20" rx="4" fill="#111"/><rect x="60" y="10" width="5" height="12" rx="2" fill="#111"/></svg></span></div>
+  <div class="cab"><div class="av"><fibra-logo versao="empilhado" cor="feijao"></fibra-logo></div>
+    <div><div style="font-weight:700;font-size:40px">fibra</div><div style="font-size:32px;color:#666">Cestas de comida de verdade</div></div></div>
+  <img class="abs" src="../entregas/03-instagram/ig-02-banana.jpg" style="left:0;top:290px;width:1080px;height:1350px;object-fit:cover">
+  <div class="abs" style="left:40px;right:40px;top:1676px;display:flex;gap:44px;align-items:center">
+    <svg class="icone" viewBox="0 0 64 64"><path d="M32 54S8 40 8 23a12 12 0 0 1 24-4 12 12 0 0 1 24 4c0 17-24 31-24 31Z"/></svg>
+    <svg class="icone" viewBox="0 0 64 64"><path d="M54 32a22 22 0 1 1-8-17l8-3-2 9a22 22 0 0 1 2 11Z"/></svg>
+    <svg class="icone" viewBox="0 0 64 64"><path d="M8 12h48L32 54l-4-20Z M28 34L56 12"/></svg>
+    <svg class="icone" viewBox="0 0 64 64" style="margin-left:auto"><path d="M16 8h32v48L32 44 16 56Z"/></svg>
+  </div>
+  <p class="abs" style="left:40px;right:40px;top:1790px;font-size:36px;line-height:1.42"><b>fibra</b> Banana-prata de pequenos produtores do Vale do Ribeira, SP. Tá na cesta desta semana, junto com arroz, feijão, mandioca e couve. Quem pode, assina. Quem precisa, paga menos.</p>
+  <p class="abs" style="left:40px;top:2080px;font-size:30px;color:#888">Ver todos os 214 comentários</p>
+  <div class="abs" style="left:0;right:0;bottom:0;height:200px;border-top:2px solid #eee;display:flex;justify-content:space-around;align-items:center">
+    <svg class="icone" viewBox="0 0 64 64"><path d="M10 30L32 10l22 20v24H38V40H26v14H10Z"/></svg>
+    <svg class="icone" viewBox="0 0 64 64"><circle cx="28" cy="28" r="16"/><path d="M40 40l14 14"/></svg>
+    <svg class="icone" viewBox="0 0 64 64"><rect x="10" y="10" width="44" height="44" rx="12"/><path d="M32 22v20M22 32h20"/></svg>
+    <svg class="icone" viewBox="0 0 64 64"><rect x="10" y="12" width="44" height="40" rx="10"/><path d="M28 24l12 8-12 8Z"/></svg>
+    <div style="width:64px;height:64px;border-radius:50%;background:var(--couve)"></div>
+  </div>
+</section>
+<script src="letras.js"></script><script src="fotos.js"></script><script src="fibra.js"></script>
+</body></html>

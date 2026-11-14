@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>FIBRA — embalagens</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .pacote { width: 600px; height: 950px; --m: 44px; }
+  .pacote .topo { position: absolute; left: var(--m); right: var(--m); top: 40px; display: flex; justify-content: space-between; align-items: flex-end; font-size: 13px; }
+  .pacote .topo fibra-logo { width: 132px; }
+  .pacote .bl { position: absolute; left: var(--m); right: var(--m); }
+  .pacote .peso { position: absolute; left: var(--m); bottom: 44px; font-weight: 900; font-size: 128px; line-height: 1; letter-spacing: -0.04em; text-box: trim-both cap alphabetic; }
+  .pacote .peso small { font-size: .42em; letter-spacing: -0.02em; margin-left: .06em; }
+  .pacote .info { position: absolute; right: var(--m); bottom: 44px; width: 230px; font-size: 14px; line-height: 1.35; text-align: right; }
+  .arte { background: #fff; }   /* artes para impressão: tinta sobre branco (aplicadas por multiplicação no suporte) */
+  .faca { width: 2400px; height: 1180px; background: var(--papel); }
+  .tec { font-weight: 500; font-size: 15px; fill: var(--feijao); }
+</style></head>
+<body>
+
+<!-- ═══ PACOTES DE 1 KG: janela em forma de grão mostra o produto ═══ -->
+<section class="prancha pacote bg-anil papel" data-nome="pacote-arroz" style="--fibra-papel:.35">
+  <div class="topo c-arroz"><fibra-logo cor="arroz"></fibra-logo><span class="t-rotulo">Direto de quem planta</span></div>
+  <div class="bl t-bloco c-arroz" data-bloco style="top:118px;gap:12px"><span class="ln">Arroz</span><span class="ln">agulhinha</span></div>
+  <fibra-janela class="abs" letra="grao" foto="tex-arroz" zoom="1.3" fundo="arroz" style="left:96px;top:410px;width:408px"></fibra-janela>
+  <div class="peso c-arroz">1<small>kg</small></div>
+  <div class="info t-texto c-arroz"><b>Tipo 1</b><br>Agricultura familiar do Rio Grande do Sul. Embalado pela Fibra.</div>
+</section>
+<section class="prancha pacote bg-dende papel" data-nome="pacote-feijao-carioca" style="--fibra-papel:.35">
+  <div class="topo"><fibra-logo cor="feijao"></fibra-logo><span class="t-rotulo">Direto de quem planta</span></div>
+  <div class="bl t-bloco" data-bloco style="top:118px;gap:12px"><span class="ln">Feijão</span><span class="ln">carioca</span></div>
+  <fibra-janela class="abs" letra="grao" foto="tex-feijao-carioca" zoom="1.35" fundo="feijao" style="left:96px;top:410px;width:408px"></fibra-janela>
+  <div class="peso">1<small>kg</small></div>
+  <div class="info t-texto"><b>Tipo 1</b><br>Agricultura familiar do Paraná. Embalado pela Fibra.</div>
+</section>
+<section class="prancha pacote bg-feijao" data-nome="pacote-feijao-preto">
+  <div class="topo c-arroz"><fibra-logo cor="arroz"></fibra-logo><span class="t-rotulo c-fuba">Direto de quem planta</span></div>
+  <div class="bl t-bloco c-fuba" data-bloco style="top:118px;gap:12px"><span class="ln">Feijão</span><span class="ln">preto</span></div>
+  <fibra-janela class="abs" letra="grao" foto="tex-feijao-preto" zoom="1.3" fundo="feijao" style="left:96px;top:410px;width:408px;outline:0"></fibra-janela>
+  <div class="peso c-arroz">1<small>kg</small></div>
+  <div class="info t-texto c-arroz"><b>Tipo 1</b><br>Agricultura familiar do Paraná. Embalado pela Fibra.</div>
+</section>
+
+<!-- ═══ FACA DA CAIXA DA CESTA (FEFCO 0201, 400 × 300 × 200 mm, 1,5 px/mm) ═══ -->
+<section class="prancha faca" data-nome="caixa-faca">
+  <div class="abs t-rotulo" style="left:120px;top:64px;font-size:18px">Caixa da cesta · faca técnica</div>
+  <p class="abs t-texto" style="left:120px;top:100px;width:1500px;font-size:20px">FEFCO 0201 · 400 × 300 × 200 mm (interno) · papelão ondulado parede dupla, kraft · impressão flexográfica em 1 cor (tinta feijão) · escala 1,5 px/mm</p>
+  <svg class="abs" style="left:120px;top:200px;width:2152.5px;height:900px;overflow:visible" viewBox="0 0 1435 600">
+    <defs>
+      <clipPath id="cx"><path d="M0 160 L35 150 L35 0 L431 0 L431 150 L439 150 L439 0 L731 0 L731 150 L739 150 L739 0 L1131 0 L1131 150 L1139 150 L1139 0 L1435 0 L1435 500 L1139 500 L1139 350 L1131 350 L1131 500 L739 500 L739 350 L731 350 L731 500 L439 500 L439 350 L431 350 L431 500 L35 500 L35 350 L0 340 Z"/></clipPath>
+    </defs>
+    <image href="../marca/texturas/kraft.jpg" x="0" y="0" width="1435" height="500" preserveAspectRatio="xMidYMid slice" clip-path="url(#cx)"/>
+    <!-- cortes -->
+    <path d="M0 160 L35 150 L35 0 L431 0 L431 150 L439 150 L439 0 L731 0 L731 150 L739 150 L739 0 L1131 0 L1131 150 L1139 150 L1139 0 L1435 0 L1435 500 L1139 500 L1139 350 L1131 350 L1131 500 L739 500 L739 350 L731 350 L731 500 L439 500 L439 350 L431 350 L431 500 L35 500 L35 350 L0 340 Z" fill="none" stroke="#2A1611" stroke-width="1.6"/>
+    <!-- vincos -->
+    <g stroke="#C8402A" stroke-width="1.3" stroke-dasharray="7 5" fill="none"><path d="M35 150H1435M35 350H1435M35 150V350M435 150V350M735 150V350M1135 150V350"/></g>
+    <!-- cotas -->
+    <g class="tec" stroke="#2152C8" stroke-width="1" fill="none"><path d="M35 540H435M435 540H735M735 540H1135M1135 540H1435M35 532v16M435 532v16M735 532v16M1135 532v16M1435 532v16"/><path d="M1470 150V350M1462 150h16M1462 350h16M1470 0V150M1462 0h16"/></g>
+    <g class="tec" fill="#2152C8" font-family="Gabarito" font-size="15" font-weight="600" text-anchor="middle">
+      <text x="235" y="568">400</text><text x="585" y="568">300</text><text x="935" y="568">400</text><text x="1285" y="568">300</text>
+      <text x="1500" y="255" text-anchor="start">200</text><text x="1500" y="80" text-anchor="start">150</text>
+    </g>
+  </svg>
+  <!-- arte em 1 cor, por painel (px = 120 + mm × 1,5) -->
+  <div class="abs" style="left:172.5px;top:200px;width:2100px;height:750px;mix-blend-mode:multiply;color:var(--feijao)">
+    <div class="abs t-bloco" data-bloco style="left:30px;width:540px;top:252px;gap:8px"><span class="ln">Comida de verdade</span><span class="ln">é direito de</span><span class="ln">todo mundo.</span></div>
+    <fibra-logo class="abs" cor="feijao" style="left:30px;top:484px;width:110px"></fibra-logo>
+    <p class="abs t-chamada" style="left:30px;top:96px;width:540px;font-size:24px">Abra com cuidado: tem comida de verdade aqui dentro.</p>
+    <fibra-logo class="abs" cor="feijao" style="left:675px;top:270px;width:300px"></fibra-logo>
+    <p class="abs t-rotulo" style="left:600px;width:450px;top:440px;text-align:center;font-size:15px">Cesta da semana · 4 pessoas</p>
+    <p class="abs t-chamada" style="left:1080px;top:262px;width:520px;font-size:36px">Quem pode, assina.<br>Quem precisa, paga menos.</p>
+    <p class="abs t-rotulo" style="left:1080px;top:470px;font-size:15px">fibra.com.br</p>
+    <svg class="abs" style="left:1440px;top:430px;width:130px;height:66px" viewBox="0 0 130 66" fill="none" stroke="#2A1611" stroke-width="3.5"><path d="M12 60V16M3 25l9-11 9 11M38 60V16M29 25l9-11 9 11M0 64h50"/><path d="M76 30a24 24 0 0 1 48 0Z M100 30v22a6 6 0 0 1-12 0"/></svg>
+    <fibra-logo class="abs" versao="empilhado" cor="feijao" style="left:1800px;top:262px;width:150px"></fibra-logo>
+    <p class="abs t-rotulo" style="left:1650px;width:450px;top:480px;text-align:center;font-size:14px">Arroz · Feijão · Legumes · Verduras</p>
+  </div>
+  <div class="abs t-rotulo" style="left:120px;bottom:52px;font-size:15px;display:flex;gap:36px;align-items:center">
+    <span><svg width="44" height="8"><path d="M0 4H44" stroke="#2A1611" stroke-width="2"/></svg> corte</span>
+    <span><svg width="44" height="8"><path d="M0 4H44" stroke="#C8402A" stroke-width="2" stroke-dasharray="7 5"/></svg> vinco</span>
+    <span><svg width="44" height="8"><path d="M0 4H44" stroke="#2152C8" stroke-width="1.4"/></svg> cota (mm)</span>
+  </div>
+</section>
+
+<!-- ═══ ARTES PARA OS MOCKUPS (tinta sobre branco) ═══ -->
+<section class="prancha arte" data-nome="arte-sacola" style="width:1000px;height:1150px">
+  <fibra-logo class="abs" cor="feijao" style="left:150px;top:260px;width:700px"></fibra-logo>
+  <p class="abs t-titulo" style="left:150px;top:620px;width:700px;font-size:56px;color:var(--feijao)">Comida de verdade é direito de todo mundo.</p>
+  <p class="abs t-rotulo" style="left:150px;top:900px;font-size:22px">fibra.com.br</p>
+</section>
+
+<section class="prancha arte" data-nome="arte-rafia" style="width:800px;height:1100px">
+  <fibra-logo class="abs" cor="couve" style="left:120px;top:120px;width:560px"></fibra-logo>
+  <div class="abs t-bloco" data-bloco style="left:120px;width:560px;top:420px;gap:12px"><span class="ln">Arroz</span><span class="ln">agulhinha</span></div>
+  <p class="abs" style="left:120px;top:720px;font-weight:900;font-size:150px;line-height:1;letter-spacing:-.04em;color:var(--couve);text-box:trim-both cap alphabetic">5<span style="font-size:.45em">kg</span></p>
+  <p class="abs t-texto" style="left:440px;top:732px;width:240px;font-size:20px;line-height:1.3"><b>Tipo 1</b><br>Agricultura familiar do Rio Grande do Sul</p>
+</section>
+
+<section class="prancha arte" data-nome="arte-aba" style="width:1200px;height:520px">
+  <div class="abs t-bloco" data-bloco style="left:70px;width:1060px;top:70px;gap:16px"><span class="ln">Comida de verdade</span><span class="ln">é direito de todo mundo.</span></div>
+  <p class="abs t-chamada" style="left:70px;top:380px;width:760px;font-size:32px">Abriu? Tem comida de quem planta aqui dentro.</p>
+  <fibra-logo class="abs" cor="feijao" style="right:70px;top:382px;width:150px"></fibra-logo>
+</section>
+
+<section class="prancha bg-arroz papel" data-nome="arte-cartao" style="width:1000px;height:1500px;--fibra-papel:.4">
+  <div class="abs t-rotulo" style="left:70px;top:70px;font-size:22px">Semana 12 · Cesta para quatro pessoas</div>
+  <div class="abs t-bloco" data-bloco style="left:70px;width:860px;top:140px;gap:14px"><span class="ln">Na cesta</span><span class="ln">desta semana</span></div>
+  <div class="abs t-texto" style="left:70px;top:540px;width:860px;font-size:36px;line-height:1.9;columns:2;column-gap:60px">
+    Arroz agulhinha, 2 kg<br>Feijão-carioca, 1 kg<br>Mandioca, 1 kg<br>Milho verde, 4 un.<br>Banana-prata, 1 dúzia<br>Abóbora-paulista, 1 un.<br>Couve-manteiga, 1 maço<br>Tomate, 1 kg
+  </div>
+  <p class="abs t-chamada" style="left:70px;top:1110px;width:860px;font-size:36px">Receita da semana: feijão tropeiro. Está em fibra.com.br/receitas.</p>
+  <fibra-logo class="abs" cor="feijao" style="left:70px;bottom:70px;width:200px"></fibra-logo>
+</section>
+
+<section class="prancha" data-nome="lacre" style="width:600px;height:600px;background:transparent">
+  <div class="abs bg-fuba" style="inset:20px;border-radius:50%"></div>
+  <svg class="abs" viewBox="0 0 400 400" style="inset:20px;width:560px;height:560px">
+    <defs><path id="lc" d="M200 52A148 148 0 1 1 199.99 52"/></defs>
+    <circle cx="200" cy="200" r="186" fill="none" stroke="#2A1611" stroke-width="5"/><circle cx="200" cy="200" r="118" fill="none" stroke="#2A1611" stroke-width="2.5"/>
+    <text font-family="Gabarito" font-weight="800" font-size="30" fill="#2A1611"><textPath href="#lc" textLength="925" lengthAdjust="spacing">CESTA CONFERIDA • FECHADA COM CUIDADO • </textPath></text>
+  </svg>
+  <fibra-grao class="abs" cor="feijao" style="left:236px;top:258px;width:128px"></fibra-grao>
+</section>
+
+<section class="prancha arte" data-nome="etiqueta" style="width:1000px;height:600px;border:0">
+  <div class="abs" style="inset:0;border:3px solid var(--feijao)"></div>
+  <div class="abs bg-couve" style="left:0;top:0;bottom:0;width:250px"></div>
+  <fibra-logo class="abs" versao="empilhado" cor="arroz" style="left:52px;top:56px;width:146px"></fibra-logo>
+  <p class="abs t-rotulo c-fuba" style="left:52px;bottom:52px;width:160px;font-size:15px;line-height:1.5">Cesta da semana<br>Fibra em Casa</p>
+  <p class="abs t-rotulo" style="left:300px;top:56px;font-size:18px">Para</p>
+  <div class="abs" style="left:300px;right:52px;top:120px;display:grid;gap:56px">
+    <div class="fio" style="opacity:.35"></div><div class="fio" style="opacity:.35"></div><div class="fio" style="opacity:.35"></div>
+  </div>
+  <p class="abs t-rotulo" style="left:300px;top:330px;font-size:18px">Semana</p><p class="abs t-display" style="left:300px;top:370px;font-size:120px">12</p>
+  <p class="abs t-texto" style="left:560px;top:376px;width:380px;font-size:20px">Comida de verdade é direito de todo mundo. Dúvidas: fibra.com.br/ajuda</p>
+</section>
+
+<script src="letras.js"></script><script src="fotos.js"></script><script src="fibra.js"></script>
+</body></html>
