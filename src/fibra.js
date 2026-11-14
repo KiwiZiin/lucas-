@@ -32,11 +32,8 @@
   class Logo extends HTMLElement {
     connectedCallback() {
       const v = this.getAttribute('versao') || 'horizontal', c = cor(this.getAttribute('cor')), solido = this.hasAttribute('solido');
-      if (v === 'simbolo') {
-        const g = D.simbolo.grao;
-        this.innerHTML = `<svg viewBox="0 0 ${D.simbolo.w} ${CAP}" fill="${c}"><path d="${L.F.d}"/><path d="${graoPath(g[0], g[1], g[2], g[3])}" fill="${cor(this.getAttribute('cor-grao')) || c}"/></svg>`; return;
-      }
-      const S = this.hasAttribute('alta') ? D.alta : D, d = disposicao(v, S), G = S.letras;
+      const ver = v === 'simbolo' ? 'BRA' : v;   // símbolo: BRA — o Brasil dentro do nome
+      const S = this.hasAttribute('alta') ? D.alta : D, d = disposicao(ver, S), G = S.letras;
       this.innerHTML = `<svg viewBox="0 0 ${d.w} ${d.h}" fill="${c}">` + d.itens.map(i => `<path transform="translate(${i.x} ${i.y})" fill-rule="evenodd" d="${G[i.l].d + (solido ? '' : G[i.l].graos.map(([x, y]) => ' ' + graoPath(x, y)).join(''))}"/>`).join('') + '</svg>';
     }
   }
@@ -141,68 +138,76 @@
   // por cima e por baixo. Cada desenho nasce da regra de cruzamento, não de um ornamento aplicado.
   //   sarja (diagonal) · espinha (zigue-zague) · olho (losangos concêntricos) · esteira (2×2) · tela (1×1) · degrau (escada)
   // Grafismos de apoio: raios · zigue · losango · escama · graos · dente
-  const POR_CIMA = {
-    tela: (i, j) => (i + j) % 2 === 0,
-    esteira: (i, j) => ((i >> 1) + (j >> 1)) % 2 === 0,
-    sarja: (i, j) => (((i + j) % 4) + 4) % 4 < 2,
-    espinha: (i, j, P) => { const k = ((j % (2 * P)) + 2 * P) % (2 * P), jj = k < P ? k : 2 * P - 1 - k; return ((i + jj) % 4) < 2; },
-    olho: (i, j, P) => { const u = Math.abs((((i % P) + P) % P) - (P - 1) / 2), v = Math.abs((((j % P) + P) % P) - (P - 1) / 2); return Math.floor(u + v) % 4 < 2; },
-    degrau: (i, j) => ((i + 2 * Math.floor(j / 2)) % 6 + 6) % 6 < 3,
+  const rng = seed => { let s = (seed * 2654435761) >>> 0 || 1; return () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296; };
+  // ── padronagens editoriais v4 ────────────────────────────────────
+  // Seis estampas de raiz brasileira, cada uma com uma história: calçadão (Copacabana), fitas (Bonfim), chita (tecido de festa),
+  // abacaxi (a casca da fruta), vitória-régia (Amazônia) e sol. Desenho em módulo de 100; c[0] fundo, c[1] principal, c[2] acento.
+  const NAC = ['fuba', 'couve', 'anil', 'urucum', 'arroz', 'dende'].map(cor);
+  const ED = {
+    ondas(c, W, H, o, r) {   // calçadão: faixas onduladas em pedra portuguesa, com a junta de cada pedrinha
+      let d = '', g = '';
+      for (let y = -50; y < H + 50; y += 50) { const a = 16; let top = `M-50 ${y}`, bot = '';
+        for (let x = -50; x <= W + 50; x += 50) { const s1 = ((x / 50) % 2 ? -1 : 1); top += `Q${x + 25} ${y + s1 * a} ${x + 50} ${y}`; }
+        for (let x = W + 50; x >= -50; x -= 50) { const s1 = ((x / 50) % 2 ? -1 : 1); bot += `Q${x - 25} ${y + 25 - s1 * a} ${x - 50} ${y + 25}`; }
+        d += top + `L${W + 100} ${y + 25}` + bot + 'Z'; }
+      for (let y = 0; y < H; y += 4.2) { const ox = r() * 4; g += `M0 ${y.toFixed(1)}H${W}`; for (let x = ox; x < W; x += 4.2 + r() * 1.2) g += `M${x.toFixed(1)} ${y.toFixed(1)}v4.2`; }
+      return `<rect width="${W}" height="${H}" fill="${c[0]}"/><path d="${d}" fill="${c[1]}"/><path d="${g}" stroke="${c[0]}" stroke-opacity=".55" stroke-width=".55" fill="none"/>`;
+    },
+    fitas(c, W, H, o, r) {   // fitas do Bonfim: tiras com a costura e a lembrança escrita
+      const cs = [c[1], c[2] || NAC[0], ...NAC].filter((v, i, a) => a.indexOf(v) === i && v !== c[0]), w = 12.5; let h = `<rect width="${W}" height="${H}" fill="${c[0]}"/>`;
+      for (let i = 0, x = 0; x < W; x += w, i++) { const f = cs[i % cs.length], sw = (r() - .5) * 3, tx = cor(f === NAC[4] || f === cor('fuba') ? 'feijao' : 'arroz');
+        h += `<g transform="translate(${x} 0) skewX(${sw.toFixed(2)})"><rect x=".6" y="-20" width="${w - 1.2}" height="${H + 40}" fill="${f}"/><path d="M2 -20V${H + 20}M${w - 2} -20V${H + 20}" stroke="${tx}" stroke-opacity=".35" stroke-width=".35" stroke-dasharray="1.4 1.2"/>` +
+          `<text transform="translate(${w / 2 + 1.6} ${(r() * 80).toFixed(1)}) rotate(90)" fill="${tx}" font-family="Sora" font-weight="700" font-size="4.6" letter-spacing=".9">${'COMIDA DE VERDADE · BRASIL · '.repeat(Math.ceil(H / 90))}</text></g>`; }
+      return h;
+    },
+    chita(c, W, H, o, r) {   // chita: flor grande de cinco pétalas, miolo, folhas e respingos
+      let h = `<rect width="${W}" height="${H}" fill="${c[0]}"/>`; const fol = c[3] || cor('couve'), mi = c[2] || cor('fuba');
+      for (let j = 0; j * 100 < H + 50; j++) for (let i = 0; i * 100 < W + 50; i++) { const cx = i * 100 + (j % 2 ? 50 : 0), cy = j * 100 + 50, rot = r() * 72;
+        h += `<g transform="translate(${cx} ${cy}) rotate(${rot.toFixed(1)}) scale(1.22)">`;
+        [0, 1].forEach(k => h += `<path d="M0 0C14 -10 34 -8 44 0C34 8 14 10 0 0Z" fill="${fol}" transform="rotate(${36 + k * 180})"/><path d="M4 0L40 0" stroke="${c[0]}" stroke-width=".8" transform="rotate(${36 + k * 180})"/>`);
+        for (let k = 0; k < 5; k++) h += `<circle cx="0" cy="-17" r="15" fill="${c[1]}" transform="rotate(${k * 72})"/><path d="M0 -6L0 -26" stroke="${c[0]}" stroke-opacity=".35" stroke-width="1" transform="rotate(${k * 72})"/>`;
+        h += `<circle r="10" fill="${mi}"/>`; for (let k = 0; k < 8; k++) h += `<circle cx="${(5.2 * Math.cos(k * .785)).toFixed(1)}" cy="${(5.2 * Math.sin(k * .785)).toFixed(1)}" r="1.4" fill="${c[1]}"/>`;
+        h += '</g>'; for (let k = 0; k < 6; k++) h += `<circle cx="${(cx + 25 + r() * 50).toFixed(1)}" cy="${(cy - 50 + r() * 100).toFixed(1)}" r="${(1.2 + r() * 1.6).toFixed(1)}" fill="${mi}"/>`; }
+      return h;
+    },
+    abacaxi(c, W, H, o, r) {   // casca de abacaxi: losangos com escamas concêntricas e espinho
+      let h = `<rect width="${W}" height="${H}" fill="${c[0]}"/>`; const s2 = 25, e = c[2] || cor('dende');
+      for (let j = -1; j * s2 < H + s2; j++) for (let i = -1; i * s2 * 2 < W + s2 * 2; i++) { const cx = i * 50 + (j % 2 ? 25 : 0), cy = j * 25;
+        const rh = (k) => `M${cx} ${cy - k}L${cx + 2 * k * .98} ${cy}L${cx} ${cy + k}L${cx - 2 * k * .98} ${cy}Z`;
+        h += `<path d="${rh(24)}" fill="${c[1]}"/><path d="${rh(16)}" fill="none" stroke="${e}" stroke-width="2.4"/><path d="${rh(8.5)}" fill="${e}"/><path d="M${cx} ${cy - 3}l-2.2 6h4.4Z" fill="${c[0]}"/>`; }
+      return h;
+    },
+    vitoria(c, W, H, o, r) {   // vitória-régia: folha redonda com borda levantada, nervuras radiais e anéis
+      let h = `<rect width="${W}" height="${H}" fill="${c[0]}"/>`; const rr = 46, aro = c[2] || cor('fuba');
+      for (let j = 0; j * 100 < H; j++) for (let i = 0; i * 100 < W; i++) { const cx = i * 100 + 50, cy = j * 100 + 50, rot = r() * 360; let v = '';
+        for (let k = 0; k < 28; k++) { const a = k / 28 * 6.283; v += `M0 0L${(rr * Math.cos(a)).toFixed(1)} ${(rr * Math.sin(a)).toFixed(1)}`; }
+        h += `<g transform="translate(${cx} ${cy}) rotate(${rot.toFixed(0)})"><circle r="${rr + 3}" fill="${aro}"/><circle r="${rr}" fill="${c[1]}"/>` +
+          `<path d="${v}" stroke="${aro}" stroke-opacity=".7" stroke-width=".9"/>` + [14, 24, 34].map(q => `<circle r="${q}" fill="none" stroke="${aro}" stroke-opacity=".35" stroke-width=".6"/>`).join('') +
+          `<path d="M0 0L${rr + 4} -3L${rr + 4} 3Z" fill="${c[0]}"/><circle r="3.5" fill="${aro}"/></g>`; }
+      return h;
+    },
+    sol(c, W, H, o) {   // sol: raios alternados com um grão no centro
+      const n = o.n || 32, cx = W / 2, cy = H / 2, R = Math.hypot(W, H); let d = '';
+      for (let k = 0; k < n; k += 2) { const a = k / n * 6.283 - 1.5708, b = a + 6.283 / n; d += `M${cx} ${cy}L${(cx + R * Math.cos(a)).toFixed(1)} ${(cy + R * Math.sin(a)).toFixed(1)}L${(cx + R * Math.cos(b)).toFixed(1)} ${(cy + R * Math.sin(b)).toFixed(1)}Z`; }
+      const m = Math.min(W, H);
+      return `<rect width="${W}" height="${H}" fill="${c[0]}"/><path d="${d}" fill="${c[1]}"/><circle cx="${cx}" cy="${cy}" r="${m * .2}" fill="${c[0]}"/><circle cx="${cx}" cy="${cy}" r="${m * .16}" fill="${c[2] || c[1]}"/><path d="${graoPath(cx, cy, m * .09, m * .038)}" fill="${c[0]}"/>`;
+    },
   };
-  function tecido(tipo, c, cols, rows, n = 8) {   // n fios por módulo
-    const s = 100 / n, g = s * .14, W = cols * 100, H = rows * 100, NX = cols * n, NY = rows * n, f = POR_CIMA[tipo], P = n; let h = `<rect width="${W}" height="${H}" fill="${c[0]}"/>`, d = '';
-    for (let j = 0; j < NY; j++) d += `M0 ${(j * s + g / 2).toFixed(2)}H${W}v${(s - g).toFixed(2)}H0Z`;
-    h += `<path d="${d}" fill="${c[1]}"/>`; d = '';
-    for (let i = 0; i < NX; i++) { let j = 0; while (j < NY) { if (!f(i, j, P)) { j++; continue; } let k = j; while (k + 1 < NY && f(i, k + 1, P)) k++;
-      d += `M${(i * s + g / 2).toFixed(2)} ${(j === 0 ? 0 : j * s + g / 2).toFixed(2)}h${(s - g).toFixed(2)}V${(k === NY - 1 ? H : (k + 1) * s - g / 2).toFixed(2)}h${(-(s - g)).toFixed(2)}Z`; j = k + 1; } }
-    return h + `<path d="${d}" fill="${c[2] || c[1]}"/>`;
-  }
-  const GRAF = {
-    raios(c, W, H, o) {   // sol de tiras: raios alternados a partir do centro
-      const n = o.n || 24, cx = W / 2, cy = H / 2, R = Math.hypot(W, H); let d = '';
-      for (let k = 0; k < n; k += 2) { const a = k / n * 2 * Math.PI - Math.PI / 2 - Math.PI / n, b2 = a + 2 * Math.PI / n; d += `M${cx} ${cy}L${(cx + R * Math.cos(a)).toFixed(1)} ${(cy + R * Math.sin(a)).toFixed(1)}L${(cx + R * Math.cos(b2)).toFixed(1)} ${(cy + R * Math.sin(b2)).toFixed(1)}Z`; }
-      return `<rect width="${W}" height="${H}" fill="${c[0]}"/><path d="${d}" fill="${c[1]}"/>`;
-    },
-    zigue(c, W, H, o) {   // faixas em zigue-zague
-      const p = o.p || 50, e = o.e || 12.5, k = c.length - 1; let h = `<rect width="${W}" height="${H}" fill="${c[0]}"/>`;
-      for (let y = -p, q = 0; y < H + p; y += e * 2, q++) { let d = `M${-p} ${y + p / 2}`; for (let x = -p, up = true; x <= W + p; x += p / 2, up = !up) d += `L${x} ${y + (up ? p / 2 : 0)}`; h += `<path d="${d}" fill="none" stroke="${c[1 + (q % k)]}" stroke-width="${e}" stroke-linejoin="miter" stroke-miterlimit="8"/>`; }
-      return h;
-    },
-    losango(c, W, H) {   // losangos concêntricos por módulo
-      let h = `<rect width="${W}" height="${H}" fill="${c[0]}"/>`; const k = c.length - 1;
-      for (let y = 0; y < H; y += 100) for (let x = 0; x < W; x += 100) [50, 36, 22, 9].forEach((r, q) => h += `<path d="M${x + 50} ${y + 50 - r}L${x + 50 + r} ${y + 50}L${x + 50} ${y + 50 + r}L${x + 50 - r} ${y + 50}Z" fill="${c[1 + (q % k)]}"/>`);
-      return h;
-    },
-    escama(c, W, H) {   // escamas / telhas em fiadas desencontradas
-      let h = `<rect width="${W}" height="${H}" fill="${c[0]}"/>`; const k = c.length - 1, r = 25;
-      for (let j = Math.ceil(H / r) + 1; j >= -1; j--) for (let x = (j % 2 ? -r : 0) - r; x < W + r; x += 2 * r) { const y = j * r; h += `<circle cx="${x + r}" cy="${y}" r="${r}" fill="${c[1 + ((j % k) + k) % k]}"/><circle cx="${x + r}" cy="${y}" r="${r * .56}" fill="${c[1 + (((j + 1) % k) + k) % k]}"/><circle cx="${x + r}" cy="${y}" r="${r * .2}" fill="${c[0]}"/>`; }
-      return h;
-    },
-    graos(c, W, H) {   // grãos em fiadas, com a inclinação alternada: ponto de arroz
-      let h = `<rect width="${W}" height="${H}" fill="${c[0]}"/>`, d = [``, ``]; const p = 25;
-      for (let j = 0, y = p / 2; y < H; y += p, j++) for (let x = (j % 2 ? p : p / 2); x < W; x += p) d[j % 2] += graoPath(x, y, 9.5, 4, j % 2 ? 42 : -42);
-      return h + `<path d="${d[0]}" fill="${c[1]}"/><path d="${d[1]}" fill="${c[2] || c[1]}"/>`;
-    },
-    dente(c, W, H) {   // dente de serra: fiadas de triângulos
-      let h = `<rect width="${W}" height="${H}" fill="${c[0]}"/>`; const k = c.length - 1, p = 25;
-      for (let j = 0, y = 0; y < H; y += p, j++) { let d = ''; for (let x = 0; x < W; x += p) d += `M${x} ${y + p}L${x + p / 2} ${y}L${x + p} ${y + p}Z`; h += `<path d="${d}" fill="${c[1 + (j % k)]}"/>`; }
-      return h;
-    },
-  };
+  const ANTIGO = { sarja: 'ondas', tela: 'ondas', espinha: 'fitas', zigue: 'fitas', olho: 'chita', losango: 'chita', esteira: 'abacaxi', escama: 'abacaxi', degrau: 'vitoria', graos: 'vitoria', dente: 'sol', raios: 'sol' };
   function trama(tipo, cores, cols, rows, o = {}) {
-    const c = cores.map(cor), W = cols * 100, H = rows * 100, corpo = POR_CIMA[tipo] ? tecido(tipo, c, cols, rows, o.n || 8) : GRAF[tipo](c, W, H, o);
-    return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><g clip-path="inset(0)">${corpo}</g></svg>`;
+    const t = ED[tipo] ? tipo : (ANTIGO[tipo] || 'ondas'), c = cores.map(cor), W = cols * 100, H = rows * 100;
+    return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice"><g clip-path="inset(0)">${ED[t](c, W, H, o, rng(o.seed || 7))}</g></svg>`;
   }
   /* <fibra-trama tipo="sarja" cores="feijao,fuba,dende" cols="2" rows="2" n="8"> — a primeira cor é o fundo (o vão entre as tiras) */
   class Trama extends HTMLElement {
     connectedCallback() { const g = (a, d) => this.getAttribute(a) || d;
-      this.innerHTML = trama(g('tipo', 'sarja'), g('cores', 'feijao,fuba,dende').split(',').map(x => x.trim()), parseFloat(g('cols', 1)), parseFloat(g('rows', 1)), { n: parseInt(g('n', 8)), p: parseFloat(g('p', 50)), e: parseFloat(g('e', 12.5)) }); }
+      this.innerHTML = trama(g('tipo', 'ondas'), g('cores', 'feijao,fuba,dende').split(',').map(x => x.trim()), parseFloat(g('cols', 1)), parseFloat(g('rows', 1)), { n: parseInt(g('n', 32)), seed: parseInt(g('seed', 7)) }); }
   }
   /* <fibra-prato foto="tex-feijao-preto" fundo="couve" raios="mata" aro="arroz" n="24"> — prato visto de cima sobre um sol de tiras */
   class Prato extends HTMLElement {
     connectedCallback() { const g = (a, d) => this.getAttribute(a) || d, id = 'p' + (++uid), f = this.getAttribute('foto'), fx = parseFloat(g('fx', .5)), fy = parseFloat(g('fy', .5)), z = parseFloat(g('zoom', 1));
       const r = parseFloat(g('r', 34)), aro = cor(g('aro', 'arroz'));
-      this.innerHTML = `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">${GRAF.raios([cor(g('fundo', 'couve')), cor(g('raios', 'mata'))], 100, 100, { n: parseInt(g('n', 24)) })}` +
+      this.innerHTML = `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">${`<rect width="100" height="100" fill="${cor(g('fundo', 'couve'))}"/><path d="${(() => { let d = ''; const n = parseInt(g('n', 24)); for (let k = 0; k < n; k += 2) { const a = k / n * 6.283 - 1.5708, b2 = a + 6.283 / n; d += `M50 50L${(50 + 80 * Math.cos(a)).toFixed(1)} ${(50 + 80 * Math.sin(a)).toFixed(1)}L${(50 + 80 * Math.cos(b2)).toFixed(1)} ${(50 + 80 * Math.sin(b2)).toFixed(1)}Z`; } return d; })()}" fill="${cor(g('raios', 'mata'))}"/>`}` +
         `<circle cx="50" cy="50" r="${r + 5.5}" fill="${aro}"/><circle cx="50" cy="50" r="${r + 1.6}" fill="none" stroke="${cor(g('fio', 'feijao'))}" stroke-opacity=".28" stroke-width=".7"/>` +
         `<clipPath id="${id}"><circle cx="50" cy="50" r="${r}"/></clipPath><g clip-path="url(#${id})"><rect width="100" height="100" fill="${cor('feijao')}"/>${f ? cobre(f, 50 - r, 50 - r, 2 * r, 2 * r, fx, fy, z) : ''}</g></svg>`; }
   }

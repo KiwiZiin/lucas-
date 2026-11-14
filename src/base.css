@@ -10,7 +10,7 @@
 
 :root {
   /* neutros */        --feijao: #2A1611; --arroz: #F4ECD8; --arroz-claro: #FBF7EC;
-  /* nacionais */      --couve: #0B7A3B; --mata: #073D26; --fuba: #FFC72C; --anil: #2152C8;
+  /* nacionais */      --couve: #0B7A3B; --mata: #163A94; --fuba: #FFC72C; --anil: #2152C8;
   /* terra e cozinha */--dende: #F28A1C; --urucum: #C8402A;
   --linha: rgba(42,22,17,.2); --linha-clara: rgba(244,236,216,.32);
   --titulo: 'Anton', 'Arial Narrow', sans-serif; --sans: 'Sora', system-ui, sans-serif;

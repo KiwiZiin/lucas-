@@ -18,7 +18,7 @@ CAP = 1000.0                       # altura de caixa-alta normalizada
 GRAO = {'rx': 82, 'ry': 35, 'ang': -42}
 TRACK = 6                        # entreletra global (unid. normalizadas)
 KERN = {'FI': 0, 'IB': 0, 'BR': 0, 'RA': -30}
-CORES = {'feijao': '#2A1611', 'arroz': '#F4ECD8', 'couve': '#0B7A3B', 'mata': '#073D26', 'fuba': '#FFC72C', 'anil': '#2152C8', 'dende': '#F28A1C', 'urucum': '#C8402A'}
+CORES = {'feijao': '#2A1611', 'arroz': '#F4ECD8', 'couve': '#0B7A3B', 'mata': '#163A94', 'fuba': '#FFC72C', 'anil': '#2152C8', 'dende': '#F28A1C', 'urucum': '#C8402A'}
 
 def contours(rec):
     out, cur = [], []
@@ -95,9 +95,9 @@ def main():
     horiz = ''.join(shape(L, i['l'], i['x']) for i in itens)
     solido = ''.join(shape(L, i['l'], i['x'], graos=False) for i in itens)
     pilha = ''.join(shape(L, i['l'], i['x'], ln['y']) for ln in data['pilha']['linhas'] for i in ln['itens'])
-    # símbolo: F + grão
-    F = L['F']; sim_w = F['w']; gx, gy = F['w'] * 0.80, 800.0
-    simbolo = shape(L, 'F') + f'<path d="{grao_path(gx, gy, 118, 50)}"/>'
+    # símbolo: BRA (o Brasil dentro do nome)
+    bra = [i for i in itens if i['l'] in 'BRA']; sim_w = round(W - bra[0]['x'], 1); F = L['F']; gx, gy = F['w'] * 0.80, 800.0
+    simbolo = ''.join(shape(L, i['l'], round(i['x'] - bra[0]['x'], 1)) for i in bra)   # símbolo: BRA
     data['simbolo'] = {'w': sim_w, 'grao': [gx, gy, 118, 50]}
     json.dump(data, open(f'{ROOT}/marca/letras.json', 'w'))
     open(f'{ROOT}/src/letras.js', 'w').write('window.FIBRA_DADOS = ' + json.dumps(data) + ';\n')

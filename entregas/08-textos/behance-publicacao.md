@@ -14,7 +14,7 @@ Alternativas curtas: *FIBRA · Identidade visual* · *FIBRA — Cestas de comida
 
 - **Áreas criativas:** Branding, Graphic Design, Typography
 - **Ferramentas:** HTML/CSS, SVG, Python, Adobe Stock
-- **Tags (até 10):** branding, identidade visual, brasil, comida, food branding, tipografia, padronagem, cestaria, poster, social impact
+- **Tags (até 10):** branding, identidade visual, brasil, comida, food branding, tipografia, padronagem, chita, poster, social impact
 - **Capa:** `07-portfolio/behance-capa-808x632.jpg`
 
 ## Descrição curta (até 300 caracteres)
@@ -39,10 +39,10 @@ Letras altas e firmes, vindas dos tipos de madeira dos cartazes lambe-lambe. As 
 Cada letra abre uma janela para o Brasil que planta e cozinha. A série F · I · B · R · A conta o caminho da comida: grão, verdura, cozinha, roça e mesa. Uma letra por peça, sempre inteira e centralizada.
 
 **Padronagens**
-Tramas de cestaria desenhadas fio a fio (sarja, espinha, olho, esteira, degrau, tela), com grafismos de apoio (zigue-zague, losango, escama, grão, dente e raios). Juntas, com pratos vistos de cima e retratos em duotom, formam a colcha: o sistema que costura posters, redes sociais e embalagens.
+Seis estampas de raiz brasileira, cada uma com uma história: o calçadão de Copacabana (com a junta de cada pedrinha), as fitas do Bonfim, a chita de festa, a casca do abacaxi, a vitória-régia e o sol. Somadas a macrofotos de comida, pratos vistos de cima e retratos em duotom, formam a colcha que costura posters, redes sociais e embalagens.
 
 **Cor e tipografia**
-Paleta tirada da mesa e da bandeira: couve, mata, fubá, anil, dendê, urucum, feijão e arroz. Anton nos títulos e Sora nos textos de apoio.
+Paleta tirada da bandeira e da mesa, com verde, amarelo e azul na frente: couve, fubá, anil, anil-escuro, dendê, urucum, feijão e arroz. Anton nos títulos e Sora nos textos de apoio.
 
 **Fotografia**
 Cotidiano, não cenário: cozinha de casa, roça, feira e mesa posta. Gente real, luz natural, comida de panela.
@@ -51,7 +51,7 @@ Cotidiano, não cenário: cozinha de casa, roça, feira e mesa posta. Gente real
 
 Fibra is a network of affordable food baskets (rice, beans, vegetables and staples) bought directly from Brazilian family farmers. Subscriptions from families and companies fund discounts for low-income households: those who can, subscribe; those who need, pay less.
 
-In 2024, 24.2% of Brazilian households experienced some degree of food insecurity (IBGE). The identity answers with warmth and directness. Tall poster letters become windows onto the Brazil that farms and cooks; the counters of B, R and A are replaced by tilted grains, placing food at the heart of the mark. Patterns are woven thread by thread from Brazilian basketry, and combine with top-down plates and duotone portraits into a patchwork that ties the whole system together.
+In 2024, 24.2% of Brazilian households experienced some degree of food insecurity (IBGE). The identity answers with warmth and directness. Tall poster letters become windows onto the Brazil that farms and cooks; the counters of B, R and A are replaced by tilted grains, placing food at the heart of the mark. Six Brazilian patterns (Copacabana's mosaic sidewalk, Bonfim ribbons, chita floral fabric, pineapple skin, giant water lily and sun) combine with macro food photography, with top-down plates and duotone portraits into a patchwork that ties the whole system together.
 
 Typefaces: Anton and Sora. Photography: Adobe Stock. Fictional brand, self-initiated project.
 

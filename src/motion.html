@@ -74,7 +74,7 @@ const c4 = el(`<div class="cena" id="c4" style="display:none;z-index:9;backgroun
 const T5 = V ? 234 : 216, N5 = V ? 4 : 8;
 const RET = [`<fibra-trama tipo="sarja" cores="feijao,fuba,dende" cols="2" rows="2"></fibra-trama>`, `<fibra-prato foto="tex-feijao-preto" fundo="fuba" raios="dende" aro="arroz"></fibra-prato>`, `<fibra-foto foto="agro-senhora" w="100" h="100" fx=".42" fy=".35" duo="mata,fuba"></fibra-foto>`, `<fibra-trama tipo="zigue" cores="arroz,urucum,feijao" cols="2" rows="2"></fibra-trama>`,
   `<fibra-prato foto="tex-arroz" fundo="anil" raios="mata" aro="fuba"></fibra-prato>`, `<fibra-trama tipo="olho" cores="feijao,dende,fuba" cols="2" rows="2"></fibra-trama>`, `<fibra-foto foto="cozinha-vovo" w="100" h="100" fx=".55" fy=".35" zoom="1.1" duo="feijao,dende"></fibra-foto>`, `<fibra-trama tipo="escama" cores="mata,couve,fuba" cols="2" rows="2"></fibra-trama>`];
-const c5 = el(`<div class="cena bg-mata" id="c5">
+const c5 = el(`<div class="cena bg-couve" id="c5">
   <div class="manchete t-titulo" data-w="${V ? W - 2 * m : 1180}" style="left:${m}px;top:${V ? 400 : M}px">${linhas(['Comida de verdade', 'é direito de', '<i class="c-fuba" style="font-style:normal">todo mundo.</i>'])}</div>
   <fibra-logo id="lf" cor="fuba" style="${V ? `left:${m}px;top:1010px` : `right:${M}px;top:${M}px`};width:${V ? 380 : 420}px"></fibra-logo>
   <div class="t-rotulo" id="url" style="${V ? `left:${m}px;top:1220px` : `right:${M}px;top:${M + 210}px;text-align:right`};font-size:${V ? 20 : 22}px;line-height:1.5">Cestas de comida de verdade<br>fibra.com.br</div>
@@ -97,13 +97,13 @@ const sobe = (mm, f, f0, passo = 5, dur = 18) => mm.querySelectorAll('.l > span'
 window.quadro = f => {
   // cena 1 · 0–60
   mostra(c1, f < 60);
-  if (f < 60) c1.querySelectorAll('.lt').forEach(g => { const n = +g.dataset.n, t = eo(p(f, 4 + n * 4, 30 + n * 4)); g.style.transform = `translateY(${(1 - t) * 1250}px)`; g.style.opacity = t > 0 ? 1 : 0; });
+  if (f < 60) c1.querySelectorAll('.lt').forEach(g => { const n = +g.dataset.n, t = eo(p(f, n * 7.5, n * 7.5 + 7));   // uma letra por batida g.style.transform = `translateY(${(1 - t) * 1250}px)`; g.style.opacity = t > 0 ? 1 : 0; });
   // cena 2 · 60–210
   mostra(c2, f >= 60 && f < 210);
   if (f >= 60 && f < 210) {
-    const g = f - 60, bg = FUNDOS[Math.floor(g / 30) % FUNDOS.length]; c2.style.background = C[bg]; const claro = ['fuba', 'dende'].includes(bg);
+    const g = f - 60, bg = FUNDOS[Math.floor(g / 37.5) % FUNDOS.length];   // troca de cor a cada compasso c2.style.background = C[bg]; const claro = ['fuba', 'dende'].includes(bg);
     c2.querySelector('#c2r').style.color = c2.querySelector('#c2d').style.color = claro ? C.feijao : C.arroz;
-    disp.itens.forEach((i, n) => { const k = Math.floor((g + n * 3) / 7) % CICLO[i.l].length; c2.querySelectorAll('.fj' + n).forEach((im, q) => im.style.display = q === k ? 'block' : 'none'); });
+    disp.itens.forEach((i, n) => { const k = (Math.floor(g / 9.375) + n) % CICLO[i.l].length;   // troca de foto a cada batida c2.querySelectorAll('.fj' + n).forEach((im, q) => im.style.display = q === k ? 'block' : 'none'); });
     const z = 1 + .05 * (g / 150); c2.querySelector('#jan').style.transform = `scale(${z})`;
   }
   // cenas 3 · 210–390 (60 quadros cada)

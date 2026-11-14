@@ -26,9 +26,15 @@ for r in rows:
 o.save('/tmp/claude-0/-home-user-lucas-/0d3f7e90-dd37-558c-a2ec-9141744b3677/scratchpad/prova/motion-${V ? 'v' : 'h'}.jpg',quality=84); print(o.size)`, V ? '.26' : '.26', ...arqs], { stdio: 'inherit' });
   process.exit(0);
 }
-const de = parseInt(opt('de', '0')), ate = parseInt(opt('ate', String(total))); const t0 = Date.now();
-for (let f = de; f < ate; f++) { await page.evaluate(f => window.quadro(f), f); await page.screenshot({ path: `${dir}/q${String(f).padStart(4, '0')}.jpg`, type: 'jpeg', quality: 95 }); if (f % 100 === 0) console.log('quadro', f, ((Date.now() - t0) / 1000).toFixed(0) + 's'); }
+// sincronia com a música (142 BPM a partir de 1:56,255): cada cena começa num compasso. Pares [quadro da linha do tempo, compasso]
+const BPM = 141.95, COMP = 4 * 60 / BPM, CHAVES = [[0, 0], [60, 2], [210, 6], [270, 8], [330, 10], [390, 12], [450, 13], [600, 16]];
+const warp = t => { const c = t / COMP; for (let k = 1; k < CHAVES.length; k++) { const [f0, c0] = CHAVES[k - 1], [f1, c1] = CHAVES[k]; if (c <= c1) return f0 + (f1 - f0) * (c - c0) / (c1 - c0); } return 600; };
+const NQ = Math.ceil((16 * COMP + 1.2) * 30);
+const de = parseInt(opt('de', '0')), ate = parseInt(opt('ate', String(NQ))); const t0 = Date.now();
+for (let f = de; f < ate; f++) { await page.evaluate(f => window.quadro(f), Math.min(599.9, warp(f / 30))); await page.screenshot({ path: `${dir}/q${String(f).padStart(4, '0')}.jpg`, type: 'jpeg', quality: 95 }); if (f % 100 === 0) console.log('quadro', f, ((Date.now() - t0) / 1000).toFixed(0) + 's'); }
 await b.close();
 const out = `${raiz}/entregas/05-motion`; fs.mkdirSync(out, { recursive: true });
-execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-framerate', '30', '-i', `${dir}/q%04d.jpg`, '-c:v', 'libx264', '-preset', 'slow', '-crf', '15', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', `${out}/${nome}.mp4`], { stdio: 'inherit' });
+const AUD = '/root/.claude/uploads/0d3f7e90-dd37-558c-a2ec-9141744b3677/286b67ac-Rio_Soundtrack-_01_Real_In_Rio.m4a', DUR = (NQ / 30).toFixed(3);
+execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-framerate', '30', '-i', `${dir}/q%04d.jpg`, '-ss', '116.255', '-t', DUR, '-i', AUD,
+  '-af', `afade=t=in:d=0.25,afade=t=out:st=${(DUR - 2.2).toFixed(2)}:d=2.2,acompressor=threshold=-18dB:ratio=2.5:attack=8:release=180,loudnorm=I=-14:TP=-1:LRA=9`, '-c:a', 'aac', '-b:a', '256k', '-ar', '48000', '-shortest', '-c:v', 'libx264', '-preset', 'slow', '-crf', '15', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', `${out}/${nome}.mp4`], { stdio: 'inherit' });
 console.log('✓', `${out}/${nome}.mp4`, ((Date.now() - t0) / 1000).toFixed(0) + 's');
