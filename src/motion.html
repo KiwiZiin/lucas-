@@ -97,13 +97,13 @@ const sobe = (mm, f, f0, passo = 5, dur = 18) => mm.querySelectorAll('.l > span'
 window.quadro = f => {
   // cena 1 · 0–60
   mostra(c1, f < 60);
-  if (f < 60) c1.querySelectorAll('.lt').forEach(g => { const n = +g.dataset.n, t = eo(p(f, n * 7.5, n * 7.5 + 7));   // uma letra por batida g.style.transform = `translateY(${(1 - t) * 1250}px)`; g.style.opacity = t > 0 ? 1 : 0; });
+  if (f < 60) c1.querySelectorAll('.lt').forEach(g => { const n = +g.dataset.n, t = eo(p(f, n * 7.5, n * 7.5 + 7)); g.style.transform = `translateY(${(1 - t) * 1250}px)`; g.style.opacity = t > 0 ? 1 : 0; });
   // cena 2 · 60–210
   mostra(c2, f >= 60 && f < 210);
   if (f >= 60 && f < 210) {
-    const g = f - 60, bg = FUNDOS[Math.floor(g / 37.5) % FUNDOS.length];   // troca de cor a cada compasso c2.style.background = C[bg]; const claro = ['fuba', 'dende'].includes(bg);
+    const g = f - 60, bg = FUNDOS[Math.floor(g / 37.5) % FUNDOS.length]; c2.style.background = C[bg]; const claro = ['fuba', 'dende'].includes(bg);
     c2.querySelector('#c2r').style.color = c2.querySelector('#c2d').style.color = claro ? C.feijao : C.arroz;
-    disp.itens.forEach((i, n) => { const k = (Math.floor(g / 9.375) + n) % CICLO[i.l].length;   // troca de foto a cada batida c2.querySelectorAll('.fj' + n).forEach((im, q) => im.style.display = q === k ? 'block' : 'none'); });
+    disp.itens.forEach((i, n) => { const k = (Math.floor(g / 9.375) + n) % CICLO[i.l].length; c2.querySelectorAll('.fj' + n).forEach((im, q) => im.style.display = q === k ? 'block' : 'none'); });
     const z = 1 + .05 * (g / 150); c2.querySelector('#jan').style.transform = `scale(${z})`;
   }
   // cenas 3 · 210–390 (60 quadros cada)

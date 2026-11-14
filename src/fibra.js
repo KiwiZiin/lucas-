@@ -194,9 +194,15 @@
     },
   };
   const ANTIGO = { sarja: 'ondas', tela: 'ondas', espinha: 'fitas', zigue: 'fitas', olho: 'chita', losango: 'chita', esteira: 'abacaxi', escama: 'abacaxi', degrau: 'vitoria', graos: 'vitoria', dente: 'sol', raios: 'sol' };
+  // ── padronagens fotográficas v5 ──────────────────────────────────
+  // Cada "trama" é um recorte macro de comida brasileira em cor real. O tipo escolhe a foto; a lista de cores só varia o enquadramento.
+  const TEX = { sarja: 'tex-feijao-preto', ondas: 'tex-feijao-preto', espinha: 'feira-pupunha', fitas: 'feira-pupunha', olho: 'feira-banana', chita: 'feira-banana',
+    esteira: 'tex-feijao-carioca', abacaxi: 'tex-feijao-carioca', degrau: 'tex-couve', vitoria: 'tex-couve', tela: 'tex-arroz', sol: 'tex-arroz',
+    zigue: 'comida-tropeiro', losango: 'feira-vagem', escama: 'feira-couve', graos: 'comida-feijoada', dente: 'feira-maos', raios: 'fogao-taipa' };
+  const hash = t => [...t].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) >>> 0, 7);
   function trama(tipo, cores, cols, rows, o = {}) {
-    const t = ED[tipo] ? tipo : (ANTIGO[tipo] || 'ondas'), c = cores.map(cor), W = cols * 100, H = rows * 100;
-    return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice"><g clip-path="inset(0)">${ED[t](c, W, H, o, rng(o.seed || 7))}</g></svg>`;
+    const W = cols * 100, H = rows * 100, f = TEX[tipo] || 'tex-feijao-preto', r = rng(hash(tipo + cores.join() + (o.seed || '')));
+    return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice">${cobre(f, 0, 0, W, H, .15 + r() * .7, .15 + r() * .7, 1.25 + r() * .5)}</svg>`;
   }
   /* <fibra-trama tipo="sarja" cores="feijao,fuba,dende" cols="2" rows="2" n="8"> — a primeira cor é o fundo (o vão entre as tiras) */
   class Trama extends HTMLElement {
@@ -204,12 +210,9 @@
       this.innerHTML = trama(g('tipo', 'ondas'), g('cores', 'feijao,fuba,dende').split(',').map(x => x.trim()), parseFloat(g('cols', 1)), parseFloat(g('rows', 1)), { n: parseInt(g('n', 32)), seed: parseInt(g('seed', 7)) }); }
   }
   /* <fibra-prato foto="tex-feijao-preto" fundo="couve" raios="mata" aro="arroz" n="24"> — prato visto de cima sobre um sol de tiras */
-  class Prato extends HTMLElement {
-    connectedCallback() { const g = (a, d) => this.getAttribute(a) || d, id = 'p' + (++uid), f = this.getAttribute('foto'), fx = parseFloat(g('fx', .5)), fy = parseFloat(g('fy', .5)), z = parseFloat(g('zoom', 1));
-      const r = parseFloat(g('r', 34)), aro = cor(g('aro', 'arroz'));
-      this.innerHTML = `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">${`<rect width="100" height="100" fill="${cor(g('fundo', 'couve'))}"/><path d="${(() => { let d = ''; const n = parseInt(g('n', 24)); for (let k = 0; k < n; k += 2) { const a = k / n * 6.283 - 1.5708, b2 = a + 6.283 / n; d += `M50 50L${(50 + 80 * Math.cos(a)).toFixed(1)} ${(50 + 80 * Math.sin(a)).toFixed(1)}L${(50 + 80 * Math.cos(b2)).toFixed(1)} ${(50 + 80 * Math.sin(b2)).toFixed(1)}Z`; } return d; })()}" fill="${cor(g('raios', 'mata'))}"/>`}` +
-        `<circle cx="50" cy="50" r="${r + 5.5}" fill="${aro}"/><circle cx="50" cy="50" r="${r + 1.6}" fill="none" stroke="${cor(g('fio', 'feijao'))}" stroke-opacity=".28" stroke-width=".7"/>` +
-        `<clipPath id="${id}"><circle cx="50" cy="50" r="${r}"/></clipPath><g clip-path="url(#${id})"><rect width="100" height="100" fill="${cor('feijao')}"/>${f ? cobre(f, 50 - r, 50 - r, 2 * r, 2 * r, fx, fy, z) : ''}</g></svg>`; }
+  class Prato extends HTMLElement {   // v5: retalho fotográfico (sem grafismo vetorial)
+    connectedCallback() { const g = (a, d) => this.getAttribute(a) || d;
+      this.innerHTML = `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">${cobre(g('foto', 'tex-feijao-preto'), 0, 0, 100, 100, parseFloat(g('fx', .5)), parseFloat(g('fy', .5)), parseFloat(g('zoom', 1)) * 1.15)}</svg>`; }
   }
   customElements.define('fibra-prato', Prato);
   /* <fibra-foto foto="mesa-jovem" w="1080" h="630" fx=".5" fy=".3" zoom="1" duo="mata,fuba"> — fotografia retangular que cobre a caixa w × h.

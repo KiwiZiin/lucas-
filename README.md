@@ -25,7 +25,7 @@ Rede de cestas populares de arroz, feijão, legumes e verduras compradas de prod
 
 - **Tipografia:** Anton (títulos, caixa-alta) · Sora (chamadas, textos e rótulos)
 - **Cores:** couve #0B7A3B · anil-escuro #163A94 · fubá #FFC72C · anil #2152C8 · dendê #F28A1C · urucum #C8402A · feijão #2A1611 · arroz #F4ECD8
-- **Padronagens:** calçadão, fitas do Bonfim, chita, abacaxi, vitória-régia e sol, combinadas com macrofotos, pratos e retratos em duotom na colcha
+- **Padronagens:** fotográficas: macrofotos de comida brasileira em cor real e retratos em duotom, montadas em colcha
 - **Fotografia:** Adobe Stock, licenças padrão; originais em alta resolução não versionados (`fotos/originais/`)
 
 ## Como regenerar

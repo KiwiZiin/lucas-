@@ -39,7 +39,7 @@ Letras altas e firmes, vindas dos tipos de madeira dos cartazes lambe-lambe. As 
 Cada letra abre uma janela para o Brasil que planta e cozinha. A série F · I · B · R · A conta o caminho da comida: grão, verdura, cozinha, roça e mesa. Uma letra por peça, sempre inteira e centralizada.
 
 **Padronagens**
-Seis estampas de raiz brasileira, cada uma com uma história: o calçadão de Copacabana (com a junta de cada pedrinha), as fitas do Bonfim, a chita de festa, a casca do abacaxi, a vitória-régia e o sol. Somadas a macrofotos de comida, pratos vistos de cima e retratos em duotom, formam a colcha que costura posters, redes sociais e embalagens.
+A padronagem é a própria comida: macrofotos de feijão, arroz, couve, pupunha, banana e tropeiro em cor real, somadas a retratos em duotom, formam a colcha fotográfica que costura posters, redes sociais e embalagens.
 
 **Cor e tipografia**
 Paleta tirada da bandeira e da mesa, com verde, amarelo e azul na frente: couve, fubá, anil, anil-escuro, dendê, urucum, feijão e arroz. Anton nos títulos e Sora nos textos de apoio.
@@ -51,7 +51,7 @@ Cotidiano, não cenário: cozinha de casa, roça, feira e mesa posta. Gente real
 
 Fibra is a network of affordable food baskets (rice, beans, vegetables and staples) bought directly from Brazilian family farmers. Subscriptions from families and companies fund discounts for low-income households: those who can, subscribe; those who need, pay less.
 
-In 2024, 24.2% of Brazilian households experienced some degree of food insecurity (IBGE). The identity answers with warmth and directness. Tall poster letters become windows onto the Brazil that farms and cooks; the counters of B, R and A are replaced by tilted grains, placing food at the heart of the mark. Six Brazilian patterns (Copacabana's mosaic sidewalk, Bonfim ribbons, chita floral fabric, pineapple skin, giant water lily and sun) combine with macro food photography, with top-down plates and duotone portraits into a patchwork that ties the whole system together.
+In 2024, 24.2% of Brazilian households experienced some degree of food insecurity (IBGE). The identity answers with warmth and directness. Tall poster letters become windows onto the Brazil that farms and cooks; the counters of B, R and A are replaced by tilted grains, placing food at the heart of the mark. Patterns are photographic: macro shots of beans, rice, collard greens, peach palm and bananas, in true colour, combine with duotone portraits with top-down plates and duotone portraits into a patchwork that ties the whole system together.
 
 Typefaces: Anton and Sora. Photography: Adobe Stock. Fictional brand, self-initiated project.
 
